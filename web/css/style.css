@@ -1,0 +1,65 @@
+@font-face{
+    font-family: Trajanus;
+    src:url(../font/TrajanusBricks.ttf);
+}
+
+body{
+    background-color: #f3f3f3 !important;
+}
+.table-ui{
+    border: 13px solid white;
+    border-radius: 15px;
+}
+
+.table-ui thead{
+    background-color: #7373732e;
+    color: #818182;
+    text-transform: uppercase;
+    letter-spacing: 0;
+}
+
+.table-ui tbody tr{
+    background-color: #ffffff;
+    border: 1px solid #00000000;
+    border-radius: 15px;
+}
+
+.table-ui tbody tr:hover{
+    background-color: #cce7ffe8;
+    border: 1px solid #00000000;
+    border-radius: 15px;
+}
+
+.table-ui th, .table-ui td{
+    border: none !important;
+    padding-top: 20px;
+    padding-bottom: 20px
+}
+
+.bg-dark-louvre{
+    background-color: #131518;
+}
+
+#navbarNavAltMarkup .navbar-nav{
+    border-bottom: solid 7px #0000;
+    font-family: Trajanus, sans-serif;
+}
+
+#navbarNavAltMarkup .navbar-nav:hover{
+    border-bottom: solid 7px #7e7a1f;
+}
+
+h3, .h3{
+    font-family: Trajanus,sans-serif !important;
+    word-spacing: 10px;
+    border-top: solid 3px #7e7a1f;
+    padding: 20px 0;
+}
+
+.card-title + .card-title{
+    color: #17a2b8;
+}
+
+.card{
+    box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+}
