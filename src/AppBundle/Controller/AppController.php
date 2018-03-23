@@ -25,8 +25,8 @@ class AppController extends Controller
     /**
      * @Route("/contact", name="contact")
      */
-    public function informationAction()
+    public function contactAction()
     {
-        return $this->render('@App/app/index.html.twig');
+        return $this->render('@App/app/contact.html.twig');
     }
 }

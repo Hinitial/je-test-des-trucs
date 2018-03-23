@@ -1,3 +1,137 @@
-{# src/AppBundle/Ressources/views/app/index.html.twig #}
+{# src/Louvre/PlatformeBumble/Ressources/views/Platforme/index.html.twig #}
 
 {% extends "layout.html.twig" %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div class="row">
+            <div class="col-12 p-4">
+                <p class="text-center h3 text-lowercase">Bienvenue au musee du Louvre</p>
+                <p class="text-justify">
+                    Ancien palais des rois, le Louvre épouse l’histoire de France depuis huit siècles.
+                    Conçu dès sa création en 1793 comme un musée universel, ses collections, qui figurent parmi
+                    les plus belles au monde, couvrent plusieurs millénaires et un territoire qui s’étend
+                    de l’Amérique aux frontières de l’Asie. Réparties en huit départements,
+                    elles contiennent des œuvres universellement admirées, comme La Joconde,
+                    la Victoire de Samothrace ou la Vénus de Milo. Le Louvre est aujourd’hui le musée le plus visité au monde.
+                </p>
+                <p class="text-center font-weight-bold">
+                    Acheter vos billet sur notre billeterie en ligne, pour visiter notre collection.
+                </p>
+                <div class="row justify-content-center"><a class="btn btn-info btn-lg" href="{{ path('homepage_billetterie') }}" role="button">Billetterie</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h3 class="text-lowercase">Tarif</h3>
+                <p>Voici la grille des tarifs du Musee du Louve. Ces prix sont les meme que ceux pratiquer en billeterie physique</p>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-6 col-12 mb-3">
+                <div class="card div card-body text-center">
+                    <div class="card-title h4">Tarif normal</div>
+                    <div class="card-title h4">16 €</div>
+                    <p class="card-text font-weight-light">Tarif classique du musée.<br>Pour les personnes de 12 ans à 59 ans</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-12 mb-3">
+                <div class="card div card-body text-center">
+                    <div class="card-title h4">Tarif enfant</div>
+                    <div class="card-title h4">8 €</div>
+                    <p class="card-text font-weight-light">À partir de 4 ans et jusqu’à 12 ans.<br>L’entrée est gratuite pour les enfants de moins de 4 ans</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-12 mb-3">
+                <div class="card div card-body text-center">
+                    <div class="card-title h4">Tarif senior</div>
+                    <div class="card-title h4">12 €</div>
+                    <p class="card-text font-weight-light">À partir de 60 ans.<br>Il n'y a pas d'age pour visité le Louvre.</p>
+                </div>
+            </div>
+            <div class="col-md-6 col-12 mb-3">
+                <div class="card div card-body text-center">
+                    <div class="card-title h4">Tarif réduit</div>
+                    <div class="card-title h4">10 €</div>
+                    <p class="card-text font-weight-light">À accordé dans certaines conditions (étudiant, employé du musée, d’un service du Ministère de la Culture, militaire…)</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-center text-lowercase">Horaires</h3>
+            </div>
+        </div>
+        <div class="row">
+            <p class="col-12">Horaire d'ouverture et de fermeture du musée. L'évacuation des salles débute à 17 h 30 ou 21 h 30 les jours de nocturne.</p>
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="row">Lundi</th>
+                    <th scope="row">Mardi</th>
+                    <th scope="row">Mercredi</th>
+                    <th scope="row">Jeudi</th>
+                    <th scope="row">Vendredi</th>
+                    <th scope="row">Samedi</th>
+                    <th scope="row">Dimanche*</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>9h - 18h</td>
+                    <td>Fermé</td>
+                    <td>9h - 21h45</td>
+                    <td>9h - 18h</td>
+                    <td>9h - 21h45</td>
+                    <td>9h - 18h</td>
+                    <td>9h - 18h</td>
+                </tr>
+                </tbody>
+            </table>
+            <p class="col-12">*Impossible d'acheter des billets en ligne pour ce jour</p>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <h3 class="text-center text-lowercase">Acces</h3>
+            </div>
+        </div>
+        <div class="row no-gutters justify-content-center">
+            <div class="col-12">
+                <table class="table table-ui mb-5">
+                    <tbody class="">
+                    <tr scope="row">
+                        <th>Métro</th>
+                        <td>lignes 1 et 7, station "Palais-Royal / Musée du Louvre"; ligne 14, station "Pyramides"</td>
+                    </tr>
+                    <tr scope="row">
+                        <th>Bus</th>
+                        <td>bus n° 21, 24, 27, 39, 48, 68, 69, 72, 81, 95</td>
+                    </tr>
+                    <tr scope="row">
+                        <th>Velib'</th>
+                        <td>n°1015 : 2 place A. Malraux, n°1023 : 165 rue Saint-Honoré, n°1014 : 5 rue de l’Echelle</td>
+                    </tr>
+                    <tr scope="row">
+                        <th>Voiture</th>
+                        <td>un parc de stationnement souterrain est accessible par l'avenue du Général-Lemonnier, tous les jours de 7 h 00 à 23 h 00.</td>
+                    </tr>
+                    <tr scope="row">
+                        <th>Batobus</th>
+                        <td>Escale "Louvre", quai François-Mitterrand</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row no-gutters">
+        <img src="{{ asset('images/maps.png') }}" alt="header">
+    </div>
+{% endblock %}
