@@ -63,3 +63,11 @@ h3, .h3{
 .card{
     box-shadow: 0 2px 4px rgba(0,0,0,0.18);
 }
+
+footer a{
+    color: white;
+}
+
+footer a:hover{
+    color: #7e7a1f;
+}
