@@ -17,7 +17,7 @@
         </div>
         <div class="row">
             {% for message in app.flashes('notice') %}
-                <div class="alert alert-success" role="alert">
+                <div class="col alert alert-success" role="alert">
                     {{ message }}
                 </div>
             {% endfor %}
