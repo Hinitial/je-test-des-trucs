@@ -1,3 +1,50 @@
 {# src/AppBundle/Ressources/views/app/contact.html.twig #}
 
 {% extends "layout.html.twig" %}
+
+{% block title %}
+    Contact - {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <div class="container my-5">
+        <h3 class="text-center text-lowercase">Formulaire de contact</h3>
+        <div class="row">
+            <p class="col text-justify">
+                Vous avez une demande à formuler ou souhaitez faire une suggestion ? Prenez soin d'identifier
+                l'interlocuteur le mieux adapté, votre demande n'en sera que mieux traitée !
+            </p>
+        </div>
+        <div class="row">
+            {% for message in app.flashes('notice') %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+        {{ form_errors(form) }}
+
+        <div class="form-row">
+            <div class="form-group col-md-3">{{ form_row(form.nom) }}</div>
+            <div class="form-group col-md-3">{{ form_row(form.prenom) }}</div>
+            <div class="form-group col-md-6">{{ form_row(form.email) }}</div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">{{ form_row(form.titre) }}</div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                {{ form_label(form.message, "Votre message", {'label_attr': {'class': 'form-control-label'}}) }}
+                {{ form_errors(form.message) }}
+                {{ form_widget(form.message, {'attr': {'class': 'form-control', 'rows': '15'}}) }}
+            </div>
+        </div>
+        {{ form_widget(form.envoyer, {'attr': {'class': 'btn btn-info'}}) }}
+
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
