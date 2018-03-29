@@ -8,13 +8,37 @@
 
 namespace AppBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 
 class Contact
 {
+    /**
+     * @Assert\Length(min="2", max="50")
+     * @Assert\NotBlank()
+     */
     private $nom;
+
+    /**
+     * @Assert\Length(min="2", max="50")
+     * @Assert\NotBlank()
+     */
     private $prenom;
+
+    /**
+     * @Assert\Email()
+     * @Assert\NotBlank()
+     */
     private $email;
+
+    /**
+     * @Assert\Length(min="2", max="50")
+     * @Assert\NotBlank()
+     */
     private $titre;
+
+    /**
+     * @Assert\NotBlank()
+     */
     private $message;
 
     /**

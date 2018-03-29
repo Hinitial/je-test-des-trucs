@@ -1,6 +1,23 @@
 {# src/AppBundle/Ressources/views/app/contact.html.twig #}
 
 
-<html>
-{{ nom }} {{ prenom }}, message : {{ message }}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>{% block title %}Musée du Louvre{% endblock %}</title>
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        {# On charge le CSS de bootstrap depuis le site directement #}
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    {% endblock %}
+    <link rel="icon" type="image/png" href="{{ asset('images/icon.png') }}">
+</head>
+<body>
+</body>
+    <p>Demande de {{ nom }} {{ prenom }}</p>
+    <p>message : {{ message }}</p>
 </html>
