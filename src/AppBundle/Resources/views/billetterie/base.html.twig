@@ -1,0 +1,25 @@
+{# src/AppBundle/Ressources/views/billetterie/base.html.twig #}
+
+{% extends "layout.html.twig" %}
+
+{% block title %}
+    Billetterie - {{ parent() }}
+{% endblock %}
+
+{% block main %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="row">
+                    <h3 class="col-12 text-center text-lowercase">Billetterie</h3>
+                </div>
+                {{ include('@App/billetterie/etape.html.twig') }}
+                <div class="col-md-8">
+                    {% block content %}
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

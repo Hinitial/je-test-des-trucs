@@ -9,6 +9,8 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Reservation;
+use AppBundle\Form\ReservationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,7 +21,12 @@ class BilletterieController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('@App/billetterie/index.html.twig');
+        $reservation = new Reservation();
+        $form = $this->createForm(ReservationType::class, $reservation);
+
+        return $this->render('@App/billetterie/index.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
     /**

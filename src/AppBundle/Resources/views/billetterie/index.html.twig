@@ -1,3 +1,21 @@
 {# src/AppBundle/Ressources/views/billetterie/index.html.twig #}
 
-{% extends "layout.html.twig" %}
+{% extends "@App/billetterie/base.html.twig" %}
+
+{% block content %}
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+    {{ form_errors(form) }}
+
+    <div class="form-row">
+        <div class="form-group ">{{ form_row(form.jourVisite) }}</div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">{{ form_row(form.typeBillet) }}</div>
+        <div class="form-group col-md-6">{{ form_row(form.email) }}</div>
+    </div>
+
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+{% endblock %}
