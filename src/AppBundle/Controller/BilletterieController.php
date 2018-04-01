@@ -9,9 +9,12 @@
 namespace AppBundle\Controller;
 
 
+use AppBundle\Entity\Billet;
 use AppBundle\Entity\Reservation;
+use AppBundle\Form\BilletType;
 use AppBundle\Form\ReservationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BilletterieController extends Controller
@@ -19,10 +22,16 @@ class BilletterieController extends Controller
     /**
      * @Route("/billetterie", name="homepage_billetterie")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $request->getSession()->set('reservation', $reservation);
+
+            return $this->redirectToRoute('billetterie_information');
+        }
 
         return $this->render('@App/billetterie/index.html.twig', array(
             'form' => $form->createView(),
@@ -34,7 +43,12 @@ class BilletterieController extends Controller
      */
     public function informationAction()
     {
-        return $this->render('@App/billetterie/index.html.twig');
+        $billets = new Billet();
+        $form = $this->createForm(BilletType::class, $billets);
+
+        return $this->render('@App/billetterie/information.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
     /**

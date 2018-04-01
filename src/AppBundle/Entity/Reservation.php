@@ -56,6 +56,24 @@ class Reservation
      */
     private $typeBillet;
 
+    private $nbreBillet;
+
+    /**
+     * @return mixed
+     */
+    public function getNbreBillet()
+    {
+        return $this->nbreBillet;
+    }
+
+    /**
+     * @param mixed $nbreBillet
+     */
+    public function setNbreBillet($nbreBillet)
+    {
+        $this->nbreBillet = $nbreBillet;
+    }
+
 
     /**
      * Get id

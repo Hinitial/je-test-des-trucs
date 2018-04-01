@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -26,6 +27,7 @@ class ReservationType extends AbstractType
                     'Demie-journée' => 'demie_journee'
                 )
             ))
+            ->add('nbreBillet', NumberType::class, array('required' => true))
             ->add('suivant', SubmitType::class);
     }/**
      * {@inheritdoc}

@@ -8,12 +8,19 @@
     {{ form_errors(form) }}
 
     <div class="form-row">
-        <div class="form-group ">{{ form_row(form.jourVisite) }}</div>
+        <div class="form-group col-md-8">{{ form_row(form.jourVisite) }}</div>
+        <div class="form-group col-md-4">
+            {{ form_row(form.typeBillet) }}
+            {{ form_row(form.nbreBillet) }}
+        </div>
     </div>
 
     <div class="form-row">
-        <div class="form-group col-md-6">{{ form_row(form.typeBillet) }}</div>
-        <div class="form-group col-md-6">{{ form_row(form.email) }}</div>
+        <div class="form-group col-md-6">
+            {{ form_label(form.email, "Email", {'label_attr': {'class': 'form-control-label'}}) }}
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'example@domain.com'}}) }}
+        </div>
     </div>
 
     {{ form_rest(form) }}
