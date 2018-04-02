@@ -11,7 +11,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Billet;
 use AppBundle\Entity\Reservation;
-use AppBundle\Form\BilletType;
+use AppBundle\Form\InformationType;
 use AppBundle\Form\ReservationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,6 +28,10 @@ class BilletterieController extends Controller
         $form = $this->createForm(ReservationType::class, $reservation);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            for ($i=0;$i<($reservation->getNbreBillet());$i++){
+                $billet = new Billet();
+                $reservation->addBillet($billet);
+            }
             $request->getSession()->set('reservation', $reservation);
 
             return $this->redirectToRoute('billetterie_information');
@@ -41,10 +45,17 @@ class BilletterieController extends Controller
     /**
      * @Route("/billetterie/information", name="billetterie_information")
      */
-    public function informationAction()
+    public function informationAction(Request $request)
     {
-        $billets = new Billet();
-        $form = $this->createForm(BilletType::class, $billets);
+        $reservation = $request->getSession()->get('reservation');
+
+        $form = $this->createForm(InformationType::class, $reservation);
+
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+            $request->getSession()->set('reservation', $reservation);
+
+            return $this->redirectToRoute('billetterie_confirmation');
+        }
 
         return $this->render('@App/billetterie/information.html.twig', array(
             'form' => $form->createView(),
@@ -60,9 +71,9 @@ class BilletterieController extends Controller
     }
 
     /**
-     * @Route("/billetterie/finalisation", name="finalisation")
+     * @Route("/billetterie/confirmation", name="billetterie_confirmation")
      */
-    public function finalisationAction()
+    public function confirmationAction()
     {
 
         return $this->render('@App/billetterie/index.html.twig');

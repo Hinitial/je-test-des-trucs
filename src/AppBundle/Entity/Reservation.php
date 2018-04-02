@@ -56,6 +56,11 @@ class Reservation
      */
     private $typeBillet;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Billet", mappedBy="reservation")
+     */
+    private $billets;
+
     private $nbreBillet;
 
     /**
@@ -204,5 +209,48 @@ class Reservation
     {
         return $this->typeBillet;
     }
-}
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->billets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add billet
+     *
+     * @param \AppBundle\Entity\Billet $billet
+     *
+     * @return Reservation
+     */
+    public function addBillet(\AppBundle\Entity\Billet $billet)
+    {
+        $this->billets[] = $billet;
+
+        $billet->setReservation($this);
+
+        return $this;
+    }
+
+    /**
+     * Remove billet
+     *
+     * @param \AppBundle\Entity\Billet $billet
+     */
+    public function removeBillet(\AppBundle\Entity\Billet $billet)
+    {
+        $this->billets->removeElement($billet);
+    }
+
+    /**
+     * Get billets
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getBillets()
+    {
+        return $this->billets;
+    }
+}

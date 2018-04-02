@@ -57,7 +57,7 @@ class Billet
     private $tarifReduit;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Reservation")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Reservation", inversedBy="billets")
      * @ORM\JoinColumn(nullable=false)
      */
     private $reservation;
