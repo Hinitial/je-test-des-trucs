@@ -72,19 +72,35 @@ footer a:hover{
     color: #7e7a1f;
 }
 
-.etape{
+.etape-1{
     background-image: linear-gradient(to right, #4481b6 0%, #17a2b8 15%, #ddd 25%);
+}
+
+.etape-2{
+    background-image: linear-gradient(to right, #4481b6 0%, #17a2b8 45%, #ddd 50%);
+}
+
+.etape-3{
+    background-image: linear-gradient(to right, #4481b6 0%, #17a2b8 65%, #ddd 75%);
+}
+
+.etape-4{
+    background-image: linear-gradient(to right, #4481b6 0%, #17a2b8 100%, #ddd 100%);
+}
+
+.etape div{
+    border: solid 2px #f3f3f3;
     font-size: 20px;
     word-spacing: 10px;
     font-family: Trajanus, sans-serif;
     color: #8d8d8d;
 }
 
-.etape div{
-    border: solid 2px #f3f3f3;
+.etape-active{
+    color: #f3f3f3 !important;
 }
 
-.etape-active{
-    /*background-color: #17a2b8 !important;*/
-    color: #f3f3f3 !important;
+.panier{
+    background-color: #ddd;
+    color: #8d8d8d !important;
 }

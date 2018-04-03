@@ -1,19 +1,23 @@
 {# src/AppBundle/Ressources/views/billetterie/information.html.twig #}
 
 {% extends "@App/billetterie/base.html.twig" %}
+{% block etape %}etape-2{% endblock %}
+{% block etape_information %}etape-active{% endblock %}
 {% block content %}
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
     {{ form_errors(form) }}
 
-    <div class="form-row">
-        {{ form_label(form.email, "Rapel de votre adresse email", {'label_attr': {'class': 'form-control-label'}}) }}
-        {{ form_errors(form.email) }}
-        {{ form_widget(form.email, {'attr': {'class': 'form-control', 'readonly': 'true'}}) }}
+    <div class="form-row mb-4">
+        <div class="col-mb-6">
+            {{ form_label(form.email, "Rapel de votre adresse email", {'label_attr': {'class': 'form-control-label'}}) }}
+            {{ form_errors(form.email) }}
+            {{ form_widget(form.email, {'attr': {'class': 'form-control', 'readonly': 'true'}}) }}
+        </div>
     </div>
 
     {% for form in form.billets %}
-        <div class="col h3">billet n° {{ loop.index }}</div>
+        <div class="col h3 text-center">billet n° {{ loop.index }}</div>
         <div class="form-row">
             <div class="form-group col-md-6">
                 {{ form_label(form.nom, "Nom", {'label_attr': {'class': 'form-control-label'}}) }}
