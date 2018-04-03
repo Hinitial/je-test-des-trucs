@@ -13,11 +13,25 @@
                 <div class="row">
                     <h3 class="col-12 text-center text-lowercase">Billetterie</h3>
                 </div>
-                {{ include('@App/billetterie/etape.html.twig') }}
-                <div class="col-md-8 my-3">
-                    {% block content %}
+                <div class="row text-center etape {% block etape %}etape-1{% endblock %} mt-3">
+                    <div class="col py-3 etape-active">1 billet</div>
+                    <div class="col py-3 {% block etape_information %}{% endblock %}">2 information</div>
+                    <div class="col py-3 {% block etape_paiement %}{% endblock %}">3 paiement</div>
+                    <div class="col py-3 {% block etape_confirmation %}{% endblock %}">4 confirmation</div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 my-3">
+                        {% block content %}
 
-                    {% endblock %}
+                        {% endblock %}
+                    </div>
+                    <div class="col-md-4 panier text-center font-weight-bold my-3">
+                        <div class="row align-items-center">
+                            <div class="col h4">
+                                Panier
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

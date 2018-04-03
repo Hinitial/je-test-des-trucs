@@ -67,7 +67,7 @@ class BilletterieController extends Controller
      */
     public function paiementAction()
     {
-        return $this->render('@App/billetterie/index.html.twig');
+        return $this->render('@App/billetterie/paiement.html.twig');
     }
 
     /**
@@ -76,6 +76,6 @@ class BilletterieController extends Controller
     public function confirmationAction()
     {
 
-        return $this->render('@App/billetterie/index.html.twig');
+        return $this->render('@App/billetterie/confirmation.html.twig');
     }
 }
