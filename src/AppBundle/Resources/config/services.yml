@@ -1,0 +1,6 @@
+services:
+  app.reservaton.manager:
+    class: AppBundle\Service\ReservationManager
+    arguments:
+      - "@mailer"
+      - "@session"
