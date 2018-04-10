@@ -3,7 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
+use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as AppAssert;
 /**
  * Reservation
  *
@@ -25,6 +26,7 @@ class Reservation
      * @var string
      *
      * @ORM\Column(name="code_reservation", type="string", length=255)
+     * @Assert\Length(max=255, maxMessage="Code trop long")
      */
     private $codeReservation;
 
@@ -32,6 +34,7 @@ class Reservation
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\Email()
      */
     private $email;
 
@@ -39,6 +42,7 @@ class Reservation
      * @var \DateTime
      *
      * @ORM\Column(name="date_reservation", type="datetime")
+     * @Assert\DateTime()
      */
     private $dateReservation;
 
@@ -46,6 +50,10 @@ class Reservation
      * @var \DateTime
      *
      * @ORM\Column(name="jour_visite", type="datetime")
+     * @Assert\DateTime()
+     * @AppAssert\NoPastDate
+     * @AppAssert\NoSunday
+     * @AppAssert\NoTuesday
      */
     private $jourVisite;
 
@@ -53,6 +61,7 @@ class Reservation
      * @var string
      *
      * @ORM\Column(name="type_billet", type="string", length=30)
+     * @Assert\Length(max=30, maxMessage="Type trop long")
      */
     private $typeBillet;
 
@@ -61,6 +70,10 @@ class Reservation
      */
     private $billets;
 
+    /**
+     * @Assert\Type(type="int")
+     * @Assert\Range(min="1",max="7")
+     */
     private $nbreBillet;
 
     /**

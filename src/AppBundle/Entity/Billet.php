@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as AppAssert;
 
 /**
  * Billet
@@ -25,6 +27,7 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=50)
+     * @Assert\Length(max=50, maxMessage="Nom trop long")
      */
     private $nom;
 
@@ -32,6 +35,7 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=50)
+     * @Assert\Length(max=50, maxMessage="Prenom trop long")
      */
     private $prenom;
 
@@ -39,6 +43,7 @@ class Billet
      * @var string
      *
      * @ORM\Column(name="pays", type="string", length=25)
+     * @Assert\Length(max=25)
      */
     private $pays;
 
@@ -46,6 +51,8 @@ class Billet
      * @var \DateTime
      *
      * @ORM\Column(name="date_naissance", type="datetime")
+     * @Assert\DateTime()
+     * @AppAssert\NoFutureDate
      */
     private $dateNaissance;
 
@@ -53,6 +60,7 @@ class Billet
      * @var bool
      *
      * @ORM\Column(name="tarif_reduit", type="boolean")
+     * @Assert\Type(type="bool")
      */
     private $tarifReduit;
 
