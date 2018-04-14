@@ -34,7 +34,7 @@ class BilletterieController extends Controller
             return $this->redirectToRoute('billetterie_information');
         }
 
-        return $this->render('@App/billetterie/index.html.twig', array(
+        return $this->render('billetterie/index.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -54,7 +54,7 @@ class BilletterieController extends Controller
             return $this->redirectToRoute('billetterie_paiement');
         }
 
-        return $this->render('@App/billetterie/information.html.twig', array(
+        return $this->render('billetterie/information.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -62,9 +62,12 @@ class BilletterieController extends Controller
     /**
      * @Route("/billetterie/paiement", name="billetterie_paiement")
      */
-    public function paiementAction()
+    public function paiementAction(ReservationManager $reservationManager)
     {
-        return $this->render('@App/billetterie/paiement.html.twig');
+        $reservationManager->EnvoyerEmail();
+        return $this->render('billetterie/paiement.html.twig', array(
+            'montant' => $reservationManager->getPrixReservation()
+        ));
     }
 
     /**
@@ -74,7 +77,7 @@ class BilletterieController extends Controller
      *     methods="POST"
      * )
      */
-    public function checkoutAction()
+    public function checkoutAction(ReservationManager $reservationManager)
     {
         \Stripe\Stripe::setApiKey("sk_test_rTE16Sgt73ezOF1XCqy76TLg");
 
@@ -84,12 +87,13 @@ class BilletterieController extends Controller
         // Create a charge: this will charge the user's card
         try {
             $charge = \Stripe\Charge::create(array(
-                "amount" => 1000, // Amount in cents
+                "amount" => ($reservationManager->getPrixReservation())*100, // Amount in cents
                 "currency" => "eur",
                 "source" => $token,
                 "description" => "Paiement Stripe - Musee du louvre"
             ));
 
+            $reservationManager->EnvoyerEmail();
             $this->addFlash("success","Bravo ça marche !");
 
             return $this->redirectToRoute("billetterie_confirmation");
@@ -109,6 +113,6 @@ class BilletterieController extends Controller
     public function confirmationAction()
     {
 
-        return $this->render('@App/billetterie/confirmation.html.twig');
+        return $this->render('billetterie/confirmation.html.twig');
     }
 }

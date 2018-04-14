@@ -22,7 +22,7 @@ class AppController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('@App/app/index.html.twig');
+        return $this->render('app/index.html.twig');
     }
 
     /**
@@ -37,7 +37,7 @@ class AppController extends Controller
             $message = (new \Swift_Message($form['titre']->getData()))
                 ->setFrom('oc.projet.super@gmail.com')
                 ->setTo($form['email']->getData())
-                ->setBody($this->renderView('@App/email/contact.html.twig', array(
+                ->setBody($this->renderView('email/contact.html.twig', array(
                     'nom' => $form['nom']->getData(),
                     'prenom' => $form['prenom']->getData(),
                     'message' => $form['message']->getData()
@@ -48,7 +48,7 @@ class AppController extends Controller
             $this->addFlash('notice', 'Formulaire bien envoyé');
         }
 
-        return $this->render('@App/app/contact.html.twig', array(
+        return $this->render('app/contact.html.twig', array(
             'form' => $form->createView(),
         ));
     }

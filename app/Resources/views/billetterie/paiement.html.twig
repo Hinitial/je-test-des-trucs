@@ -10,12 +10,12 @@
             </div>
             <div id="status">
                 <p>
-                    Vous êtes sur le point de payer un article qui vaut une petite fortune ! (995 francs, heu euros !)
+                    Vous êtes sur le point de payer un article qui vaut une petite fortune ! ({{ montant }} francs, heu euros !)
                 <form action="{{ path('order_checkout') }}" method="POST">
                     <script
                             src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                             data-key="pk_test_DAfOODyrMjxgDNcU0x0i1GQv"
-                            data-amount="99500"
+                            data-amount="{{ montant }}00"
                             data-name="oc-stripe"
                             data-description="Widget"
                             data-locale="auto"
