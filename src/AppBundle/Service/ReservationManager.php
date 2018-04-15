@@ -26,6 +26,7 @@ class ReservationManager
     }
 
     public function setBilletSession(Reservation $reservation){
+        $reservation->setCodeReservation($this->generateCodeReservation());
         foreach ($reservation->getBillets() as $billet){
             $reservation->removeBillet($billet);
         }
@@ -34,7 +35,6 @@ class ReservationManager
             $reservation->addBillet($billet);
         }
         $this->setReservationSession($reservation);
-
     }
 
     public function isReservation(){
@@ -87,14 +87,29 @@ class ReservationManager
         elseif ($age <= 12){
             return 8;
         }
-        elseif ($age >= 60){
-            return 12;
-        }
         elseif ($billet->getTarifReduit()){
             return 10;
         }
+        elseif ($age >= 60){
+            return 12;
+        }
         else{
             return 16;
+        }
+    }
+
+    public function getStringPromotion($prix){
+        switch ($prix){
+            case 0:
+                return "Gratuit";
+            case 8:
+                return "Enfant";
+            case 10:
+                return "Tarif réduit";
+            case 12:
+                return "Sénior";
+            default:
+                return "Normal";
         }
     }
 
@@ -110,23 +125,46 @@ class ReservationManager
         return $prix;
     }
 
+    /**
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function EnvoyerEmail(){
         $reservation = $this->getReservation();
         $tabPrix = array();
+        $tabPromotion = array();
+        $prixReservation = 0;
         foreach ($reservation->getBillets() as $billet){
-            array_push($tabPrix, $this->getPrixBillet($billet));
+            $prixBillet = $this->getPrixBillet($billet);
+            array_push($tabPrix, $prixBillet);
+            array_push($tabPromotion, $this->getStringPromotion($prixBillet));
+            $prixReservation = $prixReservation + $prixBillet;
         }
             $mail = (new \Swift_Message('Votre Reservation pour le Musée du louvre'))
                 ->setFrom('oc.projet.super@gmail.com')
                 ->setTo($reservation->getEmail())
                 ->setContentType('text/html')
                 ->setBody($this->template->render('billetterie/email.html.twig', array(
-                    'jourVisite' => $reservation->getJourVisite(),
-                    'billets' => $reservation->getBillets(),
+                    'reservation' => $reservation,
                     'tarif' => $tabPrix,
-                    'codeReservation' => $reservation->getCodeReservation()
+                    'tabPromotion' => $tabPromotion,
+                    'prixReservatin' => $prixReservation
                 )));
 
         $this->mailer->send($mail);
+    }
+
+    /**
+     * @return string Code de reservation généré
+     */
+    public function generateCodeReservation(){
+        $code = '';
+        $pool = array_merge(range(0,9),range('A', 'Z'));
+
+        for($i=0; $i < 10; $i++) {
+            $code .= $pool[mt_rand(0, count($pool) - 1)];
+        }
+        return $code;
     }
 }
