@@ -11,6 +11,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Billet;
 use AppBundle\Entity\Reservation;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ReservationManager
@@ -18,15 +19,23 @@ class ReservationManager
     protected $mailer;
     protected $session;
     protected $template;
+    protected $entity;
 
-    public function __construct(\Swift_Mailer $mailer, SessionInterface $session, \Twig_Environment $twig_Environment){
+    public function __construct(\Swift_Mailer $mailer, SessionInterface $session, \Twig_Environment $twig_Environment, EntityManagerInterface $entity){
         $this->mailer = $mailer;
         $this->session = $session;
         $this->template = $twig_Environment;
+        $this->entity = $entity;
     }
 
-    public function setBilletSession(Reservation $reservation){
-        $reservation->setCodeReservation($this->generateCodeReservation());
+    /**
+     * Mets en Session l'objet Reservation
+     * @param Reservation $reservation Objet Reservation
+     */
+    public function setSession(Reservation $reservation){
+        $reservation
+            ->setCodeReservation($this->generateCodeReservation())
+            ->setDateReservation(new \DateTime());
         foreach ($reservation->getBillets() as $billet){
             $reservation->removeBillet($billet);
         }
@@ -35,6 +44,18 @@ class ReservationManager
             $reservation->addBillet($billet);
         }
         $this->setReservationSession($reservation);
+    }
+
+    /**
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function insertReservation(){
+        $reservation = $this->getReservation();
+        $this->entity->persist($reservation);
+        foreach ($reservation->getBillets() as $billet){
+            $this->entity->persist($billet);
+        }
+        $this->entity->flush();
     }
 
     public function isReservation(){
@@ -98,6 +119,10 @@ class ReservationManager
         }
     }
 
+    /**
+     * @param $prix
+     * @return string
+     */
     public function getStringPromotion($prix){
         switch ($prix){
             case 0:
@@ -156,6 +181,7 @@ class ReservationManager
     }
 
     /**
+     * Génère un code de réservation
      * @return string Code de reservation généré
      */
     public function generateCodeReservation(){

@@ -25,11 +25,10 @@ class BilletterieController extends Controller
     public function indexAction(Request $request, ReservationManager $reservationManager)
     {
         $reservation = new Reservation();
-//        $reservationManager = $this->get('app.reservation.manager');
         $form = $this->createForm(ReservationType::class, $reservation);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $reservationManager->setBilletSession($reservation);
+            $reservationManager->setSession($reservation);
 
             return $this->redirectToRoute('billetterie_information');
         }
@@ -64,7 +63,6 @@ class BilletterieController extends Controller
      */
     public function paiementAction(ReservationManager $reservationManager)
     {
-        $reservationManager->EnvoyerEmail();
         return $this->render('billetterie/paiement.html.twig', array(
             'montant' => $reservationManager->getPrixReservation()
         ));
@@ -93,6 +91,7 @@ class BilletterieController extends Controller
                 "description" => "Paiement Stripe - Musee du louvre"
             ));
 
+            $reservationManager->insertReservation();
             $reservationManager->EnvoyerEmail();
             $this->addFlash("success","Bravo ça marche !");
 
