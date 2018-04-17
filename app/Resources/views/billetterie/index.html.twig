@@ -3,11 +3,16 @@
 {% extends "billetterie/base.html.twig" %}
 
 {% block content %}
+    <div class="row text-justify font-weight-light m-3">
+        Billet et réservation horaire incluant les collections permanentes, les expositions temporaires et le musée Delacroix.
+        Entrée libre, sans billet, sur présentation d’un justificatif pour les moins de 4 ans, les personnes handicapées et leur accompagnateur, et les bénéficiaires des minima sociaux.
+        Billet valable seulement le jour sélectionné.
+    </div>
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
     {{ form_errors(form) }}
 
-    <div class="form-row">
+    <div class="form-row border-t">
         <div class="form-group col-md-3">{{ form_row(form.jourVisite) }}</div>
         <div class="form-group col-md-4">
             {{ form_label(form.typeBillet, "Type de billet", {'label_attr': {'class': 'form-control-label'}}) }}
@@ -29,7 +34,73 @@
             {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'email@example.com'}}) }}
         </div>
     </div>
+    {{ form_widget(form.suivant, {'attr': {'class': 'btn btn-info'}}) }}
 
     {{ form_rest(form) }}
     {{ form_end(form) }}
+
+    <div class="jf row justify-content-center my-3 border-t">
+        <div class="col-12 my-3">
+            <div class="h5 text-center">Liste des jours fériés</div>
+        </div>
+        <div class="col-6">
+            <div class="row justify-content-center">
+                <div class="text-info">Janvier</div>
+                <ul class="font-weight-light">
+                    <li>1er Janvier</li>
+                </ul>
+            </div>
+            <div class="row justify-content-center">
+                <div class="text-info">Avril</div>
+                <ul class="font-weight-light">
+                    <li>1er Avril</li>
+                    <li>2 Avril</li>
+                </ul>
+            </div>
+            <div class="row justify-content-center">
+                <div class="text-info">Mai</div>
+                <ul class="font-weight-light">
+                    <li>1er Mai</li>
+                    <li>10 Mai</li>
+                    <li>20 Mai</li>
+                    <li>21 Mai</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row justify-content-center">
+                <div class="text-info">Juillet</div>
+                <ul class="font-weight-light">
+                    <li>14 Juillet</li>
+                </ul>
+            </div>
+            <div class="row justify-content-center">
+                <div class="text-info">Aout</div>
+                <ul class="font-weight-light">
+                    <li>15 Aout</li>
+                </ul>
+            </div>
+            <div class="row justify-content-center">
+                <div class="text-info">Novembre</div>
+                <ul class="font-weight-light">
+                    <li>1er Novembre</li>
+                </ul>
+            </div>
+            <div class="row justify-content-center">
+                <div class="text-info">Decembre</div>
+                <ul class="font-weight-light">
+                    <li>25 Decembre</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block panier %}
+    <div class="col-md-4 my-3">
+        <row class="row text-center mb-2">
+            <div class="col text-secondary">Rappel des prix</div>
+        </row>
+        {% set colTarif = 12 %}
+        {{ include("app/tarif.html.twig") }}
+    </div>
 {% endblock %}

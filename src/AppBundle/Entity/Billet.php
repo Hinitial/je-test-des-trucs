@@ -224,4 +224,55 @@ class Billet
     {
         return $this->reservation;
     }
+
+    /**
+     * @return int l'age de la personne
+     */
+    public function getAge(){
+        $now = new \DateTime();
+        $intervale = $now->diff($this->getDateNaissance());
+        $age = $intervale->format('%Y');
+        return (int) ($age);
+
+    }
+
+    /**
+     * @return int Le prix du billet
+     */
+    public function getPrixBillet(){
+        $age = $this->getAge();
+        if ($age <= 4){
+            return 0;
+        }
+        elseif ($age <= 12){
+            return 8;
+        }
+        elseif ($this->getTarifReduit()){
+            return 10;
+        }
+        elseif ($age >= 60){
+            return 12;
+        }
+        else{
+            return 16;
+        }
+    }
+
+    /**
+     * @return string
+     */
+    public function getNomPromotion(){
+        switch ($this->getPrixBillet()){
+            case 0:
+                return "Gratuit";
+            case 8:
+                return "Enfant";
+            case 10:
+                return "Tarif réduit";
+            case 12:
+                return "Sénior";
+            default:
+                return "Normal";
+        }
+    }
 }

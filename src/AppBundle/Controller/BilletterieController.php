@@ -63,9 +63,7 @@ class BilletterieController extends Controller
      */
     public function paiementAction(ReservationManager $reservationManager)
     {
-        return $this->render('billetterie/paiement.html.twig', array(
-            'montant' => $reservationManager->getPrixReservation()
-        ));
+        return $this->render('billetterie/paiement.html.twig');
     }
 
     /**
@@ -85,21 +83,21 @@ class BilletterieController extends Controller
         // Create a charge: this will charge the user's card
         try {
             $charge = \Stripe\Charge::create(array(
-                "amount" => ($reservationManager->getPrixReservation())*100, // Amount in cents
+                "amount" => ($reservationManager->getReservation()->getPrixReservation())*100, // Amount in cents
                 "currency" => "eur",
                 "source" => $token,
                 "description" => "Paiement Stripe - Musee du louvre"
             ));
 
-            $reservationManager->insertReservation();
-            $reservationManager->EnvoyerEmail();
-            $this->addFlash("success","Bravo ça marche !");
+            //$reservationManager->insertReservation();
+            //$reservationManager->EnvoyerEmail();
+            $this->addFlash("success","Paiement validé");
 
             return $this->redirectToRoute("billetterie_confirmation");
 
         } catch(\Stripe\Error\Card $e) {
 
-            $this->addFlash("error","Snif ça marche pas :(");
+            $this->addFlash("error","Une erreur est survenue lors du paiement, veillez réessayez");
             return $this->redirectToRoute("billetterie_paiement");
             // The card has been declined
         }

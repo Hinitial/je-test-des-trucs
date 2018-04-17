@@ -56,6 +56,11 @@ h3, .h3{
     padding: 20px 0;
 }
 
+.border-t{
+    border-top: solid 3px #7e7a1f;
+    padding-top: 20px;
+}
+
 .card-title + .card-title{
     color: #17a2b8;
 }
@@ -90,7 +95,7 @@ footer a:hover{
 
 .etape div{
     border: solid 2px #f3f3f3;
-    font-size: 20px;
+    font-size: 15px;
     word-spacing: 10px;
     font-family: Trajanus, sans-serif;
     color: #8d8d8d;
@@ -103,4 +108,8 @@ footer a:hover{
 .panier{
     background-color: #ddd;
     color: #8d8d8d !important;
+}
+
+.jf ul{
+    list-style-type: none;
 }

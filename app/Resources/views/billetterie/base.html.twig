@@ -7,11 +7,11 @@
 {% endblock %}
 
 {% block main %}
-    <div class="container-fluid">
+    <div class="container my-5">
         <div class="row justify-content-center">
-            <div class="col-md-10">
+            <div class="col-12">
                 <div class="row">
-                    <h3 class="col-12 text-center text-lowercase">Billetterie</h3>
+                    <h3 class="col-12 text-center text-lowercase">{% block titre_billetterie %}Billetterie{% endblock %}</h3>
                 </div>
                 <div class="row text-center etape {% block etape %}etape-1{% endblock %} mt-3">
                     <div class="col py-3 etape-active">1 billet</div>
@@ -20,11 +20,12 @@
                     <div class="col py-3 {% block etape_confirmation %}{% endblock %}">4 confirmation</div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8 my-3">
+                    <div class="col my-3">
                         {% block content %}
 
                         {% endblock %}
                     </div>
+                    {% block panier %}
                     <div class="col-md-4 panier text-center font-weight-bold my-3">
                         <div class="row align-items-center">
                             <div class="col h4">
@@ -32,6 +33,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endblock %}
                 </div>
             </div>
         </div>

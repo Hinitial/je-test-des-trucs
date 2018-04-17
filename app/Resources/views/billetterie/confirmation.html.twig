@@ -1,7 +1,55 @@
 {# src/AppBundle/Ressources/views/billetterie/confirmation.html.twig #}
 
 {% extends "billetterie/base.html.twig" %}
+{% block titre_billetterie %}confirmation{% endblock %}
 {% block etape %}etape-4{% endblock %}
 {% block etape_information %}etape-active{% endblock %}
 {% block etape_paiement %}etape-active{% endblock %}
 {% block etape_confirmation %}etape-active{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center text-center my-3">
+        <div class="col-12"> Votre commande à bien été validé, vos billets vous ont été envoyé sur votre boite mail.</div>
+
+    </div>
+<div class="row">
+    {% for message in app.flashes('success') %}
+        <div class="col alert alert-success" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+</div>
+    <div class="row">
+        <p class="text-info col-12">On dit que visiter le Louvre est très fatigant. Comment m'y préparer ?</p>
+        <p class="font-weight-light col">
+            Le Louvre est effectivement très grand, prévoyez des chaussures confortables. Sachez que de nombreux espaces
+            sont prévus pour que vous puissiez faire des pauses, vous restaurer et trouver quelques cadeaux et souvenirs.
+            Pensez néanmoins à bien vous reposer et à manger avant de venir.
+        </p>
+    </div>
+
+    <div class="row">
+        <p class="text-info col-12">Que puis-je voir avec le billet du Louvre ?</p>
+        <p class="font-weight-light col">
+            En plus des collections du musée du Louvre, le billet donne accès le jour même aux expositions temporaires
+            et pendant 48 heures au musée Eugène-Delacroix.
+        </p>
+    </div>
+
+    <div class="row">
+        <p class="text-info col-12">Quels sont les meilleurs horaires pour visiter ?</p>
+        <p class="font-weight-light col">
+            Le matin dès l'ouverture du musée et en nocturne.
+        </p>
+    </div>
+
+    <div class="row">
+        <p class="text-info col-12">J'entre dans le musée</p>
+        <p class="font-weight-light col">
+            L'entrée du musée est la pyramide du Louvre. A mon arrivée, je choisis la couleur de ma file.
+            Je prends un plan du musée du Louvre. Je demande conseil aux chargés d'accueil.
+        </p>
+    </div>
+{% endblock %}
+{% block panier %}
+{% endblock %}

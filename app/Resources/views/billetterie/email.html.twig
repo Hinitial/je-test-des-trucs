@@ -1419,19 +1419,19 @@
                                                                                         </p>
                                                                                         <p>
                                                                                             <strong>Adresse email</strong><br>
-                                                                                            {{ reservation.email }}
+                                                                                            {{  app.session.get('reservation').email }}
                                                                                         </p>
                                                                                         <p>
                                                                                             <strong>ID Commande</strong><br>
-                                                                                            {{ reservation.codeReservation }}
+                                                                                            {{  app.session.get('reservation').codeReservation }}
                                                                                         </p>
                                                                                     </th></tr></table></th>
                                                                         <th class="small-12 large-6 columns last"><table><tr><th>
                                                                                         <p>
                                                                                             <strong>Jour de la visite</strong><br>
-                                                                                            {{ reservation.jourVisite|date('D d F, Y') }}<br>
+                                                                                            {{  app.session.get('reservation').jourVisite|date('D d F, Y') }}<br>
                                                                                             <strong>Paiement effectuer le :</strong><br>
-                                                                                            {{ reservation.dateReservation|date('d/m/Y') }}
+                                                                                            {{  app.session.get('reservation').dateReservation|date('d/m/Y') }}
                                                                                         </p>
                                                                                     </th></tr></table></th>
                                                                     </tr></tbody></table>
@@ -1441,12 +1441,12 @@
 
                                                     <table class="list-order">
                                                         <tr><th>Personne</th><th>Type de billet</th><th>Prix</th></tr>
-                                                        {% for billet in reservation.billets %}
-                                                            <tr><td>{{ billet.nom }} {{ billet.prenom }}</td><td>{{ tabPromotion[ loop.index0 ] }}</td><td>{{ tarif[ loop.index0 ] }}€</td></tr>
+                                                        {% for billet in app.session.get('reservation').billets %}
+                                                            <tr><td>{{ billet.nom }} {{ billet.prenom }}</td><td>{{ billet.nomPromotion }}</td><td>{{ billet.prixBillet }}€</td></tr>
                                                         {% endfor %}
                                                         <tr>
                                                             <td colspan="2"><b>Total :</b></td>
-                                                            <td>{{ prixReservatin }}.00€</td>
+                                                            <td>{{ app.session.get('reservation').prixReservation }}.00€</td>
                                                         </tr>
                                                     </table>
 

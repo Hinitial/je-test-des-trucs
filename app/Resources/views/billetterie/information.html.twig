@@ -1,6 +1,7 @@
 {# src/AppBundle/Ressources/views/billetterie/information.html.twig #}
 
 {% extends "billetterie/base.html.twig" %}
+{% block titre_billetterie %}Information{% endblock %}
 {% block etape %}etape-2{% endblock %}
 {% block etape_information %}etape-active{% endblock %}
 {% block content %}
@@ -39,7 +40,17 @@
             <div class="form-group col-md-6">{{ form_row(form.tarifReduit) }}</div>
         </div>
     {% endfor %}
+    {{ form_widget(form.paiement, {'attr': {'class': 'btn btn-info btn-lg'}}) }}
 
     {{ form_rest(form) }}
     {{ form_end(form) }}
+{% endblock %}
+{% block panier %}
+    <div class="col-md-4 my-3">
+        <row class="row text-center mb-2">
+            <div class="col text-secondary">Rappel des prix</div>
+        </row>
+        {% set colTarif = 12 %}
+        {{ include("app/tarif.html.twig") }}
+    </div>
 {% endblock %}

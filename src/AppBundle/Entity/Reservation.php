@@ -266,4 +266,15 @@ class Reservation
     {
         return $this->billets;
     }
+
+    /**
+     * @return int Le prix de la reservation
+     */
+    public function getPrixReservation(){
+        $prix = 0;
+        foreach ($this->getBillets() as $billet){
+            $prix = $prix + $billet->getPrixBillet();
+        }
+        return $prix;
+    }
 }

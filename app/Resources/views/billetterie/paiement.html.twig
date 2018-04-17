@@ -1,29 +1,88 @@
 {% extends "billetterie/base.html.twig" %}
+{% block titre_billetterie %}paiement{% endblock %}
 {% block etape %}etape-3{% endblock %}
 {% block etape_information %}etape-active{% endblock %}
 {% block etape_paiement %}etape-active{% endblock %}
 {% block content %}
-    <div id="wrapper">
-        <div id="container">
-            <div id="welcome">
-                <h1><span>Projet Stripe</span> Mentorat OpenClassroom</h1>
-            </div>
-            <div id="status">
-                <p>
-                    Vous êtes sur le point de payer un article qui vaut une petite fortune ! ({{ montant }} francs, heu euros !)
-                <form action="{{ path('order_checkout') }}" method="POST">
-                    <script
-                            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                            data-key="pk_test_DAfOODyrMjxgDNcU0x0i1GQv"
-                            data-amount="{{ montant }}00"
-                            data-name="oc-stripe"
-                            data-description="Widget"
-                            data-locale="auto"
-                            data-currency="eur">
-                    </script>
-                </form>
-                </p>
-            </div>
+    <div class="">
+        <div class="h4">
+            Votre panier
         </div>
+        <div class="font-weight-light text-justify my-3">
+            Merci de bien vérifier que le contenu de votre réservation (date, horaire, conditions de gratuité) correspond à votre commande. Seuls les paiements en euros sont acceptés. Le paiement s'effetura via <span class="font-weight-bold">Stripe</span>
+        </div>
+        <table class="table table-ui my-3">
+            <thead>
+                <tr><th>Personne</th><th>Type de billet</th><th>Prix</th></tr>
+            </thead>
+            <tbody>
+            {% for billet in app.session.get('reservation').billets %}
+                <tr><td>{{ billet.nom }} {{ billet.prenom }}</td><td>{{ billet.nomPromotion }}</td><td>{{ billet.prixBillet }}€</td></tr>
+            {% endfor %}
+            <tr>
+                <td colspan="2"><b>Total :</b></td>
+                <td>{{ app.session.get('reservation').prixReservation }}.00€</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="row">
+            {% for message in app.flashes('error') %}
+                <div class="col alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        <form action="{{ path('order_checkout') }}" method="POST">
+            <button id="customButton" class="btn btn-info btn-lg">Payer avec <span class="font-weight-bold">Stripe</span></button>
+        </form>
+
+        <form action="{{ path('order_checkout') }}" method="POST">
+            <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_DAfOODyrMjxgDNcU0x0i1GQv"
+                    data-amount="{{ app.session.get('reservation').prixReservation }}00"
+                    data-image="{{ asset('images/icon.png') }}"
+                    data-name="Musée du Louvre"
+                    data-description="Reservation"
+                    data-locale="auto"
+                    data-currency="eur"
+                    data-email="{{ app.session.get('reservation').email }}"
+                    data-label="Payer avec Stripe">
+            </script>
+        </form>
     </div>
+
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+
+
+
+    <script>
+        var handler = StripeCheckout.configure({
+            key: 'pk_test_DAfOODyrMjxgDNcU0x0i1GQv',
+            image: "{{ asset('images/icon.png') }}",
+            locale: 'auto',
+            token: function(token) {
+            }
+        });
+
+        document.getElementById('customButton').addEventListener('click', function(e) {
+            // Open Checkout with further options:
+            handler.open({
+                name: 'Musée du Louvre',
+                description: 'Reservation',
+                email : "{{ app.session.get('reservation').email }}",
+                currency: 'eur',
+                amount: {{ app.session.get('reservation').prixReservation }}00
+            });
+            e.preventDefault();
+        });
+
+        // Close Checkout on page navigation:
+        window.addEventListener('popstate', function() {
+            handler.close();
+        });
+    </script>
 {% endblock %}
+{% block panier %}
+{% endblock %}
+
