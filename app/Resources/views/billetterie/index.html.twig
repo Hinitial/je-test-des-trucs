@@ -13,16 +13,20 @@
     {{ form_errors(form) }}
 
     <div class="form-row border-t">
-        <div class="form-group col-md-3">{{ form_row(form.jourVisite) }}</div>
+        <div class="form-group col-md-3">
+            {{ form_label(form.jourVisite, "Jour de la visite", {'label_attr': {'class': 'form-control-label'}}) }}
+            {{ form_widget(form.jourVisite, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.jourVisite) }}
+        </div>
         <div class="form-group col-md-4">
             {{ form_label(form.typeBillet, "Type de billet", {'label_attr': {'class': 'form-control-label'}}) }}
-            {{ form_errors(form.typeBillet) }}
             {{ form_widget(form.typeBillet, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.typeBillet) }}
         </div>
         <div class="form-group col-md-3">
             {{ form_label(form.nbreBillet, "Nombre de billet", {'label_attr': {'class': 'form-control-label'}}) }}
-            {{ form_errors(form.nbreBillet) }}
             {{ form_widget(form.nbreBillet, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.nbreBillet) }}
         </div>
     </div>
     <div class="form-row">
@@ -30,8 +34,8 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             {{ form_label(form.email, "Email", {'label_attr': {'class': 'form-control-label'}}) }}
-            {{ form_errors(form.email) }}
             {{ form_widget(form.email, {'attr': {'class': 'form-control', 'placeholder': 'email@example.com'}}) }}
+            {{ form_errors(form.email) }}
         </div>
     </div>
     {{ form_widget(form.suivant, {'attr': {'class': 'btn btn-info'}}) }}

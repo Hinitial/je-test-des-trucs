@@ -10,6 +10,7 @@ use AppBundle\Validator\Constraints as AppAssert;
  *
  * @ORM\Table(name="lvr_reservation")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ReservationRepository")
+ * @AppAssert\NoAllDay()
  */
 class Reservation
 {
@@ -72,7 +73,7 @@ class Reservation
 
     /**
      * @Assert\Type(type="int")
-     * @Assert\Range(min="1",max="7")
+     * @Assert\Range(min="1",max="7", minMessage="Vous devez au moins acheter {{ limit }} billet.", maxMessage="Vous ne pouvez pas acheter plus de {{ limit }} billets en une seul fois.")
      */
     private $nbreBillet;
 

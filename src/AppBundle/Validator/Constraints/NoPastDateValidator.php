@@ -17,7 +17,7 @@ class NoPastDateValidator extends ConstraintValidator
     {
         $dateActuel = new \DateTime();
 
-        if($dateActuel > $value){
+        if($dateActuel > $value && !($dateActuel->format('Y-m-d') == $value->format('Y-m-d'))){
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ jourVisite }}', $value->format('Y-m-d'))
                 ->addViolation();
