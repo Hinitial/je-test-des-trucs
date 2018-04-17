@@ -43,6 +43,9 @@ class ReservationManager
             $billet = new Billet();
             $reservation->addBillet($billet);
         }
+        foreach ($reservation->getBillets() as $billet){
+            $billet->setPays('FR');
+        }
         $this->setReservationSession($reservation);
     }
 
@@ -75,107 +78,17 @@ class ReservationManager
 
 
     /**
-     * @param $index int numero du billet dans la Reservation
-     * @return mixed Retourne un Objet Billet enregistrer en session
-     */
-    public function getBillet($index){
-        $reservation = $this->getReservation();
-        $billets = $reservation->getBillets();
-        return $billets[$index];
-    }
-
-    /**
-     * @param \DateTime $dateTime Date d'annivairsère
-     * @return int Retourne l'age en fonction d'un DateTime
-     */
-    public function getAge(\DateTime $dateTime){
-        $now = new \DateTime();
-        $intervale = $now->diff($dateTime);
-        $age = $intervale->format('%Y');
-        return (int) ($age);
-
-    }
-
-    /**
-     * @param $billet billet que l'on veux connaitre de le prix
-     * @return int Le prix du billet voulu
-     */
-    public function getPrixBillet($billet){
-        $age = $this->getAge($billet->getDateNaissance());
-        if ($age <= 4){
-            return 0;
-        }
-        elseif ($age <= 12){
-            return 8;
-        }
-        elseif ($billet->getTarifReduit()){
-            return 10;
-        }
-        elseif ($age >= 60){
-            return 12;
-        }
-        else{
-            return 16;
-        }
-    }
-
-    /**
-     * @param $prix
-     * @return string
-     */
-    public function getStringPromotion($prix){
-        switch ($prix){
-            case 0:
-                return "Gratuit";
-            case 8:
-                return "Enfant";
-            case 10:
-                return "Tarif réduit";
-            case 12:
-                return "Sénior";
-            default:
-                return "Normal";
-        }
-    }
-
-    /**
-     * @return int Le prix total de la réservation
-     */
-    public function getPrixReservation(){
-        $reservation = $this->getReservation();
-        $prix = 0;
-        foreach ($reservation->getBillets() as $billet){
-            $prix = $prix + $this->getPrixBillet($billet);
-        }
-        return $prix;
-    }
-
-    /**
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
     public function EnvoyerEmail(){
         $reservation = $this->getReservation();
-        $tabPrix = array();
-        $tabPromotion = array();
-        $prixReservation = 0;
-        foreach ($reservation->getBillets() as $billet){
-            $prixBillet = $this->getPrixBillet($billet);
-            array_push($tabPrix, $prixBillet);
-            array_push($tabPromotion, $this->getStringPromotion($prixBillet));
-            $prixReservation = $prixReservation + $prixBillet;
-        }
-            $mail = (new \Swift_Message('Votre Reservation pour le Musée du louvre'))
-                ->setFrom('oc.projet.super@gmail.com')
-                ->setTo($reservation->getEmail())
-                ->setContentType('text/html')
-                ->setBody($this->template->render('billetterie/email.html.twig', array(
-                    'reservation' => $reservation,
-                    'tarif' => $tabPrix,
-                    'tabPromotion' => $tabPromotion,
-                    'prixReservatin' => $prixReservation
-                )));
+        $mail = (new \Swift_Message('Votre Reservation pour le Musée du louvre'))
+            ->setFrom('oc.projet.super@gmail.com')
+            ->setTo($reservation->getEmail())
+            ->setContentType('text/html')
+            ->setBody($this->template->render('billetterie/email.html.twig'));
 
         $this->mailer->send($mail);
     }
