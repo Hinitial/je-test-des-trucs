@@ -89,8 +89,8 @@ class BilletterieController extends Controller
                 "description" => "Paiement Stripe - Musee du louvre"
             ));
 
-            //$reservationManager->insertReservation();
-            //$reservationManager->EnvoyerEmail();
+            $reservationManager->insertReservation();
+            $reservationManager->EnvoyerEmail();
             $this->addFlash("success","Paiement validé");
 
             return $this->redirectToRoute("billetterie_confirmation");
@@ -107,9 +107,9 @@ class BilletterieController extends Controller
     /**
      * @Route("/billetterie/confirmation", name="billetterie_confirmation")
      */
-    public function confirmationAction()
+    public function confirmationAction(ReservationManager $reservationManager)
     {
-
+        $reservationManager->clearReservation();
         return $this->render('billetterie/confirmation.html.twig');
     }
 }

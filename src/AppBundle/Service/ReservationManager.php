@@ -106,4 +106,8 @@ class ReservationManager
         }
         return $code;
     }
+
+    public function clearReservation(){
+        $this->session->remove('reservation');
+    }
 }

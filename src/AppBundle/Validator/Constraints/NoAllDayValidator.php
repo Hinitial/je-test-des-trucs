@@ -24,6 +24,7 @@ class NoAllDayValidator extends ConstraintValidator
 
         if(($reservation->getTypeBillet() == 'journee') && ($date_reservation == $date_now) && ($hour_now >= 14)){
             $this->context->buildViolation($constraint->message)
+//                ->atPath('typeBillet')
                 ->addViolation();
         }
     }

@@ -10,4 +10,11 @@ namespace AppBundle\Repository;
  */
 class ReservationRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getNombreBillet($jourVisiste){
+        $qb = $this
+            ->createQueryBuilder('r')
+            ->innerJoin('r.billet', 'b')
+            ->addSelect('b')
+        ;
+    }
 }

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as AppAssert;
 
+
 /**
  * Billet
  *
@@ -14,6 +15,22 @@ use AppBundle\Validator\Constraints as AppAssert;
  */
 class Billet
 {
+    const PRIX_GRATUIT = 0;
+    const PRIX_NORMAL = 16;
+    const PRIX_SENIOR = 12;
+    const PRIX_TARIF_REDUIT = 10;
+    const PRIX_ENFANT = 8;
+
+    const AGE_GRATUIT_MAX = 4;
+    const AGE_ENFANT_MAX = 12;
+    const AGE_SENIOR_MIN = 60;
+
+    const LABEL_GRATUIT = 'Gratuit';
+    const LABEL_NORMAL = 'Normal';
+    const LABEL_SENIOR = 'Sénior';
+    const LABEL_TARIF_REDUIT = 'Tarif réduit';
+    const LABEL_ENFANT = 'Enfant';
+
     /**
      * @var int
      *
@@ -241,20 +258,20 @@ class Billet
      */
     public function getPrixBillet(){
         $age = $this->getAge();
-        if ($age <= 4){
-            return 0;
+        if ($age <= self::AGE_GRATUIT_MAX){
+            return self::PRIX_GRATUIT;
         }
-        elseif ($age <= 12){
-            return 8;
+        elseif ($age <= self::AGE_ENFANT_MAX){
+            return self::PRIX_ENFANT;
         }
         elseif ($this->getTarifReduit()){
-            return 10;
+            return self::PRIX_TARIF_REDUIT;
         }
-        elseif ($age >= 60){
-            return 12;
+        elseif ($age >= self::AGE_SENIOR_MIN){
+            return self::PRIX_SENIOR;
         }
         else{
-            return 16;
+            return self::PRIX_NORMAL;
         }
     }
 
@@ -263,16 +280,18 @@ class Billet
      */
     public function getNomPromotion(){
         switch ($this->getPrixBillet()){
-            case 0:
-                return "Gratuit";
-            case 8:
-                return "Enfant";
-            case 10:
-                return "Tarif réduit";
-            case 12:
-                return "Sénior";
+            case self::PRIX_GRATUIT:
+                return self::LABEL_GRATUIT;
+            case self::PRIX_ENFANT:
+                return self::LABEL_ENFANT;
+            case self::PRIX_TARIF_REDUIT:
+                return self::LABEL_TARIF_REDUIT;
+            case self::PRIX_SENIOR:
+                return self::LABEL_SENIOR;
+            case self::PRIX_NORMAL:
+                return self::LABEL_NORMAL;
             default:
-                return "Normal";
+                return "Error";
         }
     }
 }
