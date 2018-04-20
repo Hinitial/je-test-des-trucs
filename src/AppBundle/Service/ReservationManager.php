@@ -84,11 +84,15 @@ class ReservationManager
      */
     public function EnvoyerEmail(){
         $reservation = $this->getReservation();
-        $mail = (new \Swift_Message('Votre Reservation pour le Musée du louvre'))
+        $mail = new  \Swift_Message('Votre Reservation pour le Musée du louvre');
+        $mail = $mail
             ->setFrom('oc.projet.super@gmail.com')
             ->setTo($reservation->getEmail())
             ->setContentType('text/html')
-            ->setBody($this->template->render('billetterie/email.html.twig'));
+            ->setBody($this->template->render('billetterie/email.html.twig', array(
+                'logoMusee' => $mail->embed(\Swift_Image::fromPath('images/Logo.jpg')),
+                'logoSombre' => $mail->embed(\Swift_Image::fromPath('images/louvre-1eravril.jpg'))
+            )));
 
         $this->mailer->send($mail);
     }
