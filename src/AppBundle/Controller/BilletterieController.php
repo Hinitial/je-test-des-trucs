@@ -9,12 +9,10 @@
 namespace AppBundle\Controller;
 
 
-use AppBundle\Entity\Reservation;
 use AppBundle\Form\InformationType;
 use AppBundle\Form\ReservationType;
 use AppBundle\Service\ReservationManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BilletterieController extends Controller
@@ -22,40 +20,18 @@ class BilletterieController extends Controller
     /**
      * @Route("/billetterie", name="homepage_billetterie")
      */
-    public function indexAction(Request $request, ReservationManager $reservationManager)
+    public function indexAction(ReservationManager $reservationManager)
     {
-        $reservation = new Reservation();
-        $form = $this->createForm(ReservationType::class, $reservation);
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $reservationManager->setSession($reservation);
-
-            return $this->redirectToRoute('billetterie_information');
-        }
-
-        return $this->render('billetterie/index.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        $reservationManager->initSession();
+        return $reservationManager->getReponse(ReservationType::class);
     }
 
     /**
      * @Route("/billetterie/information", name="billetterie_information")
      */
-    public function informationAction(Request $request)
+    public function informationAction(ReservationManager $reservationManager)
     {
-        $reservation = $request->getSession()->get('reservation');
-
-        $form = $this->createForm(InformationType::class, $reservation);
-
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $request->getSession()->set('reservation', $reservation);
-
-            return $this->redirectToRoute('billetterie_paiement');
-        }
-
-        return $this->render('billetterie/information.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        return $reservationManager->getReponse(InformationType::class);
     }
 
     /**
@@ -63,7 +39,7 @@ class BilletterieController extends Controller
      */
     public function paiementAction(ReservationManager $reservationManager)
     {
-        return $this->render('billetterie/paiement.html.twig');
+        return $reservationManager->getReponse();
     }
 
     /**
@@ -72,6 +48,11 @@ class BilletterieController extends Controller
      *     name="order_checkout",
      *     methods="POST"
      * )
+     * @param ReservationManager $reservationManager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
      */
     public function checkoutAction(ReservationManager $reservationManager)
     {
@@ -106,10 +87,12 @@ class BilletterieController extends Controller
 
     /**
      * @Route("/billetterie/confirmation", name="billetterie_confirmation")
+     * @param ReservationManager $reservationManager
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function confirmationAction(ReservationManager $reservationManager)
     {
         $reservationManager->clearReservation();
-        return $this->render('billetterie/confirmation.html.twig');
+        return $reservationManager->getReponse();
     }
 }
