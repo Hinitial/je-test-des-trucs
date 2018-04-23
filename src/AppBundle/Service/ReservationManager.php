@@ -190,7 +190,7 @@ class ReservationManager
             ->setFrom('oc.projet.super@gmail.com')
             ->setTo($reservation->getEmail())
             ->setContentType('text/html')
-            ->setBody($this->template->render('billetterie/email.html.twig', array(
+            ->setBody($this->template->render('email/reservation.html.twig', array(
                 'logoMusee' => $mail->embed(\Swift_Image::fromPath('images/Logo.jpg')),
                 'logoSombre' => $mail->embed(\Swift_Image::fromPath('images/louvre-1eravril.jpg'))
             )));
