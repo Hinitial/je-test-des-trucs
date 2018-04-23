@@ -5,6 +5,7 @@
 
 body{
     background-color: #f3f3f3 !important;
+    padding-top: 50px;
 }
 .table-ui{
     border: 13px solid white;
@@ -54,6 +55,7 @@ h3, .h3{
     word-spacing: 10px;
     border-top: solid 3px #7e7a1f;
     padding: 20px 0;
+    font-size: 25px !important;
 }
 
 .border-t{
@@ -70,27 +72,27 @@ h3, .h3{
 }
 
 footer a{
-    color: white;
+    color: #7e7a1f;
 }
 
 footer a:hover{
     color: #7e7a1f;
 }
 
-.etape-1{
-    background-image: linear-gradient(to right, #4481b6 0%, #17a2b8 15%, #ddd 25%);
+.etape-active:nth-child(4n+1){
+    background-image: linear-gradient(to right, #4481b6, #3989B6);
 }
 
-.etape-2{
-    background-image: linear-gradient(to right, #4481b6 0%, #17a2b8 45%, #ddd 50%);
+.etape-active:nth-child(4n+2){
+    background-image: linear-gradient(to right, #3989B7, #2E91B7);
 }
 
-.etape-3{
-    background-image: linear-gradient(to right, #4481b6 0%, #17a2b8 65%, #ddd 75%);
+.etape-active:nth-child(4n+3){
+    background-image: linear-gradient(to right, #2D92B7, #229AB7) !important;
 }
 
-.etape-4{
-    background-image: linear-gradient(to right, #4481b6 0%, #17a2b8 100%, #ddd 100%);
+.etape-active:nth-child(4n+0){
+    background-image: linear-gradient(to right, #229AB8, #17a2b8);
 }
 
 .etape div{
@@ -99,6 +101,7 @@ footer a:hover{
     word-spacing: 10px;
     font-family: Trajanus, sans-serif;
     color: #8d8d8d;
+    background-color: #ddd;
 }
 
 .etape-active{
@@ -140,3 +143,4 @@ footer a:hover{
 .StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
 }
+

@@ -20,7 +20,7 @@
                     la Victoire de Samothrace ou la Vénus de Milo. Le Louvre est aujourd’hui le musée le plus visité au monde.
                 </p>
                 <p class="text-center font-weight-bold">
-                    Acheter vos billet sur notre billeterie en ligne, pour visiter notre collection.
+                    Acheter vos billet sur notre billetterie en ligne, pour visiter notre collection.
                 </p>
                 <div class="row justify-content-center"><a class="btn btn-info btn-lg" href="{{ path('homepage_billetterie') }}" role="button">Billetterie</a>
                 </div>
@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-12 text-center">
                 <h3 class="text-lowercase">Tarif</h3>
-                <p>Voici la grille des tarifs du Musee du Louve. Ces prix sont les meme que ceux pratiquer en billeterie physique</p>
+                <p>Voici la grille des tarifs du Musee du Louve. Ces prix sont les meme que ceux pratiqués en billetterie physique</p>
             </div>
         </div>
         {% set colTarif = 6 %}
@@ -42,9 +42,9 @@
             </div>
         </div>
         <div class="row">
-            <p class="col-12">Horaire d'ouverture et de fermeture du musée. L'évacuation des salles débute à 17 h 30 ou 21 h 30 les jours de nocturne.</p>
-            <table class="table">
-                <thead class="thead-light">
+            <p class="col-12 text-center font-weight-light">Horaire d'ouverture et de fermeture du musée. L'évacuation des salles débute à 17 h 30 ou 21 h 30 les jours de nocturne.</p>
+            <table class="table table-responsive-sm">
+                <thead class="thead-dark">
                 <tr>
                     <th scope="row">Lundi</th>
                     <th scope="row">Mardi</th>
@@ -67,7 +67,7 @@
                 </tr>
                 </tbody>
             </table>
-            <p class="col-12">*Impossible d'acheter des billets en ligne pour ce jour</p>
+            <p class="col-12">*Impossible d'acheter des billets en ligne pour un dimanche</p>
         </div>
         <div class="row">
             <div class="col-12">
@@ -104,6 +104,6 @@
         </div>
     </div>
     <div class="row no-gutters">
-        <img src="{{ asset('images/maps.png') }}" alt="header">
+        <img src="{{ asset('images/maps.png') }}" alt="header" class="img-fluid">
     </div>
 {% endblock %}

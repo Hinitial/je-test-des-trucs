@@ -2,7 +2,6 @@
 
 {% extends "billetterie/base.html.twig" %}
 {% block titre_billetterie %}Information{% endblock %}
-{% block etape %}etape-2{% endblock %}
 {% block etape_information %}etape-active{% endblock %}
 {% block content %}
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
@@ -33,7 +32,9 @@
         </div>
         <div class="form-row">
             <div class="form-group col-md-6">{{ form_row(form.pays) }}</div>
-            <div class="form-group col-md-6">{{ form_row(form.dateNaissance) }}</div>
+            <div class="form-group col-md-6">
+                {{ form_row(form.dateNaissance) }}
+            </div>
         </div>
 
         <div class="form-row">

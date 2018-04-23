@@ -1,20 +1,42 @@
 {% extends "billetterie/base.html.twig" %}
 {% block titre_billetterie %}paiement{% endblock %}
-{% block etape %}etape-3{% endblock %}
 {% block etape_information %}etape-active{% endblock %}
 {% block etape_paiement %}etape-active{% endblock %}
 {% block content %}
-    <div class="">
-        <div class="h4">
-            Votre panier
+    <div class="row justify-content-center">
+        <div class="h3 col-12 text-center">
+            votre panier
         </div>
-        <div class="font-weight-light text-justify my-3">
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-ui mb-3">
+                <thead>
+                <tr><th>Personne</th><th>Type de billet</th><th>Prix</th></tr>
+                </thead>
+                <tbody>
+                {% for billet in app.session.get('reservation').billets %}
+                    <tr><td>{{ billet.nom }} {{ billet.prenom }}</td><td>{{ billet.nomPromotion }}</td><td>{{ billet.prixBillet }}€</td></tr>
+                {% endfor %}
+                <tr>
+                    <td colspan="2"><b>Total :</b></td>
+                    <td>{{ app.session.get('reservation').prixReservation }}€</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 font-weight-light text-justify my-3">
             Merci de bien vérifier que le contenu de votre réservation (date, horaire, conditions de gratuité) correspond à votre commande. Seuls les paiements en euros sont acceptés. Le paiement s'effetura via <span class="font-weight-bold">Stripe</span>
         </div>
 
         <form action="{{ path('order_checkout') }}" method="post" id="payment-form" class="">
-            <div class="form-group col-md-6">
-                <label for="card-element">
+            <div class="form-group ">
+                <label for="card-element" class="font-weight-bold">
                     Entrer vos informations bancaires :
                 </label>
                 <div id="card-element">
@@ -26,21 +48,6 @@
             </div>
             <button class="btn btn-info btn-lg">Payer avec <strong>Stripe</strong></button>
         </form>
-
-        <table class="table table-ui my-3">
-            <thead>
-                <tr><th>Personne</th><th>Type de billet</th><th>Prix</th></tr>
-            </thead>
-            <tbody>
-            {% for billet in app.session.get('reservation').billets %}
-                <tr><td>{{ billet.nom }} {{ billet.prenom }}</td><td>{{ billet.nomPromotion }}</td><td>{{ billet.prixBillet }}€</td></tr>
-            {% endfor %}
-            <tr>
-                <td colspan="2"><b>Total :</b></td>
-                <td>{{ app.session.get('reservation').prixReservation }}.00€</td>
-            </tr>
-            </tbody>
-        </table>
         <div class="row">
             {% for message in app.flashes('error') %}
                 <div class="col alert alert-success" role="alert">

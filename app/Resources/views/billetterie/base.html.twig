@@ -10,14 +10,14 @@
     <div class="container my-5">
         <div class="row justify-content-center">
             <div class="col-12">
-                <div class="row">
+                <div class="row no-gutters">
                     <h3 class="col-12 text-center text-lowercase">{% block titre_billetterie %}Billetterie{% endblock %}</h3>
                 </div>
-                <div class="row text-center etape {% block etape %}etape-1{% endblock %} mt-3">
-                    <div class="col py-3 etape-active">1 billet</div>
-                    <div class="col py-3 {% block etape_information %}{% endblock %}">2 information</div>
-                    <div class="col py-3 {% block etape_paiement %}{% endblock %}">3 paiement</div>
-                    <div class="col py-3 {% block etape_confirmation %}{% endblock %}">4 confirmation</div>
+                <div class="row no-gutters text-center etape mt-3">
+                    <div class="col-12 col-sm-3 py-3 etape-1 etape-active">1 billet</div>
+                    <div class="col-12 col-sm-3 py-3 etape-2 {% block etape_information %}{% endblock %}">2 information</div>
+                    <div class="col-12 col-sm-3 py-3 etape-3 {% block etape_paiement %}{% endblock %}">3 paiement</div>
+                    <div class="col-12 col-sm-3 py-3 etape-4 {% block etape_confirmation %}{% endblock %}">4 confirmation</div>
                 </div>
                 <div class="row">
                     <div class="col my-3">
