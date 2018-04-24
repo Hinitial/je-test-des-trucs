@@ -11,6 +11,7 @@ namespace AppBundle\Service;
 
 use AppBundle\Entity\Billet;
 use AppBundle\Entity\Reservation;
+use AppBundle\Exceptions\SessionNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -86,7 +87,12 @@ class ReservationManager
      */
     public function getReponse($formType = null){
         if ($formType !== null){
-            $form = ($this->formFactory->create($formType, $this->getReservation()));
+//            try{
+                $form = ($this->formFactory->create($formType, $this->getReservation()));
+//            }
+//            catch (SessionNotFoundException $e){
+//                echo $e;
+//            }
 
             $form->handleRequest($this->requestStack->getCurrentRequest());
 
@@ -98,6 +104,12 @@ class ReservationManager
         }
         else{
             return $this->renderBilletterie();
+        }
+    }
+
+    public function throwException(){
+        if (!($this->session->has(self::NOM_SESSION))){
+            throw new SessionNotFoundException('Session not exist');
         }
     }
 
@@ -159,6 +171,7 @@ class ReservationManager
 
     /**
      * @return mixed Retourne un Objet Reservation enregistrer dans la session
+     * @throws SessionNotFoundException
      */
     public function getReservation(){
         return ($this->session->get(self::NOM_SESSION));
@@ -179,6 +192,7 @@ class ReservationManager
     }
 
     /**
+     * @throws SessionNotFoundException
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax

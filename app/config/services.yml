@@ -29,6 +29,11 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    AppBundle\EventListener\ExceptionListener:
+        arguments:
+            $router: "@router"
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception }
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:

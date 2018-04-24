@@ -23,6 +23,7 @@ class BilletterieController extends Controller
     public function indexAction(ReservationManager $reservationManager)
     {
         $reservationManager->initSession();
+        $reservationManager->throwException();
         return $reservationManager->getReponse(ReservationType::class);
     }
 
@@ -31,6 +32,7 @@ class BilletterieController extends Controller
      */
     public function informationAction(ReservationManager $reservationManager)
     {
+        $reservationManager->throwException();
         return $reservationManager->getReponse(InformationType::class);
     }
 
@@ -39,6 +41,7 @@ class BilletterieController extends Controller
      */
     public function paiementAction(ReservationManager $reservationManager)
     {
+        $reservationManager->throwException();
         return $reservationManager->getReponse();
     }
 
@@ -56,6 +59,7 @@ class BilletterieController extends Controller
      */
     public function checkoutAction(ReservationManager $reservationManager)
     {
+        $reservationManager->throwException();
         \Stripe\Stripe::setApiKey("sk_test_rTE16Sgt73ezOF1XCqy76TLg");
 
         // Get the credit card details submitted by the form
@@ -92,6 +96,7 @@ class BilletterieController extends Controller
      */
     public function confirmationAction(ReservationManager $reservationManager)
     {
+        $reservationManager->throwException();
         $reservationManager->clearReservation();
         return $reservationManager->getReponse();
     }
