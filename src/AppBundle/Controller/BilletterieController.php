@@ -53,6 +53,7 @@ class BilletterieController extends Controller
      * )
      * @param ReservationManager $reservationManager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \AppBundle\Exceptions\SessionNotFoundException
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
@@ -93,6 +94,7 @@ class BilletterieController extends Controller
      * @Route("/billetterie/confirmation", name="billetterie_confirmation")
      * @param ReservationManager $reservationManager
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \AppBundle\Exceptions\SessionNotFoundException
      */
     public function confirmationAction(ReservationManager $reservationManager)
     {

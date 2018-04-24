@@ -13,6 +13,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class NoAllDayValidator extends ConstraintValidator
 {
+    const LIMIT_HOUR = 14;
+
     public function validate($reservation, Constraint $constraint)
     {
         $now = new \DateTime();
@@ -22,7 +24,7 @@ class NoAllDayValidator extends ConstraintValidator
         $date_reservation = $reservation->getJourVisite();
         $date_reservation = $date_reservation->format('d/m/Y');
 
-        if(($reservation->getTypeBillet() == 'journee') && ($date_reservation == $date_now) && ($hour_now >= 14)){
+        if(($reservation->getTypeBillet() == 'journee') && ($date_reservation == $date_now) && ($hour_now >= self::LIMIT_HOUR)){
             $this->context->buildViolation($constraint->message)
 //                ->atPath('typeBillet')
                 ->addViolation();

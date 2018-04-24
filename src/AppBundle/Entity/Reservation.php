@@ -11,6 +11,7 @@ use AppBundle\Validator\Constraints as AppAssert;
  * @ORM\Table(name="lvr_reservation")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ReservationRepository")
  * @AppAssert\NoAllDay()
+ * @AppAssert\NotOverThousand()
  */
 class Reservation
 {

@@ -12,9 +12,12 @@ class ReservationRepository extends \Doctrine\ORM\EntityRepository
 {
     public function getNombreBillet($jourVisiste){
         $qb = $this
-            ->createQueryBuilder('r')
-            ->innerJoin('r.billet', 'b')
-            ->addSelect('b')
+            ->createQueryBuilder('res')
+            ->innerJoin('res.billets', 'bil','WITH', 'res.jourVisite = :jourVisite')
+            ->select('COUNT(bil)')
+            ->setParameter('jourVisite',$jourVisiste)
         ;
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }
