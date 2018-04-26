@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Form\InformationType;
 use AppBundle\Form\ReservationType;
+use AppBundle\Service\MailManager;
 use AppBundle\Service\ReservationManager;
 use AppBundle\Service\StripeManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -58,14 +59,15 @@ class BilletterieController extends Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function checkoutAction(ReservationManager $reservationManager, StripeManager $stripeManager)
+    public function checkoutAction(ReservationManager $reservationManager, StripeManager $stripeManager, MailManager $mailManager)
     {
         $reservationManager->throwException();
         $stripeManager->initPayment();
         try {
             $stripeManager->makePayment();
-            $reservationManager->insertReservation();
-            $reservationManager->envoyerEmail();
+//            $reservationManager->insertReservation();
+            $mailManager->mailReservation($reservationManager->getReservation());
+//            $reservationManager->envoyerEmail();
             return $this->redirectToRoute("billetterie_confirmation");
         } catch(\Stripe\Error\Card $e) {
             return $this->redirectToRoute("billetterie_paiement");
