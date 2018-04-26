@@ -13,17 +13,20 @@
 {% block etape_confirmation %}etape-active{% endblock %}
 
 {% block content %}
-    <div class="row justify-content-center text-center my-3">
-        <div class="col-12"> Votre commande à bien été validé, vos billets vous ont été envoyé sur votre boite mail.</div>
-
+<div class="row justify-content-center">
+    <div class="col-12 col-sm-6 alert alert-success text-center" role="alert">
+        Paiement validé
     </div>
-<div class="row">
     {% for message in app.flashes('success') %}
-        <div class="col alert alert-success" role="alert">
+        <div class="col-12 col-sm-6 alert alert-success" role="alert">
             {{ message }}
         </div>
     {% endfor %}
 </div>
+    <div class="row justify-content-center text-center my-3">
+        <div class="col-12"> Votre commande à bien été validé, vos billets vous ont été envoyé à l'adresse : <strong>exmaple@hotmail.com</strong>. Votre numéro de commande est : <strong>FSG6GBSJ8J</strong></div>
+
+    </div>
     <div class="row">
         <p class="text-info col-12">On dit que visiter le Louvre est très fatigant. Comment m'y préparer ?</p>
         <p class="font-weight-light col text-justify">

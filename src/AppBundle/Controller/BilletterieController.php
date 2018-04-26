@@ -12,6 +12,7 @@ namespace AppBundle\Controller;
 use AppBundle\Form\InformationType;
 use AppBundle\Form\ReservationType;
 use AppBundle\Service\ReservationManager;
+use AppBundle\Service\StripeManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -57,36 +58,18 @@ class BilletterieController extends Controller
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function checkoutAction(ReservationManager $reservationManager)
+    public function checkoutAction(ReservationManager $reservationManager, StripeManager $stripeManager)
     {
         $reservationManager->throwException();
-        \Stripe\Stripe::setApiKey("sk_test_rTE16Sgt73ezOF1XCqy76TLg");
-
-        // Get the credit card details submitted by the form
-        $token = $_POST['stripeToken'];
-
-        // Create a charge: this will charge the user's card
+        $stripeManager->initPayment();
         try {
-            $charge = \Stripe\Charge::create(array(
-                "amount" => ($reservationManager->getReservation()->getPrixReservation())*100, // Amount in cents
-                "currency" => "eur",
-                "source" => $token,
-                "description" => "Paiement Stripe - Musee du louvre"
-            ));
-
+            $stripeManager->makePayment();
             $reservationManager->insertReservation();
             $reservationManager->envoyerEmail();
-            $this->addFlash("success","Paiement validé");
-
             return $this->redirectToRoute("billetterie_confirmation");
-
         } catch(\Stripe\Error\Card $e) {
-
-            $this->addFlash("error","Une erreur est survenue lors du paiement, veillez réessayez");
             return $this->redirectToRoute("billetterie_paiement");
-            // The card has been declined
         }
-
     }
 
     /**
