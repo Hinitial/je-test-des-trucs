@@ -17,3 +17,10 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret: ThisTokenIsNotSoSecretChangeIt
+
+    stripe_public: pk_test_DAfOODyrMjxgDNcU0x0i1GQv
+    stripe_private: sk_test_rTE16Sgt73ezOF1XCqy76TLg
+
+    mail_sender: oc.projet.super@gmail.com
+
+

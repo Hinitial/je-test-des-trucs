@@ -16,16 +16,18 @@ class MailManager
 {
     protected $mailer;
     protected $twig_Environment;
+    protected $mail_sender;
 
-    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig_Environment){
+    public function __construct(\Swift_Mailer $mailer, \Twig_Environment $twig_Environment, $mail_sender){
         $this->mailer = $mailer;
         $this->twig_Environment = $twig_Environment;
+        $this->mail_sender = $mail_sender;
     }
 
     public function mailContact(Contact $contact){
         $mail = new  \Swift_Message($contact->getTitre());
         $mail = $mail
-            ->setFrom('oc.projet.super@gmail.com')
+            ->setFrom($this->mail_sender)
             ->setTo($contact->getEmail())
             ->setContentType('text/html')
             ->setBody($this->twig_Environment->render('email/reservation.html.twig', array(
@@ -40,7 +42,7 @@ class MailManager
     public function mailReservation(Reservation $reservation){
         $mail = new  \Swift_Message('Votre Reservation pour le Musée du louvre');
         $mail = $mail
-            ->setFrom('oc.projet.super@gmail.com')
+            ->setFrom($this->mail_sender)
             ->setTo($reservation->getEmail())
             ->setContentType('text/html')
             ->setBody($this->twig_Environment->render('email/reservation.html.twig', array(

@@ -68,3 +68,18 @@ swiftmailer:
   password:  7ed9f6ec8bb854
   auth_mode: cram-md5
   port: 2525
+
+services:
+  AppBundle\Service\StripeManager:
+    arguments:
+      $reservationManager: '@AppBundle\Service\ReservationManager'
+      $requestStack: '@request_stack'
+      $session: '@session'
+      $stripe_public: '%stripe_public%'
+      $stripe_private: '%stripe_private%'
+
+  AppBundle\Service\MailManager:
+      arguments:
+        $mailer: '@mailer'
+        $twig_Environment: '@twig'
+        $mail_sender: '%mail_sender%'

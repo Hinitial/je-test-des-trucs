@@ -25,7 +25,6 @@ class ReservationManager
 {
     const NOM_SESSION = 'reservation';
 
-    protected $mailer;
     protected $session;
     protected $template;
     protected $entity;
@@ -35,7 +34,6 @@ class ReservationManager
 
 
     public function __construct(
-        \Swift_Mailer $mailer,
         SessionInterface $session,
         \Twig_Environment $twig_Environment,
         EntityManagerInterface $entity,
@@ -43,7 +41,6 @@ class ReservationManager
         RequestStack $requestStack,
         RouterInterface $router){
 
-        $this->mailer = $mailer;
         $this->session = $session;
         $this->template = $twig_Environment;
         $this->entity = $entity;
@@ -184,27 +181,6 @@ class ReservationManager
             $code .= $pool[mt_rand(0, count($pool) - 1)];
         }
         return $code;
-    }
-
-    /**
-     * @throws SessionNotFoundException
-     * @throws \Twig_Error_Loader
-     * @throws \Twig_Error_Runtime
-     * @throws \Twig_Error_Syntax
-     */
-    public function envoyerEmail(){
-        $reservation = $this->getReservation();
-        $mail = new  \Swift_Message('Votre Reservation pour le Musée du louvre');
-        $mail = $mail
-            ->setFrom('oc.projet.super@gmail.com')
-            ->setTo($reservation->getEmail())
-            ->setContentType('text/html')
-            ->setBody($this->template->render('email/reservation.html.twig', array(
-                'logoMusee' => $mail->embed(\Swift_Image::fromPath('images/Logo.jpg')),
-                'logoSombre' => $mail->embed(\Swift_Image::fromPath('images/louvre-1eravril.jpg'))
-            )));
-
-        $this->mailer->send($mail);
     }
 
     /**

@@ -9,32 +9,40 @@
 namespace AppBundle\Service;
 
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 class StripeManager
 {
+    const NAME_SESSION_PK = 'pk_stripe';
+
     protected $reservationManager;
     protected $requestStack;
     protected $session;
-    protected $router;
+    protected $stripePublic;
+    protected $stripePrivate;
 
     public function __construct(
         ReservationManager $reservationManager,
         RequestStack $requestStack,
         SessionInterface $session,
-        RouterInterface $router){
+        $stripe_public,
+        $stripe_private){
 
         $this->reservationManager = $reservationManager;
         $this->requestStack = $requestStack;
         $this->session = $session;
-        $this->router = $router;
+        $this->stripePublic = $stripe_public;
+        $this->stripePrivate = $stripe_private;
+    }
+
+    public function initPublicKey(){
+        $this->session->set(self::NAME_SESSION_PK, $this->stripePublic);
     }
 
     public function initPayment(){
-        \Stripe\Stripe::setApiKey("sk_test_rTE16Sgt73ezOF1XCqy76TLg");
+        \Stripe\Stripe::setApiKey($this->stripePrivate);
     }
 
     public function makePayment(){
@@ -45,5 +53,9 @@ class StripeManager
                 "source" => $token,
                 "description" => "Paiement Stripe - Musee du louvre"
             ));
+    }
+
+    public function clearPublicKey(){
+        $this->session->remove(self::NAME_SESSION_PK);
     }
 }
