@@ -87,12 +87,7 @@ class ReservationManager
      */
     public function getReponse($formType = null){
         if ($formType !== null){
-//            try{
                 $form = ($this->formFactory->create($formType, $this->getReservation()));
-//            }
-//            catch (SessionNotFoundException $e){
-//                echo $e;
-//            }
 
             $form->handleRequest($this->requestStack->getCurrentRequest());
 
@@ -197,7 +192,7 @@ class ReservationManager
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function EnvoyerEmail(){
+    public function envoyerEmail(){
         $reservation = $this->getReservation();
         $mail = new  \Swift_Message('Votre Reservation pour le Musée du louvre');
         $mail = $mail

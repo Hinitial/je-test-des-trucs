@@ -4,6 +4,11 @@
 
 {% extends "layout.html.twig" %}
 
+{% block header %}
+    <img src="{{ asset('images/h5.jpg') }}" alt="header" class="img-fluid d-none d-sm-block">
+    <img src="{{ asset('images/h5_mobile.jpg') }}" alt="header" class="img-fluid d-block d-sm-none">
+{% endblock %}
+
 {% block title %}
     Contact - {{ parent() }}
 {% endblock %}

@@ -1,4 +1,10 @@
 {% extends "billetterie/base.html.twig" %}
+
+{% block header %}
+    <img src="{{ asset('images/h6.jpg') }}" alt="header" class="img-fluid d-none d-sm-block">
+    <img src="{{ asset('images/h6_mobile.jpg') }}" alt="header" class="img-fluid d-block d-sm-none">
+{% endblock %}
+
 {% block titre_billetterie %}paiement{% endblock %}
 {% block etape_information %}etape-active{% endblock %}
 {% block etape_paiement %}etape-active{% endblock %}

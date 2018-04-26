@@ -32,13 +32,5 @@ class InformationType extends AbstractType
         ));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'appbundle_reservation';
-    }
-
 
 }

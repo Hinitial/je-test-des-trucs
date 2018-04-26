@@ -8,14 +8,14 @@
 
 namespace AppBundle\Validator\Constraints;
 
-use AppBundle\Repository\ReservationRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class NotOverThousandValidator extends ConstraintValidator
 {
-    const LIMIT_PER_DAY = 1000;
+    const LIMIT_PER_DAY = 5;
 
     protected $entityManager;
 

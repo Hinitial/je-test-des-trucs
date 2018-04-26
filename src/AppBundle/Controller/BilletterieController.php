@@ -23,7 +23,6 @@ class BilletterieController extends Controller
     public function indexAction(ReservationManager $reservationManager)
     {
         $reservationManager->initSession();
-        $reservationManager->throwException();
         return $reservationManager->getReponse(ReservationType::class);
     }
 
@@ -76,7 +75,7 @@ class BilletterieController extends Controller
             ));
 
             $reservationManager->insertReservation();
-            $reservationManager->EnvoyerEmail();
+            $reservationManager->envoyerEmail();
             $this->addFlash("success","Paiement validé");
 
             return $this->redirectToRoute("billetterie_confirmation");

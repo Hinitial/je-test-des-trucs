@@ -4,6 +4,11 @@
 
 {% extends "billetterie/base.html.twig" %}
 
+{% block header %}
+    <img src="{{ asset('images/h2.jpg') }}" alt="header" class="img-fluid d-none d-sm-block">
+    <img src="{{ asset('images/h2_mobile.jpg') }}" alt="header" class="img-fluid d-block d-sm-none">
+{% endblock %}
+
 {% block content %}
     <div class="row text-justify font-weight-light m-3">
         Billet et réservation horaire incluant les collections permanentes, les expositions temporaires et le musée Delacroix.

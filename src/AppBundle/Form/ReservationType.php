@@ -42,13 +42,5 @@ class ReservationType extends AbstractType
         ));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'appbundle_reservation';
-    }
-
 
 }

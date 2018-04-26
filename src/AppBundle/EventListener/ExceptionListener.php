@@ -27,14 +27,6 @@ class ExceptionListener
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
-        $message = sprintf(
-            'My Error says: %s with code: %s',
-            $exception->getMessage(),
-            $exception->getCode()
-        );
-
-        $response = new Response();
-        $response->setContent($message);
 
         if ($exception instanceof SessionNotFoundException) {
 
@@ -42,11 +34,7 @@ class ExceptionListener
 
             $url = $this->router->generate($route);
             $response = new RedirectResponse($url);
-        } else {
-            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+            $event->setResponse($response);
         }
-
-        // sends the modified response object to the event
-        $event->setResponse($response);
     }
 }
