@@ -65,6 +65,7 @@ class BilletterieController extends Controller
         $stripeManager->initPayment();
         try {
             $stripeManager->makePayment();
+            $reservationManager->setLastInformation();
 //            $reservationManager->insertReservation();
             $mailManager->mailReservation($reservationManager->getReservation());
             $stripeManager->clearPublicKey();

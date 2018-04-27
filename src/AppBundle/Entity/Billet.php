@@ -82,6 +82,13 @@ class Billet
     private $tarifReduit;
 
     /**
+     * @var double
+     *
+     * @ORM\Column(name="prix", type="decimal", scale=2)
+     */
+    private $prix;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Reservation", inversedBy="billets")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -293,5 +300,29 @@ class Billet
             default:
                 return "Error";
         }
+    }
+
+    /**
+     * Set prix
+     *
+     * @param string $prix
+     *
+     * @return Billet
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return string
+     */
+    public function getPrix()
+    {
+        return $this->prix;
     }
 }

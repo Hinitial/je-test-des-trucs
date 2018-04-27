@@ -65,9 +65,6 @@ class ReservationManager
      */
     public function generateBillet(){
         $reservation = $this->getReservation();
-        $reservation
-            ->setCodeReservation($this->generateCodeReservation())
-            ->setDateReservation(new \DateTime());
         foreach ($reservation->getBillets() as $billet){
             $reservation->removeBillet($billet);
         }
@@ -76,6 +73,17 @@ class ReservationManager
             $billet->setPays('FR');
             $reservation->addBillet($billet);
         }
+    }
+
+    public function setPrix(){
+
+    }
+
+    public function setLastInformation(){
+        $reservation = $this->getReservation();
+        $reservation
+            ->setCodeReservation($this->generateCodeReservation())
+            ->setDateReservation(new \DateTime());
     }
 
     /**
