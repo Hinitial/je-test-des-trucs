@@ -2,14 +2,14 @@
 #    app.stripe.manager:
 #       class: AppBundle\Service\StripeManager
 #       arguments:
-#           - "@AppBundle\Service\ReservationManager"
+#           - "@AppBundle\Service\BookingManager"
 #           - "@request_stack"
 #           - "@session"
 #           - %stripe_public%
 #           - %stripe_private%
 
 #  app.reservaton.manager:
-#    class: AppBundle\Service\ReservationManager
+#    class: AppBundle\Service\BookingManager
 #    arguments:
 #      - "@mailer"
 #      - "@session"

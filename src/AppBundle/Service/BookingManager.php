@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class ReservationManager
+class BookingManager
 {
     const NOM_SESSION = 'reservation';
 
@@ -31,6 +31,7 @@ class ReservationManager
     protected $formFactory;
     protected $requestStack;
     protected $router;
+    protected $priceTicketManager;
 
 
     public function __construct(
@@ -39,7 +40,8 @@ class ReservationManager
         EntityManagerInterface $entity,
         FormFactoryInterface $formFactory,
         RequestStack $requestStack,
-        RouterInterface $router){
+        RouterInterface $router,
+        PriceTicketManager $priceTicketManager){
 
         $this->session = $session;
         $this->template = $twig_Environment;
@@ -47,6 +49,7 @@ class ReservationManager
         $this->formFactory = $formFactory;
         $this->requestStack = $requestStack;
         $this->router = $router;
+        $this->priceTicketManager = $priceTicketManager;
 
     }
 
@@ -63,8 +66,8 @@ class ReservationManager
     /**
      * Genere les Billet
      */
-    public function generateBillet(){
-        $reservation = $this->getReservation();
+    public function generateTickets(){
+        $reservation = $this->getTicketing();
         foreach ($reservation->getBillets() as $billet){
             $reservation->removeBillet($billet);
         }
@@ -75,14 +78,21 @@ class ReservationManager
         }
     }
 
-    public function setPrix(){
-
+    /**
+     */
+    public function setPrice(){
+        $reservation = $this->getTicketing();
+        foreach ($reservation->getBillets() as $billet){
+            $this->priceTicketManager->getTicketPrice($billet);
+        }
     }
 
+    /**
+     */
     public function setLastInformation(){
-        $reservation = $this->getReservation();
+        $reservation = $this->getTicketing();
         $reservation
-            ->setCodeReservation($this->generateCodeReservation())
+            ->setCodeReservation($this->generateBookingCode())
             ->setDateReservation(new \DateTime());
     }
 
@@ -92,7 +102,7 @@ class ReservationManager
      */
     public function getReponse($formType = null){
         if ($formType !== null){
-                $form = ($this->formFactory->create($formType, $this->getReservation()));
+                $form = ($this->formFactory->create($formType, $this->getTicketing()));
 
             $form->handleRequest($this->requestStack->getCurrentRequest());
 
@@ -100,13 +110,16 @@ class ReservationManager
                 return $this->ActionForm();
             }
 
-            return $this->renderBilletterie($form);
+            return $this->renderTicketing($form);
         }
         else{
-            return $this->renderBilletterie();
+            return $this->renderTicketing();
         }
     }
 
+    /**
+     * @throws SessionNotFoundException
+     */
     public function throwException(){
         if (!($this->session->has(self::NOM_SESSION))){
             throw new SessionNotFoundException('Session not exist');
@@ -120,10 +133,11 @@ class ReservationManager
         $route = $this->requestStack->getCurrentRequest()->get('_route');
         switch ($route){
             case 'homepage_billetterie':
-                $this->generateBillet();
+                $this->generateTickets();
                 return new RedirectResponse($this->router->generate('billetterie_information'));
                 break;
             case 'billetterie_information':
+                $this->setPrice();
                 return new RedirectResponse($this->router->generate('billetterie_paiement'));
                 break;
             default:
@@ -134,7 +148,7 @@ class ReservationManager
      * @param FormInterface|null $form
      * @return Response
      */
-    public function renderBilletterie(FormInterface $form = null){
+    public function renderTicketing(FormInterface $form = null){
         $route = $this->requestStack->getCurrentRequest()->get('_route');
         $nameTemplate = '';
         switch ($route){
@@ -171,9 +185,8 @@ class ReservationManager
 
     /**
      * @return mixed Retourne un Objet Reservation enregistrer dans la session
-     * @throws SessionNotFoundException
      */
-    public function getReservation(){
+    public function getTicketing(){
         return ($this->session->get(self::NOM_SESSION));
     }
 
@@ -181,7 +194,7 @@ class ReservationManager
      * Génère un code de réservation
      * @return string Code de reservation généré
      */
-    public function generateCodeReservation(){
+    public function generateBookingCode(){
         $code = '';
         $pool = array_merge(range(0,9),range('A', 'Z'));
 
@@ -194,8 +207,8 @@ class ReservationManager
     /**
      *
      */
-    public function insertReservation(){
-        $reservation = $this->getReservation();
+    public function insertBooking(){
+        $reservation = $this->getTicketing();
         $this->entity->persist($reservation);
         foreach ($reservation->getBillets() as $billet){
             $this->entity->persist($billet);
@@ -206,7 +219,7 @@ class ReservationManager
     /**
      *
      */
-    public function clearReservation(){
+    public function clearBooking(){
         $this->session->remove(self::NOM_SESSION);
     }
 }

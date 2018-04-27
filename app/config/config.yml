@@ -72,7 +72,7 @@ swiftmailer:
 services:
   AppBundle\Service\StripeManager:
     arguments:
-      $reservationManager: '@AppBundle\Service\ReservationManager'
+      $bookingManager: '@AppBundle\Service\BookingManager'
       $requestStack: '@request_stack'
       $session: '@session'
       $stripe_public: '%stripe_public%'

@@ -12,7 +12,7 @@ namespace AppBundle\Controller;
 use AppBundle\Form\InformationType;
 use AppBundle\Form\ReservationType;
 use AppBundle\Service\MailManager;
-use AppBundle\Service\ReservationManager;
+use AppBundle\Service\BookingManager;
 use AppBundle\Service\StripeManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,7 +22,7 @@ class BilletterieController extends Controller
     /**
      * @Route("/billetterie", name="homepage_billetterie")
      */
-    public function indexAction(ReservationManager $reservationManager)
+    public function indexAction(BookingManager $reservationManager)
     {
         $reservationManager->initSession();
         return $reservationManager->getReponse(ReservationType::class);
@@ -31,7 +31,7 @@ class BilletterieController extends Controller
     /**
      * @Route("/billetterie/information", name="billetterie_information")
      */
-    public function informationAction(ReservationManager $reservationManager)
+    public function informationAction(BookingManager $reservationManager)
     {
         $reservationManager->throwException();
         return $reservationManager->getReponse(InformationType::class);
@@ -40,7 +40,7 @@ class BilletterieController extends Controller
     /**
      * @Route("/billetterie/paiement", name="billetterie_paiement")
      */
-    public function paiementAction(ReservationManager $reservationManager, StripeManager $stripeManager)
+    public function paiementAction(BookingManager $reservationManager, StripeManager $stripeManager)
     {
         $reservationManager->throwException();
         $stripeManager->initPublicKey();
@@ -53,21 +53,21 @@ class BilletterieController extends Controller
      *     name="order_checkout",
      *     methods="POST"
      * )
-     * @param ReservationManager $reservationManager
+     * @param BookingManager $reservationManager
      * @param StripeManager $stripeManager
      * @param MailManager $mailManager
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \AppBundle\Exceptions\SessionNotFoundException
      */
-    public function checkoutAction(ReservationManager $reservationManager, StripeManager $stripeManager, MailManager $mailManager)
+    public function checkoutAction(BookingManager $reservationManager, StripeManager $stripeManager, MailManager $mailManager)
     {
         $reservationManager->throwException();
         $stripeManager->initPayment();
         try {
             $stripeManager->makePayment();
             $reservationManager->setLastInformation();
-//            $reservationManager->insertReservation();
-            $mailManager->mailReservation($reservationManager->getReservation());
+            $reservationManager->insertBooking();
+            $mailManager->mailTicketing($reservationManager->getTicketing());
             $stripeManager->clearPublicKey();
             return $this->redirectToRoute("billetterie_confirmation");
         } catch(\Stripe\Error\Card $e) {
@@ -77,14 +77,14 @@ class BilletterieController extends Controller
 
     /**
      * @Route("/billetterie/confirmation", name="billetterie_confirmation")
-     * @param ReservationManager $reservationManager
+     * @param BookingManager $reservationManager
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \AppBundle\Exceptions\SessionNotFoundException
      */
-    public function confirmationAction(ReservationManager $reservationManager)
+    public function confirmationAction(BookingManager $reservationManager)
     {
         $reservationManager->throwException();
-        $reservationManager->clearReservation();
+        $reservationManager->clearBooking();
         return $reservationManager->getReponse();
     }
 }

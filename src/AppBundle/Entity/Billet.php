@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Service\PriceTicketManager;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as AppAssert;
@@ -15,21 +16,6 @@ use AppBundle\Validator\Constraints as AppAssert;
  */
 class Billet
 {
-    const PRIX_GRATUIT = 0;
-    const PRIX_NORMAL = 16;
-    const PRIX_SENIOR = 12;
-    const PRIX_TARIF_REDUIT = 10;
-    const PRIX_ENFANT = 8;
-
-    const AGE_GRATUIT_MAX = 4;
-    const AGE_ENFANT_MAX = 12;
-    const AGE_SENIOR_MIN = 60;
-
-    const LABEL_GRATUIT = 'Gratuit';
-    const LABEL_NORMAL = 'Normal';
-    const LABEL_SENIOR = 'Sénior';
-    const LABEL_TARIF_REDUIT = 'Tarif réduit';
-    const LABEL_ENFANT = 'Enfant';
 
     /**
      * @var int
@@ -257,46 +243,23 @@ class Billet
         $intervale = $now->diff($this->getDateNaissance());
         $age = $intervale->format('%Y');
         return (int) ($age);
-
-    }
-
-    /**
-     * @return int Le prix du billet
-     */
-    public function getPrixBillet(){
-        $age = $this->getAge();
-        if ($age <= self::AGE_GRATUIT_MAX){
-            return self::PRIX_GRATUIT;
-        }
-        elseif ($age <= self::AGE_ENFANT_MAX){
-            return self::PRIX_ENFANT;
-        }
-        elseif ($this->getTarifReduit()){
-            return self::PRIX_TARIF_REDUIT;
-        }
-        elseif ($age >= self::AGE_SENIOR_MIN){
-            return self::PRIX_SENIOR;
-        }
-        else{
-            return self::PRIX_NORMAL;
-        }
     }
 
     /**
      * @return string
      */
-    public function getNomPromotion(){
-        switch ($this->getPrixBillet()){
-            case self::PRIX_GRATUIT:
-                return self::LABEL_GRATUIT;
-            case self::PRIX_ENFANT:
-                return self::LABEL_ENFANT;
-            case self::PRIX_TARIF_REDUIT:
-                return self::LABEL_TARIF_REDUIT;
-            case self::PRIX_SENIOR:
-                return self::LABEL_SENIOR;
-            case self::PRIX_NORMAL:
-                return self::LABEL_NORMAL;
+    public function getTicketLabel(){
+        switch ($this->getPrix()){
+            case PriceTicketManager::PRIX_GRATUIT:
+                return PriceTicketManager::LABEL_GRATUIT;
+            case PriceTicketManager::PRIX_ENFANT:
+                return PriceTicketManager::LABEL_ENFANT;
+            case PriceTicketManager::PRIX_TARIF_REDUIT:
+                return PriceTicketManager::LABEL_TARIF_REDUIT;
+            case PriceTicketManager::PRIX_SENIOR:
+                return PriceTicketManager::LABEL_SENIOR;
+            case PriceTicketManager::PRIX_NORMAL:
+                return PriceTicketManager::LABEL_NORMAL;
             default:
                 return "Error";
         }

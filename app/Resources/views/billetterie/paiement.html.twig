@@ -23,7 +23,7 @@
                 </thead>
                 <tbody>
                 {% for billet in app.session.get('reservation').billets %}
-                    <tr><td>{{ billet.nom }} {{ billet.prenom }}</td><td>{{ billet.nomPromotion }}</td><td>{{ billet.prixBillet }}€</td></tr>
+                    <tr><td>{{ billet.nom }}, {{ billet.prenom }}</td><td>{{ billet.ticketLabel }}</td><td>{{ billet.prix }}€</td></tr>
                 {% endfor %}
                 <tr>
                     <td colspan="2"><b>Total :</b></td>

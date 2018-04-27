@@ -17,20 +17,20 @@ class StripeManager
 {
     const NAME_SESSION_PK = 'pk_stripe';
 
-    protected $reservationManager;
+    protected $bookingManager;
     protected $requestStack;
     protected $session;
     protected $stripePublic;
     protected $stripePrivate;
 
     public function __construct(
-        ReservationManager $reservationManager,
+        BookingManager $bookingManager,
         RequestStack $requestStack,
         SessionInterface $session,
         $stripe_public,
         $stripe_private){
 
-        $this->reservationManager = $reservationManager;
+        $this->bookingManager = $bookingManager;
         $this->requestStack = $requestStack;
         $this->session = $session;
         $this->stripePublic = $stripe_public;
@@ -48,7 +48,7 @@ class StripeManager
     public function makePayment(){
             $token = $this->requestStack->getCurrentRequest()->request->get('stripeToken');
             $charge = \Stripe\Charge::create(array(
-                "amount" => ($this->reservationManager->getReservation()->getPrixReservation())*100,
+                "amount" => ($this->bookingManager->getTicketing()->getPrixReservation())*100,
                 "currency" => "eur",
                 "source" => $token,
                 "description" => "Paiement Stripe - Musee du louvre"

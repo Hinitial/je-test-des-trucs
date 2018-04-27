@@ -24,6 +24,12 @@ class MailManager
         $this->mail_sender = $mail_sender;
     }
 
+    /**
+     * @param Contact $contact
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
     public function mailContact(Contact $contact){
         $mail = new  \Swift_Message($contact->getTitre());
         $mail = $mail
@@ -39,7 +45,13 @@ class MailManager
         $this->mailer->send($mail);
     }
 
-    public function mailReservation(Reservation $reservation){
+    /**
+     * @param Reservation $reservation
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Runtime
+     * @throws \Twig_Error_Syntax
+     */
+    public function mailTicketing(Reservation $reservation){
         $mail = new  \Swift_Message('Votre Reservation pour le Musée du louvre');
         $mail = $mail
             ->setFrom($this->mail_sender)

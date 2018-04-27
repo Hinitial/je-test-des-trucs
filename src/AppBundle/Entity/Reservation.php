@@ -275,7 +275,7 @@ class Reservation
     public function getPrixReservation(){
         $prix = 0;
         foreach ($this->getBillets() as $billet){
-            $prix = $prix + $billet->getPrixBillet();
+            $prix = $prix + $billet->getPrix();
         }
         return $prix;
     }
