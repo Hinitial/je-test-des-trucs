@@ -22,12 +22,12 @@
                 <tr><th>Personne</th><th>Type de billet</th><th>Prix</th></tr>
                 </thead>
                 <tbody>
-                {% for billet in app.session.get('reservation').billets %}
-                    <tr><td>{{ billet.nom }}, {{ billet.prenom }}</td><td>{{ billet.ticketLabel }}</td><td>{{ billet.prix }}€</td></tr>
+                {% for ticket in app.session.get('reservation').tickets %}
+                    <tr><td>{{ ticket.name }}, {{ ticket.firstName }}</td><td>{{ ticket.ticketLabel }}</td><td>{{ ticket.price }}€</td></tr>
                 {% endfor %}
                 <tr>
                     <td colspan="2"><b>Total :</b></td>
-                    <td>{{ app.session.get('reservation').prixReservation }}€</td>
+                    <td>{{ app.session.get('reservation').bookingPrice }}€</td>
                 </tr>
                 </tbody>
             </table>

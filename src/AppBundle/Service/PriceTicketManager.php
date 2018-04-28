@@ -9,7 +9,7 @@
 namespace AppBundle\Service;
 
 
-use AppBundle\Entity\Billet;
+use AppBundle\Entity\Ticket;
 
 class PriceTicketManager
 {
@@ -35,8 +35,8 @@ class PriceTicketManager
     /**
      * @return int Le prix du billet
      */
-    public function getTicketPrice(Billet $billet){
-        $age = $billet->getAge();
+    public function getTicketPrice(Ticket $ticket){
+        $age = $ticket->getAge();
         $price = 0.00;
         if ($age <= self::AGE_GRATUIT_MAX){
             $price = self::PRIX_GRATUIT;
@@ -44,7 +44,7 @@ class PriceTicketManager
         elseif ($age <= self::AGE_ENFANT_MAX){
             $price = self::PRIX_ENFANT;
         }
-        elseif ($billet->getTarifReduit()){
+        elseif ($ticket->getReducPrice()){
             $price = self::PRIX_TARIF_REDUIT;
         }
         elseif ($age >= self::AGE_SENIOR_MIN){
@@ -53,6 +53,6 @@ class PriceTicketManager
         else{
             $price = self::PRIX_NORMAL;
         }
-        $billet->setPrix($price);
+        $ticket->setPrice($price);
     }
 }

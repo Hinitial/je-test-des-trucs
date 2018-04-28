@@ -15,11 +15,11 @@ class NoPastDateValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint)
     {
-        $dateActuel = new \DateTime();
+        $nowDate = new \DateTime();
 
-        if($dateActuel > $value && !($dateActuel->format('Y-m-d') == $value->format('Y-m-d'))){
+        if($nowDate > $value && !($nowDate->format('Y-m-d') == $value->format('Y-m-d'))){
             $this->context->buildViolation($constraint->message)
-                ->setParameter('{{ jourVisite }}', $value->format('Y-m-d'))
+                ->setParameter('{{ visitDate }}', $value->format('Y-m-d'))
                 ->addViolation();
         }
     }

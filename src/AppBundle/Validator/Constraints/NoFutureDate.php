@@ -16,5 +16,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class NoFutureDate extends Constraint
 {
-    public $message = 'La date "{{ jourVisite }}" incorrect';
+    public $message = 'La date "{{ visitDate }}" incorrect';
 }

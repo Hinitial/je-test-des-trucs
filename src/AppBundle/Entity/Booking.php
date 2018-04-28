@@ -6,14 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as AppAssert;
 /**
- * Reservation
+ * Booking
  *
- * @ORM\Table(name="lvr_reservation")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\ReservationRepository")
+ * @ORM\Table(name="lvr_booking")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BookingRepository")
  * @AppAssert\NoAllDay()
  * @AppAssert\NotOverThousand()
  */
-class Reservation
+class Booking
 {
     /**
      * @var int
@@ -27,10 +27,10 @@ class Reservation
     /**
      * @var string
      *
-     * @ORM\Column(name="code_reservation", type="string", length=255)
+     * @ORM\Column(name="booking_code", type="string", length=255)
      * @Assert\Length(max=255, maxMessage="Code trop long")
      */
-    private $codeReservation;
+    private $bookingCode;
 
     /**
      * @var string
@@ -43,55 +43,55 @@ class Reservation
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_reservation", type="datetime")
+     * @ORM\Column(name="booking_date", type="datetime")
      * @Assert\DateTime()
      */
-    private $dateReservation;
+    private $bookingDate;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="jour_visite", type="datetime")
+     * @ORM\Column(name="visit_date", type="datetime")
      * @Assert\DateTime()
      * @AppAssert\NoPastDate
      * @AppAssert\NoSunday
      * @AppAssert\NoTuesday
      */
-    private $jourVisite;
+    private $visitDate;
 
     /**
-     * @var string
+     * @var bool
      *
-     * @ORM\Column(name="type_billet", type="string", length=30)
-     * @Assert\Length(max=30, maxMessage="Type trop long")
+     * @ORM\Column(name="ticket_type", type="boolean")
+     * @Assert\Type(type="bool")
      */
-    private $typeBillet;
+    private $ticketType;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Billet", mappedBy="reservation")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ticket", mappedBy="booking")
      */
-    private $billets;
+    private $tickets;
 
     /**
      * @Assert\Type(type="int")
      * @Assert\Range(min="1",max="7", minMessage="Vous devez au moins acheter {{ limit }} billet.", maxMessage="Vous ne pouvez pas acheter plus de {{ limit }} billets en une seul fois.")
      */
-    private $nbreBillet;
+    private $ticketNumber;
 
     /**
      * @return mixed
      */
-    public function getNbreBillet()
+    public function getTicketNumber()
     {
-        return $this->nbreBillet;
+        return $this->ticketNumber;
     }
 
     /**
-     * @param mixed $nbreBillet
+     * @param mixed $ticketNumber
      */
-    public function setNbreBillet($nbreBillet)
+    public function setTicketNumber($ticketNumber)
     {
-        $this->nbreBillet = $nbreBillet;
+        $this->ticketNumber = $ticketNumber;
     }
 
 
@@ -108,13 +108,13 @@ class Reservation
     /**
      * Set codeReservation
      *
-     * @param string $codeReservation
+     * @param string $bookingCode
      *
-     * @return Reservation
+     * @return Booking
      */
-    public function setCodeReservation($codeReservation)
+    public function setBookingCode($bookingCode)
     {
-        $this->codeReservation = $codeReservation;
+        $this->bookingCode = $bookingCode;
 
         return $this;
     }
@@ -124,9 +124,9 @@ class Reservation
      *
      * @return string
      */
-    public function getCodeReservation()
+    public function getBookingCode()
     {
-        return $this->codeReservation;
+        return $this->bookingCode;
     }
 
     /**
@@ -134,7 +134,7 @@ class Reservation
      *
      * @param string $email
      *
-     * @return Reservation
+     * @return Booking
      */
     public function setEmail($email)
     {
@@ -156,13 +156,13 @@ class Reservation
     /**
      * Set dateReservation
      *
-     * @param \DateTime $dateReservation
+     * @param \DateTime $bookingDate
      *
-     * @return Reservation
+     * @return Booking
      */
-    public function setDateReservation($dateReservation)
+    public function setBookingDate($bookingDate)
     {
-        $this->dateReservation = $dateReservation;
+        $this->bookingDate = $bookingDate;
 
         return $this;
     }
@@ -172,21 +172,21 @@ class Reservation
      *
      * @return \DateTime
      */
-    public function getDateReservation()
+    public function getBookingDate()
     {
-        return $this->dateReservation;
+        return $this->bookingDate;
     }
 
     /**
      * Set jourVisite
      *
-     * @param \DateTime $jourVisite
+     * @param \DateTime $visitDate
      *
-     * @return Reservation
+     * @return Booking
      */
-    public function setJourVisite($jourVisite)
+    public function setVisitDate($visitDate)
     {
-        $this->jourVisite = $jourVisite;
+        $this->visitDate = $visitDate;
 
         return $this;
     }
@@ -196,21 +196,21 @@ class Reservation
      *
      * @return \DateTime
      */
-    public function getJourVisite()
+    public function getVisitDate()
     {
-        return $this->jourVisite;
+        return $this->visitDate;
     }
 
     /**
      * Set typeBillet
      *
-     * @param string $typeBillet
+     * @param string $ticketType
      *
-     * @return Reservation
+     * @return Booking
      */
-    public function setTypeBillet($typeBillet)
+    public function setTicketType($ticketType)
     {
-        $this->typeBillet = $typeBillet;
+        $this->ticketType = $ticketType;
 
         return $this;
     }
@@ -220,9 +220,9 @@ class Reservation
      *
      * @return string
      */
-    public function getTypeBillet()
+    public function getTicketType()
     {
-        return $this->typeBillet;
+        return $this->ticketType;
     }
 
     /**
@@ -230,53 +230,53 @@ class Reservation
      */
     public function __construct()
     {
-        $this->billets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Add billet
+     * Add ticket
      *
-     * @param \AppBundle\Entity\Billet $billet
+     * @param \AppBundle\Entity\Ticket $ticket
      *
-     * @return Reservation
+     * @return Booking
      */
-    public function addBillet(\AppBundle\Entity\Billet $billet)
+    public function addTicket(\AppBundle\Entity\Ticket $ticket)
     {
-        $this->billets[] = $billet;
+        $this->tickets[] = $ticket;
 
-        $billet->setReservation($this);
+        $ticket->setBooking($this);
 
         return $this;
     }
 
     /**
-     * Remove billet
+     * Remove ticket
      *
-     * @param \AppBundle\Entity\Billet $billet
+     * @param \AppBundle\Entity\Ticket $ticket
      */
-    public function removeBillet(\AppBundle\Entity\Billet $billet)
+    public function removeTicket(\AppBundle\Entity\Ticket $ticket)
     {
-        $this->billets->removeElement($billet);
+        $this->tickets->removeElement($ticket);
     }
 
     /**
-     * Get billets
+     * Get ticket
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getBillets()
+    public function getTickets()
     {
-        return $this->billets;
+        return $this->tickets;
     }
 
     /**
      * @return int Le prix de la reservation
      */
-    public function getPrixReservation(){
-        $prix = 0;
-        foreach ($this->getBillets() as $billet){
-            $prix = $prix + $billet->getPrix();
+    public function getBookingPrice(){
+        $price = 0;
+        foreach ($this->getTickets() as $ticket){
+            $price = $price + $ticket->getPrice();
         }
-        return $prix;
+        return $price;
     }
 }

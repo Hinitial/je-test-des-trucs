@@ -2,7 +2,7 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Billet;
+use AppBundle\Entity\Ticket;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -19,18 +19,18 @@ class BilletType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom', TextType::class, array('required' => true))
-            ->add('prenom', TextType::class, array('required' => true))
-            ->add('pays', CountryType::class, array('required' => true))
-            ->add('dateNaissance', BirthdayType::class, array('required' => true, 'widget' => 'single_text'))
-            ->add('tarifReduit', CheckboxType::class, array('required' => false));
+            ->add('name', TextType::class, array('required' => true))
+            ->add('firstName', TextType::class, array('required' => true))
+            ->add('country', CountryType::class, array('required' => true))
+            ->add('birthDate', BirthdayType::class, array('required' => true, 'widget' => 'single_text'))
+            ->add('reducPrice', CheckboxType::class, array('required' => false));
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Billet'
+            'data_class' => 'AppBundle\Entity\Ticket'
         ));
     }
 

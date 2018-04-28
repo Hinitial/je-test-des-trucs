@@ -10,7 +10,7 @@ namespace AppBundle\Service;
 
 
 use AppBundle\Entity\Contact;
-use AppBundle\Entity\Reservation;
+use AppBundle\Entity\Booking;
 
 class MailManager
 {
@@ -46,16 +46,16 @@ class MailManager
     }
 
     /**
-     * @param Reservation $reservation
+     * @param Booking $ticketing
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
      * @throws \Twig_Error_Syntax
      */
-    public function mailTicketing(Reservation $reservation){
+    public function mailTicketing(Booking $ticketing){
         $mail = new  \Swift_Message('Votre Reservation pour le Musée du louvre');
         $mail = $mail
             ->setFrom($this->mail_sender)
-            ->setTo($reservation->getEmail())
+            ->setTo($ticketing->getEmail())
             ->setContentType('text/html')
             ->setBody($this->twig_Environment->render('email/reservation.html.twig', array(
                 'logoMusee' => $mail->embed(\Swift_Image::fromPath('images/Logo.jpg')),

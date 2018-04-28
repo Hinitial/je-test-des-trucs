@@ -71,7 +71,7 @@
                                                                                         </p>
                                                                                         <p style="Margin:0;Margin-bottom:10px;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;margin-bottom:10px;padding:0;text-align:left">
                                                                                             <strong>Commande ID</strong><br>
-                                                                                            {{  app.session.get('reservation').codeReservation }}
+                                                                                            {{  app.session.get('reservation').bookingCode }}
                                                                                         </p>
                                                                                     </th>
                                                                                 </tr>
@@ -85,9 +85,9 @@
                                                                                     <th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;padding:0;text-align:left">
                                                                                         <p style="Margin:0;Margin-bottom:10px;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;line-height:1.3;margin:0;margin-bottom:10px;padding:0;text-align:left">
                                                                                             <strong>Jour de la visite</strong><br>
-                                                                                            {{  app.session.get('reservation').jourVisite|date('D d F, Y') }}<br>
+                                                                                            {{  app.session.get('reservation').visitDate|date('D d F, Y') }}<br>
                                                                                             <strong>Paiement effectuer le :</strong><br>
-                                                                                            {{  app.session.get('reservation').dateReservation|date('d/m/Y') }}
+                                                                                            {{  app.session.get('reservation').bookingDate|date('d/m/Y') }}
                                                                                         </p>
                                                                                     </th>
                                                                                 </tr>
@@ -111,16 +111,16 @@
                                                             <th style="Margin:0;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:bold;line-height:1.3;margin:0;padding:0;text-align:left">Prix</th>
                                                         </tr>
 
-                                                        {% for billet in app.session.get('reservation').billets %}
+                                                        {% for ticket in app.session.get('reservation').tickets %}
                                                         <tr style="border-bottom: solid 2px #7e7a1f;padding:0;text-align:left;vertical-align:top">
-                                                            <td style="-moz-hyphens:auto;-webkit-hyphens:auto;Margin:0;border-collapse:collapse!important;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;hyphens:auto;line-height:5;margin:0;padding:0;text-align:left;vertical-align:top;word-wrap:break-word">{{ billet.nom }} {{ billet.prenom }}</td>
-                                                            <td style="-moz-hyphens:auto;-webkit-hyphens:auto;Margin:0;border-collapse:collapse!important;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;hyphens:auto;line-height:5;margin:0;padding:0;text-align:left;vertical-align:top;word-wrap:break-word">{{ billet.ticketLabel }}</td>
-                                                            <td style="-moz-hyphens:auto;-webkit-hyphens:auto;Margin:0;border-collapse:collapse!important;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;hyphens:auto;line-height:5;margin:0;padding:0;text-align:left;vertical-align:top;word-wrap:break-word">{{ billet.prix }}€</td>
+                                                            <td style="-moz-hyphens:auto;-webkit-hyphens:auto;Margin:0;border-collapse:collapse!important;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;hyphens:auto;line-height:5;margin:0;padding:0;text-align:left;vertical-align:top;word-wrap:break-word">{{ ticket.name }}, {{ ticket.firstName }}</td>
+                                                            <td style="-moz-hyphens:auto;-webkit-hyphens:auto;Margin:0;border-collapse:collapse!important;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;hyphens:auto;line-height:5;margin:0;padding:0;text-align:left;vertical-align:top;word-wrap:break-word">{{ ticket.ticketLabel }}</td>
+                                                            <td style="-moz-hyphens:auto;-webkit-hyphens:auto;Margin:0;border-collapse:collapse!important;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;hyphens:auto;line-height:5;margin:0;padding:0;text-align:left;vertical-align:top;word-wrap:break-word">{{ ticket.price }}€</td>
                                                         </tr>
                                                         {% endfor %}
                                                         <tr style="border-bottom: solid 2px #7e7a1f;padding:0;text-align:left;vertical-align:top">
                                                             <td colspan="2" style="-moz-hyphens:auto;-webkit-hyphens:auto;Margin:0;border-collapse:collapse!important;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;hyphens:auto;line-height:5;margin:0;padding:0;text-align:left;vertical-align:top;word-wrap:break-word"><b>Total :</b></td>
-                                                            <td style="-moz-hyphens:auto;-webkit-hyphens:auto;Margin:0;border-collapse:collapse!important;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;hyphens:auto;line-height:5;margin:0;padding:0;text-align:left;vertical-align:top;word-wrap:break-word">{{ app.session.get('reservation').prixReservation }}€</td>
+                                                            <td style="-moz-hyphens:auto;-webkit-hyphens:auto;Margin:0;border-collapse:collapse!important;color:#0a0a0a;font-family:Helvetica,Arial,sans-serif;font-size:16px;font-weight:400;hyphens:auto;line-height:5;margin:0;padding:0;text-align:left;vertical-align:top;word-wrap:break-word">{{ app.session.get('reservation').bookingPrice }}€</td>
                                                         </tr>
                                                         </tbody>
                                                     </table>

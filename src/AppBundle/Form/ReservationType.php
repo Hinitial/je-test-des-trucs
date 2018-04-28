@@ -2,7 +2,7 @@
 
 namespace AppBundle\Form;
 
-use AppBundle\Entity\Reservation;
+use AppBundle\Entity\Booking;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -23,22 +23,22 @@ class ReservationType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, array('required' => true))
-            ->add('jourVisite', DateType::class, array('required' => true, 'widget' => 'single_text'))
-            ->add('typeBillet', ChoiceType::class, array(
+            ->add('visitDate', DateType::class, array('required' => true, 'widget' => 'single_text'))
+            ->add('ticketType', ChoiceType::class, array(
                 'choices' => array(
-                    'Journée' => 'journee',
-                    'Demie-journée' => 'demie_journee'
+                    'Journée' => true,
+                    'Demie-journée' => false
                 )
             ))
-            ->add('nbreBillet', IntegerType::class, array('required' => true))
-            ->add('suivant', SubmitType::class);
+            ->add('ticketNumber', IntegerType::class, array('required' => true))
+            ->add('nextStep', SubmitType::class);
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Reservation::class
+            'data_class' => Booking::class
         ));
     }
 

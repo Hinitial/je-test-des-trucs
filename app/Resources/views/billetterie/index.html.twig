@@ -21,19 +21,19 @@
 
     <div class="form-row border-t">
         <div class="form-group col-md-3">
-            {{ form_label(form.jourVisite, "Jour de la visite", {'label_attr': {'class': 'form-control-label'}}) }}
-            {{ form_widget(form.jourVisite, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(form.jourVisite) }}
+            {{ form_label(form.visitDate, "Jour de la visite", {'label_attr': {'class': 'form-control-label'}}) }}
+            {{ form_widget(form.visitDate, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.visitDate) }}
         </div>
         <div class="form-group col-md-4">
-            {{ form_label(form.typeBillet, "Type de billet", {'label_attr': {'class': 'form-control-label'}}) }}
-            {{ form_widget(form.typeBillet, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(form.typeBillet) }}
+            {{ form_label(form.ticketType, "Type de billet", {'label_attr': {'class': 'form-control-label'}}) }}
+            {{ form_widget(form.ticketType, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.ticketType) }}
         </div>
         <div class="form-group col-md-3">
-            {{ form_label(form.nbreBillet, "Nombre de billet", {'label_attr': {'class': 'form-control-label'}}) }}
-            {{ form_widget(form.nbreBillet, {'attr': {'class': 'form-control'}}) }}
-            {{ form_errors(form.nbreBillet) }}
+            {{ form_label(form.ticketNumber, "Nombre de billet", {'label_attr': {'class': 'form-control-label'}}) }}
+            {{ form_widget(form.ticketNumber, {'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.ticketNumber) }}
         </div>
     </div>
     <div class="form-row">
@@ -45,7 +45,7 @@
             {{ form_errors(form.email) }}
         </div>
     </div>
-    {{ form_widget(form.suivant, {'attr': {'class': 'btn btn-info'}}) }}
+    {{ form_widget(form.nextStep, {'attr': {'class': 'btn btn-info'}}) }}
 
     {{ form_rest(form) }}
     {{ form_end(form) }}

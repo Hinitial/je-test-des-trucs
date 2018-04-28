@@ -11,10 +11,10 @@ use AppBundle\Validator\Constraints as AppAssert;
 /**
  * Billet
  *
- * @ORM\Table(name="lvr_billet")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\BilletRepository")
+ * @ORM\Table(name="lvr_tickey")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\TicketRepository")
  */
-class Billet
+class Ticket
 {
 
     /**
@@ -29,56 +29,56 @@ class Billet
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=50)
+     * @ORM\Column(name="name", type="string", length=50)
      * @Assert\Length(max=50, maxMessage="Nom trop long")
      */
-    private $nom;
+    private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=50)
+     * @ORM\Column(name="first_name", type="string", length=50)
      * @Assert\Length(max=50, maxMessage="Prenom trop long")
      */
-    private $prenom;
+    private $firstName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pays", type="string", length=25)
+     * @ORM\Column(name="country", type="string", length=25)
      * @Assert\Length(max=25)
      */
-    private $pays;
+    private $country;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="date_naissance", type="datetime")
+     * @ORM\Column(name="birth_date", type="datetime")
      * @Assert\DateTime()
      * @AppAssert\NoFutureDate
      */
-    private $dateNaissance;
+    private $birthDate;
 
     /**
      * @var bool
      *
-     * @ORM\Column(name="tarif_reduit", type="boolean")
+     * @ORM\Column(name="reduc_price", type="boolean")
      * @Assert\Type(type="bool")
      */
-    private $tarifReduit;
+    private $reducPrice;
 
     /**
      * @var double
      *
-     * @ORM\Column(name="prix", type="decimal", scale=2)
+     * @ORM\Column(name="price", type="decimal", scale=2)
      */
-    private $prix;
+    private $price;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Reservation", inversedBy="billets")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Booking", inversedBy="tickets")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $reservation;
+    private $booking;
 
 
     /**
@@ -94,13 +94,13 @@ class Billet
     /**
      * Set nom
      *
-     * @param string $nom
+     * @param string $name
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setNom($nom)
+    public function setName($name)
     {
-        $this->nom = $nom;
+        $this->name = $name;
 
         return $this;
     }
@@ -110,21 +110,21 @@ class Billet
      *
      * @return string
      */
-    public function getNom()
+    public function getName()
     {
-        return $this->nom;
+        return $this->name;
     }
 
     /**
      * Set prenom
      *
-     * @param string $prenom
+     * @param string $firstName
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setPrenom($prenom)
+    public function setFirstName($firstName)
     {
-        $this->prenom = $prenom;
+        $this->firstName = $firstName;
 
         return $this;
     }
@@ -134,21 +134,21 @@ class Billet
      *
      * @return string
      */
-    public function getPrenom()
+    public function getFirstName()
     {
-        return $this->prenom;
+        return $this->firstName;
     }
 
     /**
      * Set pays
      *
-     * @param string $pays
+     * @param string $country
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setPays($pays)
+    public function setCountry($country)
     {
-        $this->pays = $pays;
+        $this->country = $country;
 
         return $this;
     }
@@ -158,21 +158,21 @@ class Billet
      *
      * @return string
      */
-    public function getPays()
+    public function getCountry()
     {
-        return $this->pays;
+        return $this->country;
     }
 
     /**
      * Set dateNaissance
      *
-     * @param \DateTime $dateNaissance
+     * @param \DateTime $birthDate
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setDateNaissance($dateNaissance)
+    public function setBirthDate($birthDate)
     {
-        $this->dateNaissance = $dateNaissance;
+        $this->birthDate = $birthDate;
 
         return $this;
     }
@@ -182,21 +182,21 @@ class Billet
      *
      * @return \DateTime
      */
-    public function getDateNaissance()
+    public function getBirthDate()
     {
-        return $this->dateNaissance;
+        return $this->birthDate;
     }
 
     /**
      * Set tarifReduit
      *
-     * @param boolean $tarifReduit
+     * @param boolean $reducPrice
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setTarifReduit($tarifReduit)
+    public function setReducPrice($reducPrice)
     {
-        $this->tarifReduit = $tarifReduit;
+        $this->reducPrice = $reducPrice;
 
         return $this;
     }
@@ -206,21 +206,21 @@ class Billet
      *
      * @return bool
      */
-    public function getTarifReduit()
+    public function getReducPrice()
     {
-        return $this->tarifReduit;
+        return $this->reducPrice;
     }
 
     /**
      * Set reservation
      *
-     * @param \AppBundle\Entity\Reservation $reservation
+     * @param \AppBundle\Entity\Booking $booking
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setReservation(\AppBundle\Entity\Reservation $reservation)
+    public function setBooking(\AppBundle\Entity\Booking $booking)
     {
-        $this->reservation = $reservation;
+        $this->booking = $booking;
 
         return $this;
     }
@@ -228,11 +228,11 @@ class Billet
     /**
      * Get reservation
      *
-     * @return \AppBundle\Entity\Reservation
+     * @return \AppBundle\Entity\Booking
      */
-    public function getReservation()
+    public function getBooking()
     {
-        return $this->reservation;
+        return $this->booking;
     }
 
     /**
@@ -240,7 +240,7 @@ class Billet
      */
     public function getAge(){
         $now = new \DateTime();
-        $intervale = $now->diff($this->getDateNaissance());
+        $intervale = $now->diff($this->getBirthDate());
         $age = $intervale->format('%Y');
         return (int) ($age);
     }
@@ -249,7 +249,7 @@ class Billet
      * @return string
      */
     public function getTicketLabel(){
-        switch ($this->getPrix()){
+        switch ($this->getPrice()){
             case PriceTicketManager::PRIX_GRATUIT:
                 return PriceTicketManager::LABEL_GRATUIT;
             case PriceTicketManager::PRIX_ENFANT:
@@ -268,13 +268,13 @@ class Billet
     /**
      * Set prix
      *
-     * @param string $prix
+     * @param string $price
      *
-     * @return Billet
+     * @return Ticket
      */
-    public function setPrix($prix)
+    public function setPrice($price)
     {
-        $this->prix = $prix;
+        $this->price = $price;
 
         return $this;
     }
@@ -284,8 +284,8 @@ class Billet
      *
      * @return string
      */
-    public function getPrix()
+    public function getPrice()
     {
-        return $this->prix;
+        return $this->price;
     }
 }

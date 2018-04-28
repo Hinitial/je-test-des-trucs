@@ -15,7 +15,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class NotOverThousandValidator extends ConstraintValidator
 {
-    const LIMIT_PER_DAY = 5;
+    const LIMIT_PER_DAY = 1000;
 
     protected $entityManager;
 
@@ -23,15 +23,15 @@ class NotOverThousandValidator extends ConstraintValidator
         $this->entityManager = $entityManager;
     }
 
-    public function validate($reservation, Constraint $constraint)
+    public function validate($booking, Constraint $constraint)
     {
-        $jourVisiste = $reservation->getJourVisite();
-        $nbreBillet = $reservation->getNbreBillet();
+        $visitDate = $booking->getVisitDate();
+        $ticketNumber = $booking->getTicketNumber();
 
-        $count = $this->entityManager->getRepository('AppBundle:Reservation')
-            ->getNombreBillet($jourVisiste->format('Y-m-d H:i:s'));
+        $count = $this->entityManager->getRepository('AppBundle:Booking')
+            ->getTicketNumber($visitDate->format('Y-m-d H:i:s'));
 
-        if(($count + $nbreBillet) > self::LIMIT_PER_DAY){
+        if(($count + $ticketNumber) > self::LIMIT_PER_DAY){
             $this->context->buildViolation($constraint->message)
                 ->addViolation();
         }

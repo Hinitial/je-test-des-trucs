@@ -18,17 +18,17 @@ class InformationType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('billets', CollectionType::class, array(
+            ->add('tickets', CollectionType::class, array(
                 'entry_type' => BilletType::class
             ))
-        ->add('paiement', SubmitType::class);
+        ->add('payment', SubmitType::class);
     }/**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Reservation'
+            'data_class' => 'AppBundle\Entity\Booking'
         ));
     }
 

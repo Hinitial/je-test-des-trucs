@@ -15,16 +15,16 @@ class NoAllDayValidator extends ConstraintValidator
 {
     const LIMIT_HOUR = 14;
 
-    public function validate($reservation, Constraint $constraint)
+    public function validate($booking, Constraint $constraint)
     {
         $now = new \DateTime();
         $date_now = $now->format('d/m/Y');
         $hour_now = (int) $now->format('G');
 
-        $date_reservation = $reservation->getJourVisite();
-        $date_reservation = $date_reservation->format('d/m/Y');
+        $visitDate = $booking->getVisitDate();
+        $visitDate = $visitDate->format('d/m/Y');
 
-        if(($reservation->getTypeBillet() == 'journee') && ($date_reservation == $date_now) && ($hour_now >= self::LIMIT_HOUR)){
+        if(($booking->getTicketType() === true) && ($visitDate == $date_now) && ($hour_now >= self::LIMIT_HOUR)){
             $this->context->buildViolation($constraint->message)
 //                ->atPath('typeBillet')
                 ->addViolation();

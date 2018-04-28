@@ -15,9 +15,9 @@ class NoSundayValidator extends ConstraintValidator
 {
     public function validate($value, Constraint $constraint)
     {
-        $jour = $value->format('N');
+        $day = $value->format('N');
 
-        if($jour == '7'){
+        if($day == '7'){
             $this->context->buildViolation($constraint->message)
                 ->addViolation();
         }

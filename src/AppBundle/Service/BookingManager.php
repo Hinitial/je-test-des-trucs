@@ -9,8 +9,8 @@
 namespace AppBundle\Service;
 
 
-use AppBundle\Entity\Billet;
-use AppBundle\Entity\Reservation;
+use AppBundle\Entity\Ticket;
+use AppBundle\Entity\Booking;
 use AppBundle\Exceptions\SessionNotFoundException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -55,45 +55,45 @@ class BookingManager
 
 
     /**
-     * Mets en Session l'objet Reservation
+     * Mets en Session l'objet Booking
      */
     public function initSession(){
         if (!($this->session->has(self::NOM_SESSION))) {
-            $this->session->set(self::NOM_SESSION, new Reservation());
+            $this->session->set(self::NOM_SESSION, new Booking());
         }
     }
 
     /**
-     * Genere les Billet
+     * Genere les Ticket
      */
     public function generateTickets(){
-        $reservation = $this->getTicketing();
-        foreach ($reservation->getBillets() as $billet){
-            $reservation->removeBillet($billet);
+        $booking = $this->getBooking();
+        foreach ($booking->getTickets() as $ticket){
+            $booking->removeTicket($ticket);
         }
-        for ($i=0;$i<($reservation->getNbreBillet());$i++){
-            $billet = new Billet();
-            $billet->setPays('FR');
-            $reservation->addBillet($billet);
+        for ($i=0;$i<($booking->getTicketNumber());$i++){
+            $ticket = new Ticket();
+            $ticket->setCountry('FR');
+            $booking->addTicket($ticket);
         }
     }
 
     /**
      */
     public function setPrice(){
-        $reservation = $this->getTicketing();
-        foreach ($reservation->getBillets() as $billet){
-            $this->priceTicketManager->getTicketPrice($billet);
+        $booking = $this->getBooking();
+        foreach ($booking->getTickets() as $ticket){
+            $this->priceTicketManager->getTicketPrice($ticket);
         }
     }
 
     /**
      */
     public function setLastInformation(){
-        $reservation = $this->getTicketing();
-        $reservation
-            ->setCodeReservation($this->generateBookingCode())
-            ->setDateReservation(new \DateTime());
+        $booking = $this->getBooking();
+        $booking
+            ->setBookingCode($this->generateBookingCode())
+            ->setBookingDate(new \DateTime());
     }
 
     /**
@@ -102,7 +102,7 @@ class BookingManager
      */
     public function getReponse($formType = null){
         if ($formType !== null){
-                $form = ($this->formFactory->create($formType, $this->getTicketing()));
+                $form = ($this->formFactory->create($formType, $this->getBooking()));
 
             $form->handleRequest($this->requestStack->getCurrentRequest());
 
@@ -186,7 +186,7 @@ class BookingManager
     /**
      * @return mixed Retourne un Objet Reservation enregistrer dans la session
      */
-    public function getTicketing(){
+    public function getBooking(){
         return ($this->session->get(self::NOM_SESSION));
     }
 
@@ -208,10 +208,10 @@ class BookingManager
      *
      */
     public function insertBooking(){
-        $reservation = $this->getTicketing();
-        $this->entity->persist($reservation);
-        foreach ($reservation->getBillets() as $billet){
-            $this->entity->persist($billet);
+        $booking = $this->getBooking();
+        $this->entity->persist($booking);
+        foreach ($booking->getTickets() as $ticket){
+            $this->entity->persist($ticket);
         }
         $this->entity->flush();
     }

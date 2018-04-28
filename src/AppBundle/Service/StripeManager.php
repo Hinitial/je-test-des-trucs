@@ -37,24 +37,36 @@ class StripeManager
         $this->stripePrivate = $stripe_private;
     }
 
+    /**
+     *
+     */
     public function initPublicKey(){
         $this->session->set(self::NAME_SESSION_PK, $this->stripePublic);
     }
 
+    /**
+     *
+     */
     public function initPayment(){
         \Stripe\Stripe::setApiKey($this->stripePrivate);
     }
 
+    /**
+     *
+     */
     public function makePayment(){
             $token = $this->requestStack->getCurrentRequest()->request->get('stripeToken');
             $charge = \Stripe\Charge::create(array(
-                "amount" => ($this->bookingManager->getTicketing()->getPrixReservation())*100,
+                "amount" => ($this->bookingManager->getBooking()->getBookingPrice())*100,
                 "currency" => "eur",
                 "source" => $token,
                 "description" => "Paiement Stripe - Musee du louvre"
             ));
     }
 
+    /**
+     *
+     */
     public function clearPublicKey(){
         $this->session->remove(self::NAME_SESSION_PK);
     }

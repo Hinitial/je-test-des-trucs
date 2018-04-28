@@ -16,5 +16,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class NoPastDate extends Constraint
 {
-    public $message = 'La date "{{ jourVisite }}" est déja passé';
+    public $message = 'La date "{{ visitDate }}" est déja passé';
 }
