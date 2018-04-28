@@ -30,6 +30,7 @@ class Ticket
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=50)
+     * @Assert\NotBlank(groups={"step_2"})
      * @Assert\Length(max=50, maxMessage="Nom trop long")
      */
     private $name;
@@ -38,6 +39,7 @@ class Ticket
      * @var string
      *
      * @ORM\Column(name="first_name", type="string", length=50)
+     * @Assert\NotBlank(groups={"step_2"})
      * @Assert\Length(max=50, maxMessage="Prenom trop long")
      */
     private $firstName;
@@ -46,6 +48,7 @@ class Ticket
      * @var string
      *
      * @ORM\Column(name="country", type="string", length=25)
+     * @Assert\NotBlank(groups={"step_2"})
      * @Assert\Length(max=25)
      */
     private $country;
@@ -54,6 +57,7 @@ class Ticket
      * @var \DateTime
      *
      * @ORM\Column(name="birth_date", type="datetime")
+     * @Assert\NotBlank(groups={"step_2"})
      * @Assert\DateTime()
      * @AppAssert\NoFutureDate
      */
@@ -63,7 +67,7 @@ class Ticket
      * @var bool
      *
      * @ORM\Column(name="reduc_price", type="boolean")
-     * @Assert\Type(type="bool")
+     * @Assert\Type(type="bool", groups={"step_2"})
      */
     private $reducPrice;
 
@@ -71,6 +75,7 @@ class Ticket
      * @var double
      *
      * @ORM\Column(name="price", type="decimal", scale=2)
+     * @Assert\NotBlank(groups={"step_2"})
      */
     private $price;
 

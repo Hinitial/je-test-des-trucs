@@ -28,7 +28,8 @@ class Booking
      * @var string
      *
      * @ORM\Column(name="booking_code", type="string", length=255)
-     * @Assert\Length(max=255, maxMessage="Code trop long")
+     * @Assert\NotBlank(groups={"step_3"})
+     * @Assert\Length(max=255, maxMessage="Code trop long", groups={"step_3"})
      */
     private $bookingCode;
 
@@ -36,7 +37,8 @@ class Booking
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
-     * @Assert\Email()
+     * @Assert\NotBlank(groups={"step_1"})
+     * @Assert\Email(groups={"step_1"})
      */
     private $email;
 
@@ -44,7 +46,8 @@ class Booking
      * @var \DateTime
      *
      * @ORM\Column(name="booking_date", type="datetime")
-     * @Assert\DateTime()
+     * @Assert\NotBlank(groups={"step_3"})
+     * @Assert\DateTime(groups={"step_3"})
      */
     private $bookingDate;
 
@@ -52,7 +55,8 @@ class Booking
      * @var \DateTime
      *
      * @ORM\Column(name="visit_date", type="datetime")
-     * @Assert\DateTime()
+     * @Assert\NotBlank(groups={"step_1"})
+     * @Assert\DateTime(groups={"step_1"})
      * @AppAssert\NoPastDate
      * @AppAssert\NoSunday
      * @AppAssert\NoTuesday
@@ -63,18 +67,21 @@ class Booking
      * @var bool
      *
      * @ORM\Column(name="ticket_type", type="boolean")
-     * @Assert\Type(type="bool")
+     * @Assert\NotBlank(groups={"step_1"})
+     * @Assert\Type(type="bool", groups={"step_1"})
      */
     private $ticketType;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ticket", mappedBy="booking")
+     * @Assert\Valid(groups={"step_2"})
      */
     private $tickets;
 
     /**
-     * @Assert\Type(type="int")
-     * @Assert\Range(min="1",max="7", minMessage="Vous devez au moins acheter {{ limit }} billet.", maxMessage="Vous ne pouvez pas acheter plus de {{ limit }} billets en une seul fois.")
+     * @Assert\NotBlank(groups={"step_1"})
+     * @Assert\Type(type="int", groups={"step_1"})
+     * @Assert\Range(min="1",max="7", minMessage="Vous devez au moins acheter {{ limit }} billet.", maxMessage="Vous ne pouvez pas acheter plus de {{ limit }} billets en une seul fois.", groups={"step_1"})
      */
     private $ticketNumber;
 

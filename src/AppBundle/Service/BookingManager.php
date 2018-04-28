@@ -20,6 +20,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Validator\Validation;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class BookingManager
 {
@@ -32,6 +34,7 @@ class BookingManager
     protected $requestStack;
     protected $router;
     protected $priceTicketManager;
+    protected $validation;
 
 
     public function __construct(
@@ -41,7 +44,8 @@ class BookingManager
         FormFactoryInterface $formFactory,
         RequestStack $requestStack,
         RouterInterface $router,
-        PriceTicketManager $priceTicketManager){
+        PriceTicketManager $priceTicketManager,
+        ValidatorInterface $validation){
 
         $this->session = $session;
         $this->template = $twig_Environment;
@@ -50,6 +54,7 @@ class BookingManager
         $this->requestStack = $requestStack;
         $this->router = $router;
         $this->priceTicketManager = $priceTicketManager;
+        $this->validation = $validation;
 
     }
 
@@ -60,6 +65,17 @@ class BookingManager
     public function initSession(){
         if (!($this->session->has(self::NOM_SESSION))) {
             $this->session->set(self::NOM_SESSION, new Booking());
+        }
+    }
+
+
+    public function verifyStep($step){
+        $errors = $this->validation->validate($this->getBooking(), null, array($step));
+        if(count($errors) > 0) {
+            return new Response((string) $errors);
+        }
+        else{
+            return null;
         }
     }
 
