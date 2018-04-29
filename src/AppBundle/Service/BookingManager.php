@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Validator\Validation;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class BookingManager
@@ -72,11 +71,12 @@ class BookingManager
     public function verifyStep($step){
         $errors = $this->validation->validate($this->getBooking(), null, array($step));
         if(count($errors) > 0) {
-            return new Response((string) $errors);
+            throw new \Exception('Something went wrong!');
+//            return new Response((string) $errors);
         }
-        else{
-            return null;
-        }
+//        else{
+//            return null;
+//        }
     }
 
     /**

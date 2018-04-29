@@ -34,9 +34,10 @@ class BilletterieController extends Controller
     public function informationAction(BookingManager $bookingManager)
     {
         $bookingManager->throwException();
-        if($bookingManager->verifyStep('step_1') !== null){
-            return $bookingManager->verifyStep('step_1');
-        }
+//        if($bookingManager->verifyStep('step_1') !== null){
+//            return $bookingManager->verifyStep('step_1');
+//        }
+        $bookingManager->verifyStep('step_1');
         return $bookingManager->getReponse(InformationType::class);
     }
 
@@ -46,9 +47,10 @@ class BilletterieController extends Controller
     public function paymentAction(BookingManager $bookingManager, StripeManager $stripeManager)
     {
         $bookingManager->throwException();
-        if($bookingManager->verifyStep('step_2') !== null){
-            return $bookingManager->verifyStep('step_2');
-        }
+//        if($bookingManager->verifyStep('step_2') !== null){
+//            return $bookingManager->verifyStep('step_2');
+//        }
+        $bookingManager->verifyStep('step_2');
         $stripeManager->initPublicKey();
         return $bookingManager->getReponse();
     }
@@ -93,9 +95,10 @@ class BilletterieController extends Controller
     public function confirmationAction(BookingManager $bookingManager)
     {
         $bookingManager->throwException();
-        if($bookingManager->verifyStep('step_3') !== null){
-            return $bookingManager->verifyStep('step_3');
-        }
+//        if($bookingManager->verifyStep('step_3') !== null){
+//            return $bookingManager->verifyStep('step_3');
+//        }
+        $bookingManager->verifyStep('step_3');
         $bookingManager->clearBooking();
         return $bookingManager->getReponse();
     }
