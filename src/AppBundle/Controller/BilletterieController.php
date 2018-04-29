@@ -30,6 +30,8 @@ class BilletterieController extends Controller
 
     /**
      * @Route("/billetterie/information", name="billetterie_information")
+     * @throws \AppBundle\Exceptions\SessionNotFoundException
+     * @throws \Exception
      */
     public function informationAction(BookingManager $bookingManager)
     {
@@ -40,6 +42,8 @@ class BilletterieController extends Controller
 
     /**
      * @Route("/billetterie/paiement", name="billetterie_paiement")
+     * @throws \AppBundle\Exceptions\SessionNotFoundException
+     * @throws \Exception
      */
     public function paymentAction(BookingManager $bookingManager, StripeManager $stripeManager)
     {
@@ -85,6 +89,7 @@ class BilletterieController extends Controller
      * @param BookingManager $bookingManager
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \AppBundle\Exceptions\SessionNotFoundException
+     * @throws \Exception
      */
     public function confirmationAction(BookingManager $bookingManager)
     {

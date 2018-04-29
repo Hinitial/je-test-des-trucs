@@ -60,6 +60,7 @@ class Booking
      * @AppAssert\NoPastDate
      * @AppAssert\NoSunday
      * @AppAssert\NoTuesday
+     * @AppAssert\TooFarFuture
      */
     private $visitDate;
 
@@ -81,7 +82,7 @@ class Booking
     /**
      * @Assert\NotBlank(groups={"step_1"})
      * @Assert\Type(type="int", groups={"step_1"})
-     * @Assert\Range(min="1",max="7", minMessage="Vous devez au moins acheter {{ limit }} billet.", maxMessage="Vous ne pouvez pas acheter plus de {{ limit }} billets en une seul fois.", groups={"step_1"})
+     * @Assert\Range(min="1",max="7", minMessage="Vous devez au moins acheter {{ limit }} billet.", maxMessage="Vous ne pouvez pas acheter plus de {{ limit }} billets en une seul fois.")
      */
     private $ticketNumber;
 
