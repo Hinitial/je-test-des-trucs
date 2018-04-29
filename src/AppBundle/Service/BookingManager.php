@@ -68,15 +68,15 @@ class BookingManager
     }
 
 
+    /**
+     * @param $step
+     * @throws \Exception
+     */
     public function verifyStep($step){
         $errors = $this->validation->validate($this->getBooking(), null, array($step));
         if(count($errors) > 0) {
             throw new \Exception('Something went wrong!');
-//            return new Response((string) $errors);
         }
-//        else{
-//            return null;
-//        }
     }
 
     /**
