@@ -21,7 +21,7 @@ class InformationType extends AbstractType
             ->add('tickets', CollectionType::class, array(
                 'entry_type' => BilletType::class
             ))
-        ->add('payment', SubmitType::class);
+        ->add('payment', SubmitType::class, array('label' => 'Paiement'));
     }/**
      * {@inheritdoc}
      */

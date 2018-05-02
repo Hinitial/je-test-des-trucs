@@ -31,7 +31,7 @@ class ReservationType extends AbstractType
                 )
             ))
             ->add('ticketNumber', IntegerType::class, array('required' => true))
-            ->add('nextStep', SubmitType::class);
+            ->add('nextStep', SubmitType::class, array('label' => 'Suivant'));
     }/**
      * {@inheritdoc}
      */

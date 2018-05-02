@@ -61,6 +61,7 @@ class Booking
      * @AppAssert\NoSunday(groups={"step_1"})
      * @AppAssert\NoTuesday(groups={"step_1"})
      * @AppAssert\TooFarFuture(groups={"step_1"})
+     * @AppAssert\NoPublicHoliday(groups={"step_1"})
      */
     private $visitDate;
 

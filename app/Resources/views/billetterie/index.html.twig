@@ -51,59 +51,72 @@
     {{ form_end(form) }}
 
     <div class="jf row no-gutters justify-content-center my-3 border-t">
+        {% set current_year = getCurrentYear() %}
+        {% set next_year = current_year + 1 %}
         <div class="col-12 my-3">
-            <div class="h5 text-center">Liste des jours fériés en 2018</div>
+            <div class="h5 text-center">Liste des jours fériés en {{ current_year }}</div>
         </div>
         <div class="col-12 col-sm-6">
-            <div class="row justify-content-center">
-                <div class="text-info">Janvier</div>
-                <ul class="font-weight-light">
-                    <li>1er Janvier</li>
-                </ul>
-            </div>
-            <div class="row justify-content-center">
-                <div class="text-info">Avril</div>
-                <ul class="font-weight-light">
-                    <li>1er Avril</li>
-                    <li>2 Avril</li>
-                </ul>
-            </div>
-            <div class="row justify-content-center">
-                <div class="text-info">Mai</div>
-                <ul class="font-weight-light">
-                    <li>1er Mai</li>
-                    <li>10 Mai</li>
-                    <li>20 Mai</li>
-                    <li>21 Mai</li>
-                </ul>
-            </div>
+            {% for i in 1..6 %}
+                {% if getFirstDate(i, current_year) %}
+                    <div class="row justify-content-center">
+                        <div class="text-info">{{ getFirstDate(i, current_year)|date('F') }}</div>
+                        <ul class="font-weight-light">
+                            {% for day in getPublicHoliday(current_year)|sort if day|date('n') == i %}
+                                <li>{{ day|date('d F') }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
         <div class="col-12 col-sm-6">
-            <div class="row justify-content-center">
-                <div class="text-info">Juillet</div>
-                <ul class="font-weight-light">
-                    <li>14 Juillet</li>
-                </ul>
-            </div>
-            <div class="row justify-content-center">
-                <div class="text-info">Aout</div>
-                <ul class="font-weight-light">
-                    <li>15 Aout</li>
-                </ul>
-            </div>
-            <div class="row justify-content-center">
-                <div class="text-info">Novembre</div>
-                <ul class="font-weight-light">
-                    <li>1er Novembre</li>
-                </ul>
-            </div>
-            <div class="row justify-content-center">
-                <div class="text-info">Decembre</div>
-                <ul class="font-weight-light">
-                    <li>25 Decembre</li>
-                </ul>
-            </div>
+            {% for i in 7..12 %}
+                {% if getFirstDate(i, current_year) %}
+                    <div class="row justify-content-center">
+                        <div class="text-info">{{ getFirstDate(i, current_year)|date('F') }}</div>
+                        <ul class="font-weight-light">
+                            {% for day in getPublicHoliday(current_year)|sort if day|date('n') == i %}
+                                <li>{{ day|date('d F') }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endfor %}
         </div>
+
+        <div class="col-12 my-3">
+            <div class="h5 text-center">Liste des jours fériés en {{ next_year }}</div>
+        </div>
+        <div class="col-12 col-sm-6">
+            {% for i in 1..6 %}
+                {% if getFirstDate(i, next_year) %}
+                    <div class="row justify-content-center">
+                        <div class="text-info">{{ getFirstDate(i, next_year)|date('F') }}</div>
+                        <ul class="font-weight-light">
+                            {% for day in getPublicHoliday(next_year)|sort if day|date('n') == i %}
+                                <li>{{ day|date('d F') }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="col-12 col-sm-6">
+            {% for i in 7..12 %}
+                {% if getFirstDate(i, next_year) %}
+                    <div class="row justify-content-center">
+                        <div class="text-info">{{ getFirstDate(i, next_year)|date('F') }}</div>
+                        <ul class="font-weight-light">
+                            {% for day in getPublicHoliday(next_year)|sort if day|date('n') == i %}
+                                <li>{{ day|date('d F') }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
     </div>
 {% endblock %}
 {% block panier %}
