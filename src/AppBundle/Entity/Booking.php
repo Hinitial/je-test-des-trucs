@@ -10,8 +10,8 @@ use AppBundle\Validator\Constraints as AppAssert;
  *
  * @ORM\Table(name="lvr_booking")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BookingRepository")
- * @AppAssert\NoAllDay()
- * @AppAssert\NotOverThousand()
+ * @AppAssert\NoAllDay(groups={"step_1"})
+ * @AppAssert\NotOverThousand(groups={"step_1"})
  */
 class Booking
 {
@@ -57,10 +57,10 @@ class Booking
      * @ORM\Column(name="visit_date", type="datetime")
      * @Assert\NotBlank(groups={"step_1"})
      * @Assert\DateTime(groups={"step_1"})
-     * @AppAssert\NoPastDate
-     * @AppAssert\NoSunday
-     * @AppAssert\NoTuesday
-     * @AppAssert\TooFarFuture
+     * @AppAssert\NoPastDate(groups={"step_1"})
+     * @AppAssert\NoSunday(groups={"step_1"})
+     * @AppAssert\NoTuesday(groups={"step_1"})
+     * @AppAssert\TooFarFuture(groups={"step_1"})
      */
     private $visitDate;
 
@@ -68,7 +68,6 @@ class Booking
      * @var bool
      *
      * @ORM\Column(name="ticket_type", type="boolean")
-     * @Assert\NotBlank(groups={"step_1"})
      * @Assert\Type(type="bool", groups={"step_1"})
      */
     private $ticketType;
@@ -82,7 +81,7 @@ class Booking
     /**
      * @Assert\NotBlank(groups={"step_1"})
      * @Assert\Type(type="int", groups={"step_1"})
-     * @Assert\Range(min="1",max="7", minMessage="Vous devez au moins acheter {{ limit }} billet.", maxMessage="Vous ne pouvez pas acheter plus de {{ limit }} billets en une seul fois.")
+     * @Assert\Range(min="1",max="7", minMessage="Vous devez au moins acheter {{ limit }} billet.", maxMessage="Vous ne pouvez pas acheter plus de {{ limit }} billets en une seul fois.", groups={"step_1"})
      */
     private $ticketNumber;
 

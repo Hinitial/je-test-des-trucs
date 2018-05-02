@@ -38,6 +38,7 @@ class ReservationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
+            'validation_groups' => array('step_1'),
             'data_class' => Booking::class
         ));
     }

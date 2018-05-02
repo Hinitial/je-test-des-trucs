@@ -17,14 +17,9 @@
     <div class="col-12 col-sm-6 alert alert-success text-center" role="alert">
         Paiement validé
     </div>
-    {% for message in app.flashes('success') %}
-        <div class="col-12 col-sm-6 alert alert-success" role="alert">
-            {{ message }}
-        </div>
-    {% endfor %}
 </div>
     <div class="row justify-content-center text-center my-3">
-        <div class="col-12"> Votre commande à bien été validé, vos billets vous ont été envoyé à l'adresse : <strong>exmaple@hotmail.com</strong>. Votre numéro de commande est : <strong>FSG6GBSJ8J</strong></div>
+        <div class="col-12"> Votre commande à bien été validé, vos billets vous ont été envoyé à l'adresse : <strong>{{ email }}</strong>. Votre numéro de commande est : <strong>{{ code }}</strong></div>
 
     </div>
     <div class="row">

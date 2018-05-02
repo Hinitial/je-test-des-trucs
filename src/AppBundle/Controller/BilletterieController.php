@@ -15,6 +15,7 @@ use AppBundle\Service\MailManager;
 use AppBundle\Service\BookingManager;
 use AppBundle\Service\StripeManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BilletterieController extends Controller
@@ -49,7 +50,6 @@ class BilletterieController extends Controller
     {
         $bookingManager->throwException();
         $bookingManager->verifyStep('step_2');
-        $stripeManager->initPublicKey();
         return $bookingManager->getReponse();
     }
 
@@ -77,25 +77,30 @@ class BilletterieController extends Controller
             $bookingManager->setLastInformation();
             $bookingManager->insertBooking();
             $mailManager->mailTicketing($bookingManager->getBooking());
-            $stripeManager->clearPublicKey();
-            return $this->redirectToRoute("billetterie_confirmation");
+            return $this->redirectToRoute('billetterie_confirmation',
+                array(
+                    'code' => $bookingManager->getBooking()->getBookingCode(),
+                    'mail' => $bookingManager->getBooking()->getEmail()));
         } catch(\Stripe\Error\Card $e) {
             return $this->redirectToRoute("billetterie_paiement");
         }
     }
 
     /**
-     * @Route("/billetterie/confirmation", name="billetterie_confirmation")
+     * @Route("/billetterie/confirmation/{code}", name="billetterie_confirmation")
      * @param BookingManager $bookingManager
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \AppBundle\Exceptions\SessionNotFoundException
      * @throws \Exception
      */
-    public function confirmationAction(BookingManager $bookingManager)
+    public function confirmationAction($code, BookingManager $bookingManager, Request $request)
     {
         $bookingManager->throwException();
         $bookingManager->verifyStep('step_3');
         $bookingManager->clearBooking();
-        return $bookingManager->getReponse();
+        return $this->render('billetterie/confirmation.html.twig', array(
+            'code' => $code,
+            'email' => $request->query->get('mail')
+        ));
     }
 }

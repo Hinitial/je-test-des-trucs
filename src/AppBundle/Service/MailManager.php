@@ -36,7 +36,7 @@ class MailManager
             ->setFrom($this->mail_sender)
             ->setTo($contact->getEmail())
             ->setContentType('text/html')
-            ->setBody($this->twig_Environment->render('email/reservation.html.twig', array(
+            ->setBody($this->twig_Environment->render('email/contact.html.twig', array(
                 'nom' => $contact->getNom(),
                 'prenom' => $contact->getPrenom(),
                 'message' => $contact->getMessage()
