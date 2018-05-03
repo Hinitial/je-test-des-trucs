@@ -33,8 +33,8 @@ class MailManager
     public function mailContact(Contact $contact){
         $mail = new  \Swift_Message($contact->getTitre());
         $mail = $mail
-            ->setFrom($this->mail_sender)
-            ->setTo($contact->getEmail())
+            ->setFrom($contact->getEmail())
+            ->setTo($this->mail_sender)
             ->setContentType('text/html')
             ->setBody($this->twig_Environment->render('email/contact.html.twig', array(
                 'nom' => $contact->getNom(),
