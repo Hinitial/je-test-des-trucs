@@ -33,6 +33,7 @@ class PriceTicketManager
     }
 
     /**
+     * Retourne le prix d'un billet,à partir de lapolitique budgetetaire actuel
      * @return int Le prix du billet
      */
     public function getTicketPrice(Ticket $ticket){

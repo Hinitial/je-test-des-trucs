@@ -25,6 +25,7 @@ class MailManager
     }
 
     /**
+     * Envoie un mail de contact
      * @param Contact $contact
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime
@@ -46,6 +47,7 @@ class MailManager
     }
 
     /**
+     * Envoie un mail de confirmation de reservation
      * @param Booking $ticketing
      * @throws \Twig_Error_Loader
      * @throws \Twig_Error_Runtime

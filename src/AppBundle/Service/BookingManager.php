@@ -71,6 +71,7 @@ class BookingManager
 
 
     /**
+     * Verifie une étape précise de la réservation
      * @param $step
      * @throws \Exception
      */
@@ -83,6 +84,7 @@ class BookingManager
     }
 
     /**
+     * Retourne Booking
      * @return mixed Retourne un Objet Reservation enregistrer dans la session
      */
     public function getBooking()
@@ -91,6 +93,7 @@ class BookingManager
     }
 
     /**
+     * Ajoute les dernière information de la réservation
      */
     public function setLastInformation()
     {
@@ -116,6 +119,7 @@ class BookingManager
     }
 
     /**
+     * Obtient une vue à affichée et affectuant les actions requisent
      * @param null $formType
      * @return RedirectResponse|Response
      */
@@ -137,6 +141,7 @@ class BookingManager
     }
 
     /**
+     * Execute un action en fonction de la route actuel
      * @return RedirectResponse
      */
     public function ActionForm()
@@ -144,11 +149,11 @@ class BookingManager
         $route = $this->requestStack->getCurrentRequest()->get('_route');
         switch ($route) {
             case 'homepage_billetterie':
-                $this->generateTickets();
+                $this->addTickets();
                 return new RedirectResponse($this->router->generate('billetterie_information'));
                 break;
             case 'billetterie_information':
-                $this->setPrice();
+                $this->setTicketPrice();
                 return new RedirectResponse($this->router->generate('billetterie_paiement'));
                 break;
             default:
@@ -156,9 +161,9 @@ class BookingManager
     }
 
     /**
-     * Genere les Ticket
+     * Ajoute le bon nombre de Tickets dans le Booking
      */
-    public function generateTickets()
+    public function addTickets()
     {
         $booking = $this->getBooking();
         foreach ($booking->getTickets() as $ticket) {
@@ -172,8 +177,9 @@ class BookingManager
     }
 
     /**
+     * Ajoute les prix aux Tickets
      */
-    public function setPrice()
+    public function setTicketPrice()
     {
         $booking = $this->getBooking();
         foreach ($booking->getTickets() as $ticket) {
@@ -182,6 +188,7 @@ class BookingManager
     }
 
     /**
+     * Obtient une vue à affichée
      * @param FormInterface|null $form
      * @return Response
      */
@@ -221,6 +228,7 @@ class BookingManager
     }
 
     /**
+     * Lève une Exception si la Session nexiste pas
      * @throws SessionNotFoundException
      */
     public function throwException()
@@ -231,7 +239,7 @@ class BookingManager
     }
 
     /**
-     *
+     * Enregistre en base de donnée la Réservation
      */
     public function insertBooking()
     {
@@ -244,7 +252,7 @@ class BookingManager
     }
 
     /**
-     *
+     * Supprime le l'objet Booking de la session
      */
     public function clearBooking()
     {

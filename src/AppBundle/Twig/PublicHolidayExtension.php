@@ -6,8 +6,10 @@
  * Time: 17:12
  */
 
-namespace AppBundle\Service;
+namespace AppBundle\Twig;
 
+
+use AppBundle\Service\PublicHolidayManager;
 
 class PublicHolidayExtension extends \Twig_Extension
 {
@@ -17,10 +19,23 @@ class PublicHolidayExtension extends \Twig_Extension
         $this->holidayManager = $holidayManager;
     }
 
+    /**
+     * Retourne la liste des jours fériés d'une année pécise
+     * @param $year
+     * @return array
+     * @throws \Exception
+     */
     public function getPublicHolidayTab($year){
         return $this->holidayManager->getPublicHolidayTab($year);
     }
 
+    /**
+     * Retourne la premier date d'un mois et d'une année précis
+     * @param $month
+     * @param $year
+     * @return null
+     * @throws \Exception
+     */
     public function getFirstDate($month, $year){
         foreach ($this->getPublicHolidayTab($year) as $date){
             if ($date->format('n') == $month){
@@ -30,6 +45,10 @@ class PublicHolidayExtension extends \Twig_Extension
         return null;
     }
 
+    /**
+     * Retourne l'année actuel
+     * @return string
+     */
     public function getCurrentYear(){
         $currentDay = new \DateTime();
         return $currentDay->format('Y');

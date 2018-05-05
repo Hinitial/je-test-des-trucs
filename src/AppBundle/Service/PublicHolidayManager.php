@@ -11,6 +11,12 @@ namespace AppBundle\Service;
 
 class PublicHolidayManager
 {
+    /**
+     * Retourne la liste des jours fériés d'une année pécise
+     * @param $year
+     * @return array
+     * @throws \Exception
+     */
     public function getPublicHolidayTab($year){
         $tab = array(
             'nouvel_ans' => new \DateTime($year.'-01-01'),
@@ -30,6 +36,12 @@ class PublicHolidayManager
         return $tab;
     }
 
+    /**
+     * Retourne la date du dimanche de Paque d'une année précise
+     * @param $year
+     * @return \DateTime
+     * @throws \Exception
+     */
     public function get_easter_datetime($year) {
         $base = new \DateTime("$year-03-21");
         $days = easter_days($year);

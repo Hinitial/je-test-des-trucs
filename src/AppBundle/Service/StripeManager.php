@@ -38,21 +38,14 @@ class StripeManager
     }
 
     /**
-     *
-     */
-    public function initPublicKey(){
-        $this->session->set(self::NAME_SESSION_PK, $this->stripePublic);
-    }
-
-    /**
-     *
+     * Initialise le payment
      */
     public function initPayment(){
         \Stripe\Stripe::setApiKey($this->stripePrivate);
     }
 
     /**
-     *
+     * Exécute le paiement
      */
     public function makePayment(){
             $token = $this->requestStack->getCurrentRequest()->request->get('stripeToken');
@@ -62,12 +55,5 @@ class StripeManager
                 "source" => $token,
                 "description" => "Paiement Stripe - Musee du louvre"
             ));
-    }
-
-    /**
-     *
-     */
-    public function clearPublicKey(){
-        $this->session->remove(self::NAME_SESSION_PK);
     }
 }
