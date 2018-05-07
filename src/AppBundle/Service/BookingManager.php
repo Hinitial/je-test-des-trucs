@@ -79,7 +79,7 @@ class BookingManager
     {
         $errors = $this->validation->validate($this->getBooking(), null, array($step));
         if (count($errors) > 0) {
-            throw new \Exception('Something went wrong!');
+            throw new \Exception('Erreur de naviguation');
         }
     }
 
@@ -90,17 +90,6 @@ class BookingManager
     public function getBooking()
     {
         return ($this->session->get(self::NOM_SESSION));
-    }
-
-    /**
-     * Ajoute les dernière information de la réservation
-     */
-    public function setLastInformation()
-    {
-        $booking = $this->getBooking();
-        $booking
-            ->setBookingCode($this->generateBookingCode())
-            ->setBookingDate(new \DateTime());
     }
 
     /**
@@ -149,41 +138,14 @@ class BookingManager
         $route = $this->requestStack->getCurrentRequest()->get('_route');
         switch ($route) {
             case 'homepage_billetterie':
-                $this->addTickets();
+                $this->addTickets($this->getBooking());
                 return new RedirectResponse($this->router->generate('billetterie_information'));
                 break;
             case 'billetterie_information':
-                $this->setTicketPrice();
+                $this->setTicketPrice($this->getBooking());
                 return new RedirectResponse($this->router->generate('billetterie_paiement'));
                 break;
             default:
-        }
-    }
-
-    /**
-     * Ajoute le bon nombre de Tickets dans le Booking
-     */
-    public function addTickets()
-    {
-        $booking = $this->getBooking();
-        foreach ($booking->getTickets() as $ticket) {
-            $booking->removeTicket($ticket);
-        }
-        for ($i = 0; $i < ($booking->getTicketNumber()); $i++) {
-            $ticket = new Ticket();
-            $ticket->setCountry('FR');
-            $booking->addTicket($ticket);
-        }
-    }
-
-    /**
-     * Ajoute les prix aux Tickets
-     */
-    public function setTicketPrice()
-    {
-        $booking = $this->getBooking();
-        foreach ($booking->getTickets() as $ticket) {
-            $this->priceTicketManager->getTicketPrice($ticket);
         }
     }
 
@@ -228,6 +190,41 @@ class BookingManager
     }
 
     /**
+     * Ajoute le bon nombre de Tickets dans le Booking
+     */
+    public function addTickets(Booking $booking)
+    {
+        foreach ($booking->getTickets() as $ticket) {
+            $booking->removeTicket($ticket);
+        }
+        for ($i = 0; $i < ($booking->getTicketNumber()); $i++) {
+            $ticket = new Ticket();
+            $ticket->setCountry('FR');
+            $booking->addTicket($ticket);
+        }
+    }
+
+    /**
+     * Ajoute les prix aux Tickets
+     */
+    public function setTicketPrice(Booking $booking)
+    {
+        foreach ($booking->getTickets() as $ticket) {
+            $ticket->setPrice($this->priceTicketManager->getTicketPrice($ticket));
+        }
+    }
+
+    /**
+     * Ajoute les dernière information de la réservation
+     */
+    public function setLastInformation(Booking $booking)
+    {
+        $booking
+            ->setBookingCode($this->generateBookingCode())
+            ->setBookingDate(new \DateTime());
+    }
+
+    /**
      * Lève une Exception si la Session nexiste pas
      * @throws SessionNotFoundException
      */
@@ -241,9 +238,8 @@ class BookingManager
     /**
      * Enregistre en base de donnée la Réservation
      */
-    public function insertBooking()
+    public function insertBooking(Booking $booking)
     {
-        $booking = $this->getBooking();
         $this->entity->persist($booking);
         foreach ($booking->getTickets() as $ticket) {
             $this->entity->persist($ticket);

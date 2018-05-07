@@ -54,6 +54,6 @@ class PriceTicketManager
         else{
             $price = self::PRIX_NORMAL;
         }
-        $ticket->setPrice($price);
+        return $price;
     }
 }

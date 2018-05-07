@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BilletterieController extends Controller
+class TicketingController extends Controller
 {
     /**
      * @Route("/billetterie", name="homepage_billetterie")
@@ -46,7 +46,7 @@ class BilletterieController extends Controller
      * @throws \AppBundle\Exceptions\SessionNotFoundException
      * @throws \Exception
      */
-    public function paymentAction(BookingManager $bookingManager, StripeManager $stripeManager)
+    public function paymentAction(BookingManager $bookingManager)
     {
         $bookingManager->throwException();
         $bookingManager->verifyStep('step_2');
@@ -74,8 +74,9 @@ class BilletterieController extends Controller
         $stripeManager->initPayment();
         try {
             $stripeManager->makePayment();
-            $bookingManager->setLastInformation();
-            $bookingManager->insertBooking();
+            $booking = $bookingManager->getBooking();
+            $bookingManager->setLastInformation($booking);
+            $bookingManager->insertBooking($booking);
             $mailManager->mailTicketing($bookingManager->getBooking());
             return $this->redirectToRoute('billetterie_confirmation',
                 array(
