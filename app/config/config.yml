@@ -73,6 +73,10 @@ swiftmailer:
   port: 2525
 
 services:
+  twig.extension.intl:
+    class: Twig_Extensions_Extension_Intl
+    tags:
+      - { name: twig.extension }
   AppBundle\Service\StripeManager:
     arguments:
       $bookingManager: '@AppBundle\Service\BookingManager'
