@@ -75,7 +75,7 @@ class BookingManager
      * @param $step
      * @throws \Exception
      */
-    public function verifyStep($step)
+    public function verifyStep($step, $booking)
     {
         $errors = $this->validation->validate($this->getBooking(), null, array($step));
         if (count($errors) > 0) {
@@ -228,11 +228,13 @@ class BookingManager
      * Lève une Exception si la Session nexiste pas
      * @throws SessionNotFoundException
      */
-    public function throwException()
+    public function throwException($step)
     {
         if (!($this->session->has(self::NOM_SESSION))) {
             throw new SessionNotFoundException('Session not exist');
         }
+        $booking = $this->getBooking();
+        $this->verifyStep($step,$booking);
     }
 
     /**

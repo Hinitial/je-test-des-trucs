@@ -10,19 +10,15 @@
     <div class="container">
         <div class="row">
             <div class="col-12 p-4">
-                <p class="text-center h3 text-lowercase">Bienvenue au musee du Louvre</p>
+                <p class="text-center h3 text-lowercase">{% trans %}app.index.welcome{% endtrans %}</p>
                 <p class="text-justify">
-                    Ancien palais des rois, le Louvre épouse l’histoire de France depuis huit siècles.
-                    Conçu dès sa création en 1793 comme un musée universel, ses collections, qui figurent parmi
-                    les plus belles au monde, couvrent plusieurs millénaires et un territoire qui s’étend
-                    de l’Amérique aux frontières de l’Asie. Réparties en huit départements,
-                    elles contiennent des œuvres universellement admirées, comme La Joconde,
-                    la Victoire de Samothrace ou la Vénus de Milo. Le Louvre est aujourd’hui le musée le plus visité au monde.
+                    {% trans %}app.index.text_welcome{% endtrans %}
                 </p>
                 <p class="text-center font-weight-bold">
-                    Acheter vos billet sur notre billetterie en ligne, pour visiter notre collection.
+                    {% trans %}app.index.text_link{% endtrans %}
                 </p>
-                <div class="row justify-content-center"><a class="btn btn-info btn-lg" href="{{ path('homepage_billetterie') }}" role="button">Billetterie</a>
+                <div class="row justify-content-center">
+                    <a class="btn btn-info btn-lg" href="{{ path('homepage_billetterie') }}" role="button">{% trans %}comment.billetterie{% endtrans %}</a>
                 </div>
             </div>
         </div>
@@ -30,19 +26,19 @@
     <div class="container">
         <div class="row">
             <div class="col-12 text-center">
-                <h3 class="text-lowercase">Tarif</h3>
-                <p>Voici la grille des tarifs du Musee du Louve. Ces prix sont les meme que ceux pratiqués en billetterie physique</p>
+                <h3 class="text-lowercase">{% trans %}app.title.tarif{% endtrans %}</h3>
+                <p>{% trans %}app.index.tarif{% endtrans %}</p>
             </div>
         </div>
         {% set colTarif = 6 %}
         {{ include("app/tarif.html.twig") }}
         <div class="row">
             <div class="col-12">
-                <h3 class="text-center text-lowercase">Horaires</h3>
+                <h3 class="text-center text-lowercase">{% trans %}app.title.horaire{% endtrans %}</h3>
             </div>
         </div>
         <div class="row">
-            <p class="col-12 text-center font-weight-light">Horaire d'ouverture et de fermeture du musée. L'évacuation des salles débute à 17 h 30 ou 21 h 30 les jours de nocturne.</p>
+            <p class="col-12 text-center font-weight-light">{% trans %}app.index.horaire{% endtrans %}</p>
             <table class="table table-responsive-sm">
                 <thead class="thead-dark">
                 <tr>
@@ -58,7 +54,7 @@
                 <tbody>
                 <tr>
                     <td>9h - 18h</td>
-                    <td>Fermé</td>
+                    <td>{% trans %}app.index.close{% endtrans %}</td>
                     <td>9h - 21h45</td>
                     <td>9h - 18h</td>
                     <td>9h - 21h45</td>
@@ -67,11 +63,11 @@
                 </tr>
                 </tbody>
             </table>
-            <p class="col-12">*Impossible d'acheter des billets en ligne pour un dimanche</p>
+            <p class="col-12">*{% trans %}app.index.horaire_aide{% endtrans %}</p>
         </div>
         <div class="row">
             <div class="col-12">
-                <h3 class="text-center text-lowercase">Acces</h3>
+                <h3 class="text-center text-lowercase">{% trans %}app.title.acces{% endtrans %}</h3>
             </div>
         </div>
         <div class="row no-gutters justify-content-center">
@@ -79,24 +75,24 @@
                 <table class="table table-ui mb-5">
                     <tbody class="">
                     <tr scope="row">
-                        <th>Métro</th>
-                        <td>lignes 1 et 7, station "Palais-Royal / Musée du Louvre"; ligne 14, station "Pyramides"</td>
+                        <th>{% trans %}app.title.metro{% endtrans %}</th>
+                        <td>{% trans %}app.index.metro{% endtrans %}</td>
                     </tr>
                     <tr scope="row">
-                        <th>Bus</th>
-                        <td>bus n° 21, 24, 27, 39, 48, 68, 69, 72, 81, 95</td>
+                        <th>{% trans %}app.title.bus{% endtrans %}</th>
+                        <td>{% trans %}app.index.bus{% endtrans %}</td>
                     </tr>
                     <tr scope="row">
                         <th>Velib'</th>
-                        <td>n°1015 : 2 place A. Malraux, n°1023 : 165 rue Saint-Honoré, n°1014 : 5 rue de l’Echelle</td>
+                        <td>{% trans %}app.index.velib{% endtrans %}</td>
                     </tr>
                     <tr scope="row">
-                        <th>Voiture</th>
-                        <td>un parc de stationnement souterrain est accessible par l'avenue du Général-Lemonnier, tous les jours de 7 h 00 à 23 h 00.</td>
+                        <th>{% trans %}app.title.voiture{% endtrans %}</th>
+                        <td>{% trans %}app.index.voiture{% endtrans %}</td>
                     </tr>
                     <tr scope="row">
-                        <th>Batobus</th>
-                        <td>Escale "Louvre", quai François-Mitterrand</td>
+                        <th>{% trans %}app.title.batobus{% endtrans %}</th>
+                        <td>{% trans %}app.index.batobus{% endtrans %}</td>
                     </tr>
                     </tbody>
                 </table>

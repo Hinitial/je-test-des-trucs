@@ -15,11 +15,10 @@
 
 {% block main %}
     <div class="container my-5">
-        <h3 class="text-center text-lowercase">Formulaire de contact</h3>
+        <h3 class="text-center text-lowercase">{% trans %}contact.title{% endtrans %}</h3>
         <div class="row">
             <p class="col text-justify">
-                Vous avez une demande à formuler ou souhaitez faire une suggestion ? Prenez soin d'identifier
-                l'interlocuteur le mieux adapté, votre demande n'en sera que mieux traitée !
+                {% trans %}contact.text{% endtrans %}
             </p>
         </div>
         <div class="row">
@@ -35,22 +34,26 @@
 
         <div class="form-row">
             <div class="form-group col-md-3">
-                {{ form_row(form.nom) }}
+                {{ form_label(form.nom, "Nom", {'label_attr': {'class': 'form-control-label'}}) }}
+                {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.nom) }}
             </div>
             <div class="form-group col-md-3">
-                {{ form_row(form.prenom) }}
+                {{ form_label(form.prenom, "Prenom", {'label_attr': {'class': 'form-control-label'}}) }}
+                {{ form_widget(form.prenom, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.prenom) }}
             </div>
             <div class="form-group col-md-6">
-                {{ form_row(form.email) }}
+                {{ form_label(form.email, "Votre email", {'label_attr': {'class': 'form-control-label'}}) }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.email) }}
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-8">
-                {{ form_row(form.titre) }}
+                {{ form_label(form.titre, "Titre", {'label_attr': {'class': 'form-control-label'}}) }}
+                {{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.titre) }}
             </div>
         </div>

@@ -15,7 +15,7 @@ class AppControllerTest extends WebTestCase
 {
     public function testHomeIsUp(){
         $client = static::createClient();
-        $client->request('GET', 'musee-louvre/');
+        $client->request('GET', '/');
 
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }

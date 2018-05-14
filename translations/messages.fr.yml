@@ -1,0 +1,75 @@
+comment.accueil: Accueil
+comment.billetterie: Billetterie
+comment.contact: Contact
+footer.conception: 'Site web conçu par'
+footer.mention_legale: 'Mention légales'
+footer.cgv: CGV
+footer.tous_droits: 'Tous droits de reproduction réservés'
+app.index.welcome: 'Bienvenue au musee du Louvre'
+app.index.text_welcome: "Ancien palais des rois, le Louvre épouse l’histoire de France depuis huit siècles. Conçu dès sa création en 1793 comme un musée universel, ses collections, qui figurent parmi les plus belles au monde, couvrent plusieurs millénaires et un territoire qui s’étend de l’Amérique aux frontières de l’Asie. Réparties en huit départements, elles contiennent des œuvres universellement admirées, comme La Joconde, la Victoire de Samothrace ou la Vénus de Milo. Le Louvre est aujourd’hui le musée le plus visité au monde.\n"
+app.index.text_link: 'Acheter vos billet sur notre billetterie en ligne, pour visiter notre collection.'
+app.title.tarif: Tarif
+app.index.tarif: 'Here is the price list of the Louvre Museum. These prices are the same as those charged in physical ticketing'
+app.title.horaire: Horaires
+app.index.horaire: 'Horaire d''ouverture et de fermeture du musée. L''évacuation des salles débute à 17 h 30 ou 21 h 30 les jours de nocturne.'
+app.index.close: Fermé
+app.index.horaire_aide: 'Impossible d''acheter des billets en ligne pour un dimanche'
+app.title.acces: Acces
+app.title.metro: Métro
+app.index.metro: 'lignes 1 et 7, station "Palais-Royal / Musée du Louvre"; ligne 14, station "Pyramides"'
+app.title.bus: Bus
+app.index.bus: 'bus n° 21, 24, 27, 39, 48, 68, 69, 72, 81, 95'
+app.index.velib: 'n°1015 : 2 place A. Malraux, n°1023 : 165 rue Saint-Honoré, n°1014 : 5 rue de l’Echelle'
+app.title.voiture: Voiture
+app.index.voiture: 'un parc de stationnement souterrain est accessible par l''avenue du Général-Lemonnier, tous les jours de 7 h 00 à 23 h 00.'
+app.title.batobus: Batobus
+app.index.batobus: 'Escale "Louvre", quai François-Mitterrand'
+tarif.title.normal: 'Tarif normal'
+tarif.text.normal: "Tarif classique du musée.\nPour les personnes de 12 ans à 59 ans\n"
+tarif.title.enfant: 'Tarif enfant'
+tarif.text.enfant: "À partir de 4 ans et jusqu’à 12 ans.\nL’entrée est gratuite pour les enfants de moins de 4 ans\n"
+tarif.title.senior: 'Tarif senior'
+tarif.text.senior: "À partir de 60 ans.\nIl n'y a pas d'age pour visité le Louvre.\n"
+tarif.title.reduit: 'Tarif réduit'
+tarif.text.reduit: 'Accordé dans certaines conditions (étudiant, employé du musée, d’un service du Ministère de la Culture, militaire…)'
+contact.title: 'Formulaire de contact'
+contact.text: "Vous avez une demande à formuler ou souhaitez faire une suggestion ? Prenez soin d'identifier l'interlocuteur le mieux adapté, votre demande n'en sera que mieux traitée !\n"
+billetterie.base.billet: billet
+billetterie.base.information: information
+billetterie.base.paiement: paiement
+billetterie.base.confirmation: confirmation
+billetterie.index.text: "Billet et réservation horaire incluant les collections permanentes, les expositions temporaires et le musée Delacroix. Entrée libre, sans billet, sur présentation d’un justificatif pour les moins de 4 ans, les personnes handicapées et leur accompagnateur, et les bénéficiaires des minima sociaux. Billet valable seulement le jour sélectionné.\n"
+billetterie.index.ferie: 'Liste des jours fériés en'
+billetterie.index.rappel: 'Rappel des prix'
+Nom: Nom
+Prenom: Prenom
+'Type de billet': 'Type de billet'
+Reduc price: Tarif reduit
+
+billetterie.paiement.panier: votre panier
+billetterie.paiement.prix: Prix
+billetterie.paiement.total: Total
+billetterie.paiement.text: >
+    Merci de bien vérifier que le contenu de votre réservation (date, horaire, conditions de gratuité)
+    correspond à votre commande. Seuls les paiements en euros sont acceptés. Le paiement s'effetura via
+
+billetterie.paiement.bank_text: Entrer vos informations bancaires
+billetterie.paiement.avec: Payer avec
+billetterie.confirmation.valide: Paiement validé
+billetterie.confirmation.text_1: Votre commande à bien été validé, vos billets vous ont été envoyé à l'adresse
+billetterie.confirmation.text_2: Votre numéro de commande est
+billetterie.confirmation.question_1: On dit que visiter le Louvre est très fatigant. Comment m'y préparer ?
+billetterie.confirmation.reponse_1: >
+    Le Louvre est effectivement très grand, prévoyez des chaussures confortables. Sachez que de nombreux espaces
+    sont prévus pour que vous puissiez faire des pauses, vous restaurer et trouver quelques cadeaux et souvenirs.
+    Pensez néanmoins à bien vous reposer et à manger avant de venir.
+billetterie.confirmation.question_2: Que puis-je voir avec le billet du Louvre ?
+billetterie.confirmation.reponse_2: >
+    En plus des collections du musée du Louvre, le billet donne accès le jour même aux expositions temporaires
+    et pendant 48 heures au musée Eugène-Delacroix.
+billetterie.confirmation.question_3: Quels sont les meilleurs horaires pour visiter ?
+billetterie.confirmation.reponse_3: Le matin dès l'ouverture du musée et en nocturne.
+billetterie.confirmation.question_4: J'entre dans le musée
+billetterie.confirmation.reponse_4: >
+    L'entrée du musée est la pyramide du Louvre. A mon arrivée, je choisis la couleur de ma file.
+    Je prends un plan du musée du Louvre. Je demande conseil aux chargés d'accueil.

@@ -24,13 +24,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <div class="nav-item"><a class="nav-link text-lowercase " href="{{ path('home') }}">Accueil</a></div>
+                <div class="nav-item"><a class="nav-link text-lowercase " href="{{ path('home') }}">{% trans %}comment.accueil{% endtrans %}</a></div>
             </div>
             <div class="nav navbar-nav mx-auto">
-                <div class="nav-item"><a class="nav-link text-lowercase" href="{{ path('homepage_billetterie') }}">Billetterie</a></div>
+                <div class="nav-item"><a class="nav-link text-lowercase" href="{{ path('homepage_billetterie') }}">{% trans %}comment.billetterie{% endtrans %}</a></div>
             </div>
             <div class="nav navbar-nav">
-                <div class="nav-item"><a class="nav-link text-lowercase" href="{{ path('contact') }}">Contact</a></div>
+                <div class="nav-item"><a class="nav-link text-lowercase" href="{{ path('contact') }}">{% trans %}comment.contact{% endtrans %}</a></div>
             </div>
         </div>
     </div>
@@ -50,12 +50,15 @@
     <div class="container">
         <div class="row justify-content-between py-4">
             <div class="col-12 col-sm-6 order-last order-sm-first">
-                <p class="col-12">Site web concu par</p>
+                <p class="col-12">Language</p>
+                <p class="col-12"><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">FR</a> | <a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">EN</a></p>
+                <p class="col-12">{% trans %}footer.conception{% endtrans %}</p>
                 <div class="col-sm-4 col-6"><img class="img-fluid" src="{{ asset('images/UpStorm_footer.png') }}" alt="logo_upStorm"></div>
             </div>
             <div class="col-12 col-sm-6 order-first order-sm-last text-left">
-                <p class="col-12"><a href="#" class="">Mention légales</a> · <a href="#" class="">CGV</a></p>
-                <p class="col-12">© Musée du Louvre - Tous droits de reproduction réservés</p></div>
+                <p class="col-12"><a href="#" class="">{% trans %}footer.mention_legale{% endtrans %}</a> · <a href="#" class="">{% trans %}footer.cgv{% endtrans %}</a></p>
+                <p class="col-12">© Musée du Louvre - {% trans %}footer.tous_droits{% endtrans %}</p>
+            </div>
         </div>
     </div>
 </footer>

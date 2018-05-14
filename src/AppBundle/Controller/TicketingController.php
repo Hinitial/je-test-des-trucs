@@ -16,6 +16,7 @@ use AppBundle\Service\BookingManager;
 use AppBundle\Service\StripeManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TicketingController extends Controller
@@ -36,8 +37,8 @@ class TicketingController extends Controller
      */
     public function informationAction(BookingManager $bookingManager)
     {
-        $bookingManager->throwException();
-        $bookingManager->verifyStep('step_1');
+        $bookingManager->throwException('step_1');
+        $booking = $bookingManager->getBooking();
         return $bookingManager->getReponse(InformationType::class);
     }
 
@@ -48,8 +49,8 @@ class TicketingController extends Controller
      */
     public function paymentAction(BookingManager $bookingManager)
     {
-        $bookingManager->throwException();
-        $bookingManager->verifyStep('step_2');
+        $bookingManager->throwException('step_2');
+        $booking = $bookingManager->getBooking();
         return $bookingManager->getReponse();
     }
 
@@ -70,7 +71,7 @@ class TicketingController extends Controller
      */
     public function checkoutAction(BookingManager $bookingManager, StripeManager $stripeManager, MailManager $mailManager)
     {
-        $bookingManager->throwException();
+        $bookingManager->throwException('step_2');
         $stripeManager->initPayment();
         try {
             $stripeManager->makePayment();
@@ -78,30 +79,27 @@ class TicketingController extends Controller
             $bookingManager->setLastInformation($booking);
             $bookingManager->insertBooking($booking);
             $mailManager->mailTicketing($bookingManager->getBooking());
-            return $this->redirectToRoute('billetterie_confirmation',
-                array(
-                    'code' => $bookingManager->getBooking()->getBookingCode(),
-                    'mail' => $bookingManager->getBooking()->getEmail()));
+            return $this->redirectToRoute('billetterie_confirmation');
         } catch(\Stripe\Error\Card $e) {
             return $this->redirectToRoute("billetterie_paiement");
         }
     }
 
     /**
-     * @Route("/billetterie/confirmation/{code}", name="billetterie_confirmation")
+     * @Route("/billetterie/confirmation", name="billetterie_confirmation")
      * @param BookingManager $bookingManager
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \AppBundle\Exceptions\SessionNotFoundException
      * @throws \Exception
      */
-    public function confirmationAction($code, BookingManager $bookingManager, Request $request)
+    public function confirmationAction(BookingManager $bookingManager)
     {
-        $bookingManager->throwException();
-        $bookingManager->verifyStep('step_3');
+        $bookingManager->throwException('step_3');
+        $booking =  $bookingManager->getBooking();
         $bookingManager->clearBooking();
         return $this->render('billetterie/confirmation.html.twig', array(
-            'code' => $code,
-            'email' => $request->query->get('mail')
+            'code' => $booking->getBookingCode(),
+            'email' => $booking->getEmail()
         ));
     }
 }

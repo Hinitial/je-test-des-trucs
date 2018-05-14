@@ -1,0 +1,93 @@
+Nom: Name
+Prenom: 'First name'
+Email: Email
+Titre: Title
+'Votre email': 'Your email'
+'Votre message': 'Your message'
+Envoyer: Send
+'Jour de la visite': 'Day of the visit'
+'Type de billet': 'Ticket type'
+Journée: 'All day'
+Demie-journée: 'Half day'
+'Nombre de billet': 'Number of tickets'
+Suivant: Next
+comment.accueil: Home
+comment.billetterie: Ticketing
+comment.contact: Contact
+footer.conception: 'Website designed by'
+footer.mention_legale: 'Terms & Conditions'
+footer.cgv: 'T&Cs'
+footer.tous_droits: 'All rights reserved'
+app.index.welcome: 'Welcome to the Musee du Louvre website'
+app.index.text_welcome: "'Formerly a royal palace, the Louvre has embraced the history of France for eight centuries. Intended as a universal museum since its inception in 1793, its collections—among the finest in the world—span several thousands of years and a territory that extends from America to the confines of Asia. Divided among eight departments, these collections feature works admired throughout the globe, including the Mona Lisa, the Winged Victory of Samothrace, and the Venus de Milo. The Louvre is currently the world’s most visited museum.'\n"
+app.index.text_link: 'Purchase your ticket on our online ticket shop, to visit our collection'
+app.title.tarif: Rate
+app.index.tarif: 'These prices are the same as those charged in physical ticketing'
+app.title.horaire: Schedule
+app.index.horaire: 'Opening and closing times of the museum. Room evacuation begins at 5.30 pm or 9.30 pm on night days.'
+app.index.close: Fermé
+app.index.horaire_aide: 'Can not buy tickets online for a Sunday'
+app.title.acces: Access
+app.title.metro: Underground
+app.index.metro: 'line 1 and 7, station "Palais-Royal / Musée du Louvre"; line 14, station "Pyramides"'
+app.title.bus: Bus
+app.index.bus: 'bus n° 21, 24, 27, 39, 48, 68, 69, 72, 81, 95'
+app.index.velib: 'n°1015 : 2 place A. Malraux, n°1023 : 165 rue Saint-Honoré, n°1014 : 5 rue de l’Echelle'
+app.title.voiture: Car
+app.index.voiture: 'an underground car park is accessible by avenue du Général-Lemonnier, every day from 7 am to 11 pm'
+app.title.batobus: Batobus
+app.index.batobus: 'stop "Louvre", dock François-Mitterrand'
+tarif.title.normal: 'Normal rate'
+tarif.text.normal: "Classic price of the museum.\nFor people aged 12 to 59\n"
+tarif.title.enfant: 'Children rate'
+tarif.text.enfant: "From 4 years old and up to 12 years old.\nAdmission is free for children under 4 years old\n"
+tarif.title.senior: 'Senior rate'
+tarif.text.senior: "From 60 years old.\nThere is no age to visit the Louvre.\n"
+tarif.title.reduit: 'Reduced rate'
+tarif.text.reduit: 'Granted under certain conditions (student, museum employee, department of the Ministry of Culture, military ...)'
+contact.title: 'Contact form'
+contact.text: "Do you have a request to make or wish to make a suggestion? Take care to identify the most suitable interlocutor, your request will be better handled!\n"
+billetterie.base.billet: ticket
+billetterie.base.information: information
+billetterie.base.paiement: payment
+billetterie.base.confirmation: confirmation
+billetterie.index.text: "Ticket and reservation including permanent collections, temporary exhibitions and the Delacroix museum. Free entry, without ticket, upon presentation of a proof for under 4 years, disabled people and their companion, and recipients of social minima. Ticket valid only on the selected day.\n"
+billetterie.index.ferie: 'List of public holidays in'
+billetterie.index.rappel: 'Price reminder'
+
+billetterie.paiement.panier: your bucket
+billetterie.paiement.prix: Price
+billetterie.paiement.total: Total
+billetterie.paiement.text: >
+    Please check that the content of your reservation (date, time, conditions of free)
+    corresponds to your order. Only payments in euros are accepted. Payment cleared via
+
+billetterie.paiement.bank_text: Enter your bank details
+billetterie.paiement.avec: Pay with
+billetterie.confirmation.valide: Payment validated
+billetterie.confirmation.text_1: Your order has been validated, your tickets have been sent to the address
+billetterie.confirmation.text_2: Your order number is
+billetterie.confirmation.question_1: It is said that visiting the Louvre is very tiring. How to prepare for it ?
+billetterie.confirmation.reponse_1: >
+    The Louvre is indeed very large, plan comfortable shoes. Know that many spaces
+    are planned so that you can take breaks, restore yourself and find some gifts and souvenirs.
+    But remember to rest and eat before coming.
+billetterie.confirmation.question_2: What can I see with the Louvre ticket ?
+billetterie.confirmation.reponse_2: >
+    In addition to the collections of the Louvre Museum, the ticket gives access to temporary exhibitions the same day
+    and for 48 hours at the Musée Eugène-Delacroix.
+billetterie.confirmation.question_3: What are the best times to visit?
+billetterie.confirmation.reponse_3: In the morning from the opening of the museum and at night.
+billetterie.confirmation.question_4: I enter the museum
+billetterie.confirmation.reponse_4: >
+    The entrance to the museum is the Louvre Pyramid. When I arrive, I choose the color of my line.
+    I take a map of the Louvre Museum. I ask advice from the receptionists.
+
+Votre nom: Your name
+Votre prenom: Your first name
+Nationalité: Nationality
+Date de naissance: Birth date
+Reduc price: Reduced price
+Paiement: payment
+Rappel de votre adresse email: Reminder of your email address
+

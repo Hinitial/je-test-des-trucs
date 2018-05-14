@@ -16,22 +16,37 @@ class TicketingControllerTest extends WebTestCase
     public function testRedirectionToFirstStep(){
         $client = static::createClient();
 //        $this->expectException('SessionNotFoundException');
-        $client->request('GET', 'musee-louvre/billetterie/information');
+        $client->request('GET', 'billetterie/information');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
 
-    public function testFirstStepSubmint(){
+    public function testBeginBooking(){
         $client = static::createClient();
-        $crawder = $client->request('GET', 'musee-louvre/billetterie');
-        $form = $crawder->selectButton('reservation[nextStep]')->form();
+        $crawler = $client->request('GET', 'billetterie');
+        $form = $crawler->selectButton('reservation[nextStep]')->form();
 
         $form['reservation[visitDate]'] = '2018/05/23';
         $form['reservation[ticketType]'] = true;
         $form['reservation[ticketNumber]'] = 1;
         $form['reservation[email]'] = 'romsy2111@hotmail.fr';
 
-        $crawder = $client->submit($form);
+        $crawler = $client->submit($form);
+
+        $client->followRedirect();
+
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+
+        $crawler = $client->getCrawler();
+        $form2 = $crawler->selectButton('information[payment]')->form();
+
+            $form2['information[tickets][0][name]'] = 'Alvarez';
+            $form2['information[tickets][0][firstName]'] = 'Romain';
+            $form2['information[tickets][0][country]'] = 'FR';
+            $form2['information[tickets][0][birthDate]'] = '1996/11/21';
+            $form2['information[tickets][0][reducPrice]'] = false;
+
+        $crawler = $client->submit($form2);
 
         $client->followRedirect();
 
@@ -40,7 +55,7 @@ class TicketingControllerTest extends WebTestCase
 
     public function testTooMutchTicket(){
         $client = static::createClient();
-        $crawder = $client->request('GET', 'musee-louvre/billetterie');
+        $crawder = $client->request('GET', 'billetterie');
         $form = $crawder->selectButton('reservation[nextStep]')->form();
 
         $form['reservation[visitDate]'] = '2018/05/23';

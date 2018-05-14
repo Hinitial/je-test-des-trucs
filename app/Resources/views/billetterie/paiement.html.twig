@@ -5,13 +5,13 @@
     <img src="{{ asset('images/h6_mobile.jpg') }}" alt="header" class="img-fluid d-block d-sm-none">
 {% endblock %}
 
-{% block titre_billetterie %}paiement{% endblock %}
+{% block titre_billetterie %}{% trans %}billetterie.base.paiement{% endtrans %}{% endblock %}
 {% block etape_information %}etape-active{% endblock %}
 {% block etape_paiement %}etape-active{% endblock %}
 {% block content %}
     <div class="row justify-content-center">
         <div class="h3 col-12 text-center">
-            votre panier
+            {% trans %}billetterie.paiement.panier{% endtrans %}
         </div>
     </div>
 
@@ -19,14 +19,17 @@
         <div class="col-12">
             <table class="table table-ui mb-3">
                 <thead>
-                <tr><th>Personne</th><th>Type de billet</th><th>Prix</th></tr>
+                <tr>
+                    <th>{% trans %}Nom{% endtrans %}, {% trans %}Prenom{% endtrans %}</th>
+                    <th>{% trans %}Type de billet{% endtrans %}</th>
+                    <th>{% trans %}billetterie.paiement.prix{% endtrans %}</th></tr>
                 </thead>
                 <tbody>
                 {% for ticket in app.session.get('reservation').tickets %}
                     <tr><td>{{ ticket.name }}, {{ ticket.firstName }}</td><td>{{ ticket.ticketLabel }}</td><td>{{ ticket.price }}€</td></tr>
                 {% endfor %}
                 <tr>
-                    <td colspan="2"><b>Total :</b></td>
+                    <td colspan="2"><b>{% trans %}billetterie.paiement.total{% endtrans %} :</b></td>
                     <td>{{ app.session.get('reservation').bookingPrice }}€</td>
                 </tr>
                 </tbody>
@@ -37,30 +40,29 @@
     <div class="row justify-content-center">
 
         <div class="col-12 font-weight-light text-justify my-3">
-            Merci de bien vérifier que le contenu de votre réservation (date, horaire, conditions de gratuité) correspond à votre commande. Seuls les paiements en euros sont acceptés. Le paiement s'effetura via <span class="font-weight-bold">Stripe</span>
+            {% trans %}billetterie.paiement.text{% endtrans %} <span class="font-weight-bold">Stripe</span>
         </div>
 
-        <form action="{{ path('order_checkout') }}" method="post" id="payment-form" class="">
+        <form action="{{ path('order_checkout') }}" method="post" id="payment-form" class="col-lg-6 col-sm-8 col-11">
             <div class="form-group ">
                 <label for="card-element" class="font-weight-bold">
-                    Entrer vos informations bancaires :
+                    {% trans %}billetterie.paiement.bank_text{% endtrans %} :
                 </label>
                 <div id="card-element">
 
                 </div>
 
-                <!-- Used to display Element errors. -->
                 <div id="card-errors" role="alert"></div>
             </div>
-            <button class="btn btn-info btn-lg">Payer avec <strong>Stripe</strong></button>
+            <button class="btn btn-info btn-lg">{% trans %}billetterie.paiement.avec{% endtrans %} <strong>Stripe</strong></button>
         </form>
-        <div class="row">
-            {% for message in app.flashes('error') %}
-                <div class="col alert alert-success" role="alert">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        </div>
+        {#<div class="row">#}
+            {#{% for message in app.flashes('error') %}#}
+                {#<div class="col alert alert-success" role="alert">#}
+                    {#{{ message }}#}
+                {#</div>#}
+            {#{% endfor %}#}
+        {#</div>#}
     </div>
 
         <script src="https://js.stripe.com/v3/"></script>

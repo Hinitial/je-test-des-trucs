@@ -52,4 +52,21 @@ class AppController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+    /**
+     * @Route("/mention-legales", name="mention legales")
+     */
+    public function mentionLegalesAction(Request $request, \Swift_Mailer $mailer)
+    {
+
+    }
+
+
+    /**
+     * @Route("/cgv", name="cgv")
+     */
+    public function cGVAction(Request $request, \Swift_Mailer $mailer)
+    {
+
+    }
 }

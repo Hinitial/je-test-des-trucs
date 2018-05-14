@@ -76,6 +76,7 @@ class Booking
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Ticket", mappedBy="booking")
      * @Assert\Valid(groups={"step_2"})
+     * @Assert\Count(min=1, groups={"step_2"})
      */
     private $tickets;
 
