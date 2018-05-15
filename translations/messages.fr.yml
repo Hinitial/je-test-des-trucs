@@ -44,32 +44,21 @@ billetterie.index.rappel: 'Rappel des prix'
 Nom: Nom
 Prenom: Prenom
 'Type de billet': 'Type de billet'
-Reduc price: Tarif reduit
-
-billetterie.paiement.panier: votre panier
+'Reduc price': 'Tarif reduit'
+billetterie.paiement.panier: 'votre panier'
 billetterie.paiement.prix: Prix
 billetterie.paiement.total: Total
-billetterie.paiement.text: >
-    Merci de bien vérifier que le contenu de votre réservation (date, horaire, conditions de gratuité)
-    correspond à votre commande. Seuls les paiements en euros sont acceptés. Le paiement s'effetura via
-
-billetterie.paiement.bank_text: Entrer vos informations bancaires
-billetterie.paiement.avec: Payer avec
-billetterie.confirmation.valide: Paiement validé
-billetterie.confirmation.text_1: Votre commande à bien été validé, vos billets vous ont été envoyé à l'adresse
-billetterie.confirmation.text_2: Votre numéro de commande est
-billetterie.confirmation.question_1: On dit que visiter le Louvre est très fatigant. Comment m'y préparer ?
-billetterie.confirmation.reponse_1: >
-    Le Louvre est effectivement très grand, prévoyez des chaussures confortables. Sachez que de nombreux espaces
-    sont prévus pour que vous puissiez faire des pauses, vous restaurer et trouver quelques cadeaux et souvenirs.
-    Pensez néanmoins à bien vous reposer et à manger avant de venir.
-billetterie.confirmation.question_2: Que puis-je voir avec le billet du Louvre ?
-billetterie.confirmation.reponse_2: >
-    En plus des collections du musée du Louvre, le billet donne accès le jour même aux expositions temporaires
-    et pendant 48 heures au musée Eugène-Delacroix.
-billetterie.confirmation.question_3: Quels sont les meilleurs horaires pour visiter ?
-billetterie.confirmation.reponse_3: Le matin dès l'ouverture du musée et en nocturne.
-billetterie.confirmation.question_4: J'entre dans le musée
-billetterie.confirmation.reponse_4: >
-    L'entrée du musée est la pyramide du Louvre. A mon arrivée, je choisis la couleur de ma file.
-    Je prends un plan du musée du Louvre. Je demande conseil aux chargés d'accueil.
+billetterie.paiement.text: "Merci de bien vérifier que le contenu de votre réservation (date, horaire, conditions de gratuité) correspond à votre commande. Seuls les paiements en euros sont acceptés. Le paiement s'effetura via\n"
+billetterie.paiement.bank_text: 'Entrer vos informations bancaires'
+billetterie.paiement.avec: 'Payer avec'
+billetterie.confirmation.valide: 'Paiement validé'
+billetterie.confirmation.text_1: 'Votre commande à bien été validé, vos billets vous ont été envoyé à l''adresse'
+billetterie.confirmation.text_2: 'Votre numéro de commande est'
+billetterie.confirmation.question_1: 'On dit que visiter le Louvre est très fatigant. Comment m''y préparer ?'
+billetterie.confirmation.reponse_1: "Le Louvre est effectivement très grand, prévoyez des chaussures confortables. Sachez que de nombreux espaces sont prévus pour que vous puissiez faire des pauses, vous restaurer et trouver quelques cadeaux et souvenirs. Pensez néanmoins à bien vous reposer et à manger avant de venir.\n"
+billetterie.confirmation.question_2: 'Que puis-je voir avec le billet du Louvre ?'
+billetterie.confirmation.reponse_2: "En plus des collections du musée du Louvre, le billet donne accès le jour même aux expositions temporaires et pendant 48 heures au musée Eugène-Delacroix.\n"
+billetterie.confirmation.question_3: 'Quels sont les meilleurs horaires pour visiter ?'
+billetterie.confirmation.reponse_3: 'Le matin dès l''ouverture du musée et en nocturne.'
+billetterie.confirmation.question_4: 'J''entre dans le musée'
+billetterie.confirmation.reponse_4: "L'entrée du musée est la pyramide du Louvre. A mon arrivée, je choisis la couleur de ma file. Je prends un plan du musée du Louvre. Je demande conseil aux chargés d'accueil.\n"

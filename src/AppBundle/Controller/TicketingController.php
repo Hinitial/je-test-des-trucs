@@ -15,8 +15,6 @@ use AppBundle\Service\MailManager;
 use AppBundle\Service\BookingManager;
 use AppBundle\Service\StripeManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TicketingController extends Controller

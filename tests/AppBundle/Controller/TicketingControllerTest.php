@@ -13,17 +13,25 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TicketingControllerTest extends WebTestCase
 {
+    public function testTicketingIsUp(){
+        $client = static::createClient();
+        $client->request('GET', 'fr/billetterie');
+
+//        echo $client->getResponse()->getContent();
+        $this->assertSame(200, $client->getResponse()->getStatusCode());
+    }
+
     public function testRedirectionToFirstStep(){
         $client = static::createClient();
-//        $this->expectException('SessionNotFoundException');
-        $client->request('GET', 'billetterie/information');
+        $client->request('GET', 'fr/billetterie/information');
 
         $this->assertSame(302, $client->getResponse()->getStatusCode());
     }
 
     public function testBeginBooking(){
         $client = static::createClient();
-        $crawler = $client->request('GET', 'billetterie');
+        $crawler = $client->request('GET', 'fr/billetterie');
+
         $form = $crawler->selectButton('reservation[nextStep]')->form();
 
         $form['reservation[visitDate]'] = '2018/05/23';
@@ -55,7 +63,8 @@ class TicketingControllerTest extends WebTestCase
 
     public function testTooMutchTicket(){
         $client = static::createClient();
-        $crawder = $client->request('GET', 'billetterie');
+        $crawder = $client->request('GET', 'fr/billetterie');
+
         $form = $crawder->selectButton('reservation[nextStep]')->form();
 
         $form['reservation[visitDate]'] = '2018/05/23';
@@ -69,13 +78,4 @@ class TicketingControllerTest extends WebTestCase
 
         $this->assertSame("Vous ne pouvez pas acheter plus de \"7\" billets en une seul fois.", $error);
     }
-
-//    public function testThrowingStepException(){
-//        $client = static::createClient();
-//        $client->request('GET', 'musee-louvre/billetterie');
-//        $this->assertSame(200, $client->getResponse()->getStatusCode());
-//
-//        $client->request('GET', 'musee-louvre/billetterie/information');
-//        $this->assertSame(500, $client->getResponse()->getStatusCode());
-//    }
 }

@@ -54,40 +54,27 @@ billetterie.base.confirmation: confirmation
 billetterie.index.text: "Ticket and reservation including permanent collections, temporary exhibitions and the Delacroix museum. Free entry, without ticket, upon presentation of a proof for under 4 years, disabled people and their companion, and recipients of social minima. Ticket valid only on the selected day.\n"
 billetterie.index.ferie: 'List of public holidays in'
 billetterie.index.rappel: 'Price reminder'
-
-billetterie.paiement.panier: your bucket
+billetterie.paiement.panier: 'your bucket'
 billetterie.paiement.prix: Price
 billetterie.paiement.total: Total
-billetterie.paiement.text: >
-    Please check that the content of your reservation (date, time, conditions of free)
-    corresponds to your order. Only payments in euros are accepted. Payment cleared via
-
-billetterie.paiement.bank_text: Enter your bank details
-billetterie.paiement.avec: Pay with
-billetterie.confirmation.valide: Payment validated
-billetterie.confirmation.text_1: Your order has been validated, your tickets have been sent to the address
-billetterie.confirmation.text_2: Your order number is
-billetterie.confirmation.question_1: It is said that visiting the Louvre is very tiring. How to prepare for it ?
-billetterie.confirmation.reponse_1: >
-    The Louvre is indeed very large, plan comfortable shoes. Know that many spaces
-    are planned so that you can take breaks, restore yourself and find some gifts and souvenirs.
-    But remember to rest and eat before coming.
-billetterie.confirmation.question_2: What can I see with the Louvre ticket ?
-billetterie.confirmation.reponse_2: >
-    In addition to the collections of the Louvre Museum, the ticket gives access to temporary exhibitions the same day
-    and for 48 hours at the Musée Eugène-Delacroix.
-billetterie.confirmation.question_3: What are the best times to visit?
-billetterie.confirmation.reponse_3: In the morning from the opening of the museum and at night.
-billetterie.confirmation.question_4: I enter the museum
-billetterie.confirmation.reponse_4: >
-    The entrance to the museum is the Louvre Pyramid. When I arrive, I choose the color of my line.
-    I take a map of the Louvre Museum. I ask advice from the receptionists.
-
-Votre nom: Your name
-Votre prenom: Your first name
+billetterie.paiement.text: "Please check that the content of your reservation (date, time, conditions of free) corresponds to your order. Only payments in euros are accepted. Payment cleared via\n"
+billetterie.paiement.bank_text: 'Enter your bank details'
+billetterie.paiement.avec: 'Pay with'
+billetterie.confirmation.valide: 'Payment validated'
+billetterie.confirmation.text_1: 'Your order has been validated, your tickets have been sent to the address'
+billetterie.confirmation.text_2: 'Your order number is'
+billetterie.confirmation.question_1: 'It is said that visiting the Louvre is very tiring. How to prepare for it ?'
+billetterie.confirmation.reponse_1: "The Louvre is indeed very large, plan comfortable shoes. Know that many spaces are planned so that you can take breaks, restore yourself and find some gifts and souvenirs. But remember to rest and eat before coming.\n"
+billetterie.confirmation.question_2: 'What can I see with the Louvre ticket ?'
+billetterie.confirmation.reponse_2: "In addition to the collections of the Louvre Museum, the ticket gives access to temporary exhibitions the same day and for 48 hours at the Musée Eugène-Delacroix.\n"
+billetterie.confirmation.question_3: 'What are the best times to visit?'
+billetterie.confirmation.reponse_3: 'In the morning from the opening of the museum and at night.'
+billetterie.confirmation.question_4: 'I enter the museum'
+billetterie.confirmation.reponse_4: "The entrance to the museum is the Louvre Pyramid. When I arrive, I choose the color of my line. I take a map of the Louvre Museum. I ask advice from the receptionists.\n"
+'Votre nom': 'Your name'
+'Votre prenom': 'Your first name'
 Nationalité: Nationality
-Date de naissance: Birth date
-Reduc price: Reduced price
+'Date de naissance': 'Birth date'
+'Reduc price': 'Reduced price'
 Paiement: payment
-Rappel de votre adresse email: Reminder of your email address
-
+'Rappel de votre adresse email': 'Reminder of your email address'

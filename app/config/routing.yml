@@ -4,3 +4,10 @@ app:
     prefix: /{_locale}
     requirements:
          _locale: en|fr
+
+root:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:urlRedirect
+        path: /fr/
+        permanent: true

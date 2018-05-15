@@ -42,6 +42,8 @@
         <img src="{{ asset('images/header1_bl_mobile.png') }}" alt="header" class="img-fluid d-block d-sm-none">
     {% endblock %}
 </div>
+
+
 {% block main %}
 {% endblock %}
 
@@ -50,13 +52,15 @@
     <div class="container">
         <div class="row justify-content-between py-4">
             <div class="col-12 col-sm-6 order-last order-sm-first">
-                <p class="col-12">Language</p>
-                <p class="col-12"><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">FR</a> | <a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">EN</a></p>
+                {% block switch%}
+                    <p class="col-12">Language</p>
+                    <p class="col-12"><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">FR</a> | <a href="{{  path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'}))}}">EN</a></p>
+                {% endblock %}
                 <p class="col-12">{% trans %}footer.conception{% endtrans %}</p>
                 <div class="col-sm-4 col-6"><img class="img-fluid" src="{{ asset('images/UpStorm_footer.png') }}" alt="logo_upStorm"></div>
             </div>
             <div class="col-12 col-sm-6 order-first order-sm-last text-left">
-                <p class="col-12"><a href="#" class="">{% trans %}footer.mention_legale{% endtrans %}</a> · <a href="#" class="">{% trans %}footer.cgv{% endtrans %}</a></p>
+                <p class="col-12"><a href="{{ path('mention_legales') }}" class="">{% trans %}footer.mention_legale{% endtrans %}</a> · <a href="{{ path('cgv') }}" class="">{% trans %}footer.cgv{% endtrans %}</a></p>
                 <p class="col-12">© Musée du Louvre - {% trans %}footer.tous_droits{% endtrans %}</p>
             </div>
         </div>

@@ -73,6 +73,7 @@ class BookingManager
     /**
      * Verifie une étape précise de la réservation
      * @param $step
+     * @return bool
      * @throws \Exception
      */
     public function verifyStep($step, $booking)
@@ -81,6 +82,7 @@ class BookingManager
         if (count($errors) > 0) {
             throw new \Exception('Erreur de naviguation');
         }
+        return true;
     }
 
     /**

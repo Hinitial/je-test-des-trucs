@@ -54,19 +54,19 @@ class AppController extends Controller
     }
 
     /**
-     * @Route("/mention-legales", name="mention legales")
+     * @Route("/mention-legales", name="mention_legales")
      */
-    public function mentionLegalesAction(Request $request, \Swift_Mailer $mailer)
+    public function mentionLegalesAction()
     {
-
+        return $this->render('app/mention_legale.html.twig');
     }
 
 
     /**
      * @Route("/cgv", name="cgv")
      */
-    public function cGVAction(Request $request, \Swift_Mailer $mailer)
+    public function cGVAction()
     {
-
+        return $this->render('app/cgv.html.twig');
     }
 }
