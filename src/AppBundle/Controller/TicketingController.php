@@ -15,6 +15,7 @@ use AppBundle\Service\MailManager;
 use AppBundle\Service\BookingManager;
 use AppBundle\Service\StripeManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class TicketingController extends Controller
@@ -35,8 +36,8 @@ class TicketingController extends Controller
      */
     public function informationAction(BookingManager $bookingManager)
     {
-        $bookingManager->throwException('step_1');
         $booking = $bookingManager->getBooking();
+        $bookingManager->throwException('step_1', $booking);
         return $bookingManager->getReponse(InformationType::class);
     }
 
@@ -47,8 +48,8 @@ class TicketingController extends Controller
      */
     public function paymentAction(BookingManager $bookingManager)
     {
-        $bookingManager->throwException('step_2');
         $booking = $bookingManager->getBooking();
+        $bookingManager->throwException('step_2', $booking);
         return $bookingManager->getReponse();
     }
 
@@ -69,14 +70,14 @@ class TicketingController extends Controller
      */
     public function checkoutAction(BookingManager $bookingManager, StripeManager $stripeManager, MailManager $mailManager)
     {
-        $bookingManager->throwException('step_2');
+        $booking = $bookingManager->getBooking();
+        $bookingManager->throwException('step_2', $booking);
         $stripeManager->initPayment();
         try {
             $stripeManager->makePayment();
-            $booking = $bookingManager->getBooking();
             $bookingManager->setLastInformation($booking);
             $bookingManager->insertBooking($booking);
-            $mailManager->mailTicketing($bookingManager->getBooking());
+            $mailManager->mailTicketing($booking);
             return $this->redirectToRoute('billetterie_confirmation');
         } catch(\Stripe\Error\Card $e) {
             return $this->redirectToRoute("billetterie_paiement");
@@ -92,8 +93,8 @@ class TicketingController extends Controller
      */
     public function confirmationAction(BookingManager $bookingManager)
     {
-        $bookingManager->throwException('step_3');
         $booking =  $bookingManager->getBooking();
+        $bookingManager->throwException('step_3', $booking);
         $bookingManager->clearBooking();
         return $this->render('billetterie/confirmation.html.twig', array(
             'code' => $booking->getBookingCode(),

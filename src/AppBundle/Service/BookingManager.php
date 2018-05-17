@@ -230,12 +230,11 @@ class BookingManager
      * Lève une Exception si la Session nexiste pas
      * @throws SessionNotFoundException
      */
-    public function throwException($step)
+    public function throwException($step, $booking)
     {
         if (!($this->session->has(self::NOM_SESSION))) {
             throw new SessionNotFoundException('Session not exist');
         }
-        $booking = $this->getBooking();
         $this->verifyStep($step,$booking);
     }
 

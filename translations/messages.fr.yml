@@ -9,7 +9,7 @@ app.index.welcome: 'Bienvenue au musee du Louvre'
 app.index.text_welcome: "Ancien palais des rois, le Louvre épouse l’histoire de France depuis huit siècles. Conçu dès sa création en 1793 comme un musée universel, ses collections, qui figurent parmi les plus belles au monde, couvrent plusieurs millénaires et un territoire qui s’étend de l’Amérique aux frontières de l’Asie. Réparties en huit départements, elles contiennent des œuvres universellement admirées, comme La Joconde, la Victoire de Samothrace ou la Vénus de Milo. Le Louvre est aujourd’hui le musée le plus visité au monde.\n"
 app.index.text_link: 'Acheter vos billet sur notre billetterie en ligne, pour visiter notre collection.'
 app.title.tarif: Tarif
-app.index.tarif: 'Here is the price list of the Louvre Museum. These prices are the same as those charged in physical ticketing'
+app.index.tarif: 'Voici la liste des tarif du musée du louvre. Ces prix sont les meme que ceux pratiquer en billetterie physique'
 app.title.horaire: Horaires
 app.index.horaire: 'Horaire d''ouverture et de fermeture du musée. L''évacuation des salles débute à 17 h 30 ou 21 h 30 les jours de nocturne.'
 app.index.close: Fermé
@@ -38,7 +38,24 @@ billetterie.base.billet: billet
 billetterie.base.information: information
 billetterie.base.paiement: paiement
 billetterie.base.confirmation: confirmation
+
+billetterie.index.info.title: Information
 billetterie.index.text: "Billet et réservation horaire incluant les collections permanentes, les expositions temporaires et le musée Delacroix. Entrée libre, sans billet, sur présentation d’un justificatif pour les moins de 4 ans, les personnes handicapées et leur accompagnateur, et les bénéficiaires des minima sociaux. Billet valable seulement le jour sélectionné.\n"
+billetterie.index.restriction.title: Restriction
+billetterie.index.restriction.text:
+        - Il y a quelque restriction pour l'achat de billet, vérifiez que vous les respecter.
+        - Il est impossible d'acheter des billet pour un Mardi ou un Dimanche
+        - Vous ne pouvez pas acheter de billet pour un jour férié
+        - Vous pouvez acheter un billet jusqu'à 6 mois après le jour de réservation
+        - Il est impossible de commander des billets Journée pour le jour meme après 14h
+        - Vous ne pouvez pas acheter plus de 7 billets en une seul fois
+billetterie.index.form.title: Formulaire
+billetterie.information.title: Remplir avec vos informations
+billetterie.information.text: >
+            Le billet son nominatif, veillez reseigner, pour chaque billet, le nom, le prenom, la nationalté et la date de naissances.
+            Indiquer aussi si vous etes éligible a un tarif reduit, un justificatif vous sera demandé.
+            Ces informations permmetent de calculer automatiquement les prix des billets
+
 billetterie.index.ferie: 'Liste des jours fériés en'
 billetterie.index.rappel: 'Rappel des prix'
 Nom: Nom

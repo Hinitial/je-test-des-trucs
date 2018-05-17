@@ -42,13 +42,13 @@
             <table class="table table-responsive-sm">
                 <thead class="thead-dark">
                 <tr>
-                    <th scope="row">Lundi</th>
-                    <th scope="row">Mardi</th>
-                    <th scope="row">Mercredi</th>
-                    <th scope="row">Jeudi</th>
-                    <th scope="row">Vendredi</th>
-                    <th scope="row">Samedi</th>
-                    <th scope="row">Dimanche*</th>
+                    <th scope="row">{% trans %}Lundi{% endtrans %}</th>
+                    <th scope="row">{% trans %}Mardi{% endtrans %}</th>
+                    <th scope="row">{% trans %}Mercredi{% endtrans %}</th>
+                    <th scope="row">{% trans %}Jeudi{% endtrans %}</th>
+                    <th scope="row">{% trans %}Vendredi{% endtrans %}</th>
+                    <th scope="row">{% trans %}Samedi{% endtrans %}</th>
+                    <th scope="row">{% trans %}Dimanche{% endtrans %}*</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -100,6 +100,7 @@
         </div>
     </div>
     <div class="row no-gutters">
-        <img src="{{ asset('images/maps.png') }}" alt="header" class="img-fluid">
+        <img src="{{ asset('images/maps.png') }}" alt="maps" class="img-fluid d-none d-sm-block">
+        <img src="{{ asset('images/maps_mobile.png') }}" alt="maps" class="img-fluid d-block d-sm-none">
     </div>
 {% endblock %}

@@ -11,6 +11,14 @@
 {% block titre_billetterie %}{% trans %}billetterie.base.information{% endtrans %}{% endblock %}
 {% block etape_information %}etape-active{% endblock %}
 {% block content %}
+    <div class="row my-3">
+        <div class="col-12 text-center my-3">
+            {% trans %}billetterie.information.title{% endtrans %}
+        </div>
+        <div class="col-12 text-justify font-weight-light">
+            {% trans %}billetterie.information.text{% endtrans %}
+        </div>
+    </div>
     {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
     {{ form_errors(form) }}

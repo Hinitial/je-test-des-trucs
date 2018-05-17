@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Contact;
 use AppBundle\Form\ContactType;
+use AppBundle\Service\MailManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,22 +29,15 @@ class AppController extends Controller
     /**
      * @Route("/contact", name="contact")
      */
-    public function contactAction(Request $request, \Swift_Mailer $mailer)
+    public function contactAction(Request $request, MailManager $mailManager)
     {
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
 
-        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-            $message = (new \Swift_Message($form['titre']->getData()))
-                ->setFrom('oc.projet.super@gmail.com')
-                ->setTo($form['email']->getData())
-                ->setBody($this->renderView('email/contact.html.twig', array(
-                    'nom' => $form['nom']->getData(),
-                    'prenom' => $form['prenom']->getData(),
-                    'message' => $form['message']->getData()
-                )),'text/html');
+        $form->handleRequest($request);
 
-            $mailer->send($message);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $mailManager->mailContact($contact);
 
             $this->addFlash('notice', 'Formulaire bien envoyé');
         }

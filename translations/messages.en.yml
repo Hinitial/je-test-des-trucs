@@ -25,7 +25,7 @@ app.title.tarif: Rate
 app.index.tarif: 'These prices are the same as those charged in physical ticketing'
 app.title.horaire: Schedule
 app.index.horaire: 'Opening and closing times of the museum. Room evacuation begins at 5.30 pm or 9.30 pm on night days.'
-app.index.close: Fermé
+app.index.close: Close
 app.index.horaire_aide: 'Can not buy tickets online for a Sunday'
 app.title.acces: Access
 app.title.metro: Underground
@@ -51,6 +51,23 @@ billetterie.base.billet: ticket
 billetterie.base.information: information
 billetterie.base.paiement: payment
 billetterie.base.confirmation: confirmation
+
+billetterie.index.info.title: Information
+billetterie.index.restriction.title: Restriction
+billetterie.index.restriction.text:
+        - There is some restriction for ticket purchase, check that you respect them.
+        - It is not possible to buy tickets for a Tuesday or a Sunday
+        - You can not buy a ticket for a holiday
+        - You can buy a ticket up to 6 months after the booking day
+        - It is impossible to order tickets Day for the same day after 14h
+        - You can not buy more than 7 tickets at once
+billetterie.index.form.title: Form
+billetterie.information.title: Fill with your information
+billetterie.information.text: >
+            The ticket is nominative, be sure to reseign, for each ticket, the name, the name, the nationality and the date of birth.
+            Also indicate if you are eligible for a reduced rate, proof will be required.
+            This information automatically calculates ticket prices
+
 billetterie.index.text: "Ticket and reservation including permanent collections, temporary exhibitions and the Delacroix museum. Free entry, without ticket, upon presentation of a proof for under 4 years, disabled people and their companion, and recipients of social minima. Ticket valid only on the selected day.\n"
 billetterie.index.ferie: 'List of public holidays in'
 billetterie.index.rappel: 'Price reminder'
@@ -78,3 +95,11 @@ Nationalité: Nationality
 'Reduc price': 'Reduced price'
 Paiement: payment
 'Rappel de votre adresse email': 'Reminder of your email address'
+Lundi: Monday
+Mardi: Tuesday
+Mercredi: Wednesday
+Jeudi: Thursday
+Vendredi: Friday
+Samedi: Saturday
+Dimanche: Sunday
+'email@example.com': 'email@example.com'

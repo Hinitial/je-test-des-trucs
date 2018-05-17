@@ -3,28 +3,28 @@
         <div class="card div card-body text-center">
             <div class="card-title h4">{% trans %}tarif.title.normal{% endtrans %}</div>
             <div class="card-title h4">{{ constant('AppBundle\\Service\\PriceTicketManager::PRIX_NORMAL') }} €</div>
-            <p class="card-text font-weight-light">{% trans %}tarif.text.normal{% endtrans %}</p>
+            <p class="card-text font-weight-light">{{ 'tarif.text.normal'|trans|nl2br }}</p>
         </div>
     </div>
     <div class="col-md-{{ colTarif }} col-12 mb-3">
         <div class="card div card-body text-center">
             <div class="card-title h4">{% trans %}tarif.title.enfant{% endtrans %}</div>
             <div class="card-title h4">{{ constant('AppBundle\\Service\\PriceTicketManager::PRIX_ENFANT') }} €</div>
-            <p class="card-text font-weight-light">{% trans %}tarif.text.enfant{% endtrans %}</p>
+            <p class="card-text font-weight-light">{{ 'tarif.text.enfant'|trans|nl2br }}</p>
         </div>
     </div>
     <div class="col-md-{{ colTarif }} col-12 mb-3">
         <div class="card div card-body text-center">
             <div class="card-title h4">{% trans %}tarif.title.senior{% endtrans %}</div>
             <div class="card-title h4">{{ constant('AppBundle\\Service\\PriceTicketManager::PRIX_SENIOR') }} €</div>
-            <p class="card-text font-weight-light">{% trans %}tarif.text.senior{% endtrans %}</p>
+            <p class="card-text font-weight-light">{{ 'tarif.text.senior'|trans|nl2br }}</p>
         </div>
     </div>
     <div class="col-md-{{ colTarif }} col-12 mb-3">
         <div class="card div card-body text-center">
             <div class="card-title h4">{% trans %}tarif.title.reduit{% endtrans %}</div>
             <div class="card-title h4">{{ constant('AppBundle\\Service\\PriceTicketManager::PRIX_TARIF_REDUIT') }} €</div>
-            <p class="card-text font-weight-light">{% trans %}tarif.text.reduit{% endtrans %}</p>
+            <p class="card-text font-weight-light">{{ 'tarif.text.reduit'|trans|nl2br }}</p>
         </div>
     </div>
 </div>
